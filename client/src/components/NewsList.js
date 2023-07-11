@@ -4,8 +4,8 @@ import NewsItem from './NewsItem'
 const NewsList = ( {generalNews} ) => {
   return (
     <div>
-      {generalNews.map((item, index) => (
-        <NewsItem key={index} item={item} />
+      {generalNews.map((item, index, image) => (
+        <NewsItem key={index} item={item} image={image} />
       ))}
     </div>
   )
