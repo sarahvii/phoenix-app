@@ -6,7 +6,12 @@ const StockList = ({ portfolioStocks }) => {
     <>
       {/* map through portfolioStocks and create a StockItem for each one */}
       {portfolioStocks.map((stock) => {
-        return <StockItem stock={stock} />;
+        if (stock.totalShares <= 0){
+            return null;
+        }
+        else{
+            return <StockItem stock={stock}/>
+        }
       })}
     </>
   );
