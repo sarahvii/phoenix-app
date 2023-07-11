@@ -94,9 +94,6 @@ router.post('/', (req, res) => {
 });
 
   
-  
-  
-  
 
   // DESTROY
   router.delete('/:id', (req, res) => {
