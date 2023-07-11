@@ -4,7 +4,6 @@ db.dropDatabase();
 db.orders.insertMany(
   [
     {
-      "_id": "64acf6bb746a01da1387bc9e",
       "stockName": "Apple",
       "ticker": "AAPL",
       "totalShares": 100,
@@ -18,7 +17,6 @@ db.orders.insertMany(
       ]
     },
     {
-      "_id": "64acf6bb746a01da1387bc9f",
       "stockName": "Meta",
       "ticker": "META",
       "totalShares": 200,
@@ -32,7 +30,6 @@ db.orders.insertMany(
       ]
     },
     {
-      "_id": "64acf6bb746a01da1387bca0",
       "stockName": "Alphabet Inc.",
       "ticker": "GOOG",
       "totalShares": 150,
@@ -46,7 +43,6 @@ db.orders.insertMany(
       ]
     },
     {
-      "_id": "64acf6bb746a01da1387bca1",
       "stockName": "Tesla",
       "ticker": "TSLA",
       "totalShares": 50,
