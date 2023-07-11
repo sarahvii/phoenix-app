@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import NewsList from './NewsList';
+import styled from 'styled-components';
 
 const NewsPanel = () => {
   const [generalNews, setGeneralNews] = useState([]);
@@ -17,11 +18,18 @@ const NewsPanel = () => {
 
 
   return (
-    <div className='news-panel'>
+    <NewsPanelContainer>
       <p>NEWS</p>
       <NewsList generalNews={generalNews}/>
-    </div>
+    </NewsPanelContainer>
   )
-}
+};
+
+const NewsPanelContainer = styled.div`
+overflow-x: scroll;
+white-space: wrap;
+`;
+
+
 
 export default NewsPanel
