@@ -1,6 +1,6 @@
 import React from 'react'
 import NewsItem from './NewsItem'
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 
 const NewsList = ( { news } ) => {
   return (

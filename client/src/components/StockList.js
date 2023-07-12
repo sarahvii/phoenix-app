@@ -1,7 +1,13 @@
 import React from "react";
 import StockItem from "./StockItem";
 
-const StockList = ({ portfolioStocks }) => {
+const StockList = ({ portfolioStocks, setSelectedStock }) => {
+
+    const handleStockClick = (ticker) => {
+        setSelectedStock(ticker);
+        console.log("clicked ticker", ticker);
+    }
+
   return (
     <>
       {/* map through portfolioStocks and create a StockItem for each one */}
@@ -10,7 +16,7 @@ const StockList = ({ portfolioStocks }) => {
             return null;
         }
         else{
-            return <StockItem stock={stock}/>
+            return <StockItem stock={stock} handleStockClick={handleStockClick} />
         }
       })}
     </>
