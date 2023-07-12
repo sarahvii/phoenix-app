@@ -2,10 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import calculateProfitLoss from "../services/CalculateProfitOrLoss";
 
-const StockItem = ({ stock }) => {
-  const [livePriceData, setLivePriceData] = useState(null);
-  const [liveCompanyData, setLiveCompanyData] = useState(null);
-
   const StockItemDiv = styled.div`
     border: 5px solid black;
     margin: 10px;
@@ -54,6 +50,12 @@ const StockItem = ({ stock }) => {
     font-weight: bold;
     `;
 
+    
+const StockItem = ({ stock, handleStockClick }) => {
+  const [livePriceData, setLivePriceData] = useState(null);
+  const [liveCompanyData, setLiveCompanyData] = useState(null);
+
+
   useEffect(() => {
     fetch(
       `https://finnhub.io/api/v1/quote?symbol=${stock.ticker}&token=cim0421r01qucvvrg00gcim0421r01qucvvrg010`
@@ -81,7 +83,7 @@ const StockItem = ({ stock }) => {
   const { profitLoss, isProfit, totalCost, totalRevenue, currentTotalValue, totalShares } = caluculatedVals;
 
   return (
-    <StockItemDiv>
+    <StockItemDiv onClick={() => handleStockClick(stock.ticker)}>
         <CompanyInfo>
             <StockTicker>{stock.ticker}</StockTicker>
             <StockName>{liveCompanyData.name}</StockName>
