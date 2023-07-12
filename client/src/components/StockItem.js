@@ -64,13 +64,15 @@ const StockItem = ({ stock }) => {
 
   const caluculatedVals = calculateProfitLoss(stock.orders, livePriceData.c);
 
+  const { profitLoss, isProfit, totalShares, totalCost, totalRevenue, currentTotalValue } = caluculatedVals;
+
   return (
     <StockItemDiv>
       <Logo src={logo} alt="company logo" />
       <StockTicker>{stock.ticker}</StockTicker>
       <StockName>{liveCompanyData.name}</StockName>
       <StockTotalShares>{stock.totalShares}</StockTotalShares>
-      <p>{caluculatedVals.profitLoss}</p>
+      <p>{profitLoss.toFixed(2)}</p>
       <StockCurrentPrice>
         {"Current Price: " + (livePriceData.c)}
       </StockCurrentPrice>

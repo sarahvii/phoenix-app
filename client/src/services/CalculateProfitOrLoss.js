@@ -1,9 +1,10 @@
 const calculateProfitLoss = (orders, currentPrice) => {
-    let totalShares = 0; // Total shares of the stock
+    let totalShares = 0; // Total shares for each stock
     let totalCost = 0; // Total cost of buying shares
     let totalRevenue = 0; // Total revenue from selling shares
   
     for (const order of orders) {
+
       if (order.type === 'buy') {
         // For buy orders
         totalShares += order.sharesQuantity; // Increase the total number of shares
