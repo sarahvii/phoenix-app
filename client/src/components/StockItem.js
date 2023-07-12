@@ -16,6 +16,10 @@ const StockItem = ({ stock }) => {
     align-items: center;
   `;
 
+  const CompanyInfo = styled.div`
+    width: 25%;
+  `;
+
   const StockName = styled.h3`
     font-size: 20px;
   `;
@@ -35,10 +39,20 @@ const StockItem = ({ stock }) => {
   const StockTotalValue = styled.p``;
 
   const Logo = styled.img`
-    width: 50px;
-    height: 50px;
+    width: 10%;
+    height: 10%;
     border-radius: 50%;
   `;
+  
+  const PerformanceInfo = styled.div`
+    width: 25%;
+    `;
+  
+  const ProfitOrLoss = styled.p`
+    color: ${props => (props.isProfit ? 'green' : 'red')};
+    font-size: 20px;
+    font-weight: bold;
+    `;
 
   useEffect(() => {
     fetch(
@@ -64,18 +78,21 @@ const StockItem = ({ stock }) => {
 
   const caluculatedVals = calculateProfitLoss(stock.orders, livePriceData.c);
 
-  const { profitLoss, isProfit, totalShares, totalCost, totalRevenue, currentTotalValue } = caluculatedVals;
+  const { profitLoss, isProfit, totalCost, totalRevenue, currentTotalValue } = caluculatedVals;
 
   return (
     <StockItemDiv>
-      <Logo src={logo} alt="company logo" />
-      <StockTicker>{stock.ticker}</StockTicker>
-      <StockName>{liveCompanyData.name}</StockName>
-      <StockTotalShares>{stock.totalShares}</StockTotalShares>
-      <p>{profitLoss.toFixed(2)}</p>
-      <StockCurrentPrice>
-        {"Current Price: " + (livePriceData.c)}
-      </StockCurrentPrice>
+        <CompanyInfo>
+            <StockTicker>{stock.ticker}</StockTicker>
+            <StockName>{liveCompanyData.name}</StockName>
+            <StockCurrentPrice>Current price: {livePriceData.c}</StockCurrentPrice>
+        </CompanyInfo>
+            <Logo src={logo} alt="company logo" />
+        <PerformanceInfo>
+            <StockTotalShares>{stock.totalShares.toFixed(2)} Shares</StockTotalShares>
+            <StockTotalValue>Total value: {currentTotalValue.toFixed(2)}</StockTotalValue>
+            <ProfitOrLoss isProfit={isProfit}>{profitLoss.toFixed(2)}</ProfitOrLoss>
+        </PerformanceInfo>
     </StockItemDiv>
   );
 };
