@@ -28,7 +28,7 @@ function App() {
   return (
     <div className="App">
       <NavBar />
-      <SearchBar />
+      <SearchBar setSelectedStock={setSelectedStock} />
       <HomeBox />
       {portfolioStocks !== null && <PortfolioBox portfolioStocks={portfolioStocks} setSelectedStock={setSelectedStock} />}
       <StockBox selectedStock={selectedStock}/>

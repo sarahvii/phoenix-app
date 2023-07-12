@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const BASE_URL = "https://finnhub.io/api/v1/stock/";
 
-export default function SearchBar() {
+export default function SearchBar({ setSelectedStock }) {
   const [symbol, setSymbol] = useState('');
   const [details, setDetails] = useState(null);
 
@@ -15,6 +15,7 @@ export default function SearchBar() {
     const response = await detail(symbol);
     console.log(response);
     setDetails(response);
+    setSelectedStock(response.ticker);
   } catch (err) {
     setDetails({ error: "symbol not found" });
   }
@@ -23,7 +24,9 @@ export default function SearchBar() {
   return (
     <div className="Search Bar">
       <p>Search for a stock</p>
-      <input value={symbol} onChange={evt => setSymbol(evt.target.value)} />
+      <input value={symbol} onChange={(evt) => {
+        return setSymbol(evt.target.value);
+      }} />
       <button onClick={handleClick}>Search</button>
 
       { details && (
