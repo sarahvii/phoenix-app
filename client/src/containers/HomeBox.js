@@ -7,7 +7,7 @@ const HomeBox = () => {
         <>
         <h2>HomeBox</h2>
         <HomeChart/>
-        <NewsPanel/>
+        <NewsPanel containerType="home"/>
         </>   
      );
 }
