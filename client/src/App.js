@@ -9,6 +9,7 @@ import PortfolioStocksService from './services/PortfolioStocksService';
 
 function App() {
   const [portfolioStocks, setPortfolioStocks] = useState(null);
+  const [selectedStock, setSelectedStock] = useState(null);
 
   const fetchStocksFromDatabase = useCallback(() => {
     PortfolioStocksService.getStocks()
@@ -29,8 +30,8 @@ function App() {
       <NavBar />
       <SearchBar />
       <HomeBox />
-      {portfolioStocks !== null && <PortfolioBox portfolioStocks={portfolioStocks} />}
-      <StockBox />
+      {portfolioStocks !== null && <PortfolioBox portfolioStocks={portfolioStocks} setSelectedStock={setSelectedStock} />}
+      <StockBox selectedStock={selectedStock}/>
     </div>
   );
 }

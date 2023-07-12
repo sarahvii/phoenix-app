@@ -3,7 +3,6 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import pie from 'highcharts/modules/series-label';
 
-// Initialize the Highcharts module(s) you need
 pie(Highcharts);
 
 const PieChart = ({ portfolioStocks }) => {
