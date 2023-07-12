@@ -39,7 +39,7 @@ const StockBox = ({selectedStock}) => {
         <p>{liveCompanyData.name}</p>
         <p>{selectedStock}</p>
         <BuyPanel />
-        <NewsPanel containerType="stock" />
+        <NewsPanel containerType="stock" selectedStock={selectedStock} />
         </>
      );
 }
