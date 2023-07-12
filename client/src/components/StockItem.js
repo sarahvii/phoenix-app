@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import calculateProfitLoss from "../services/CalculateProfitOrLoss";
 
 const StockItem = ({ stock }) => {
   const [livePriceData, setLivePriceData] = useState(null);
@@ -61,12 +62,15 @@ const StockItem = ({ stock }) => {
 
   const { logo } = liveCompanyData;
 
+  const caluculatedVals = calculateProfitLoss(stock.orders, livePriceData.c);
+
   return (
     <StockItemDiv>
       <Logo src={logo} alt="company logo" />
       <StockTicker>{stock.ticker}</StockTicker>
       <StockName>{liveCompanyData.name}</StockName>
       <StockTotalShares>{stock.totalShares}</StockTotalShares>
+      <p>{caluculatedVals.profitLoss}</p>
       <StockCurrentPrice>
         {"Current Price: " + (livePriceData.c)}
       </StockCurrentPrice>
