@@ -78,7 +78,7 @@ const StockItem = ({ stock }) => {
 
   const caluculatedVals = calculateProfitLoss(stock.orders, livePriceData.c);
 
-  const { profitLoss, isProfit, totalCost, totalRevenue, currentTotalValue } = caluculatedVals;
+  const { profitLoss, isProfit, totalCost, totalRevenue, currentTotalValue, totalShares } = caluculatedVals;
 
   return (
     <StockItemDiv>
@@ -89,7 +89,7 @@ const StockItem = ({ stock }) => {
         </CompanyInfo>
             <Logo src={logo} alt="company logo" />
         <PerformanceInfo>
-            <StockTotalShares>{stock.totalShares.toFixed(2)} Shares</StockTotalShares>
+            <StockTotalShares>{totalShares.toFixed(2)} Shares</StockTotalShares>
             <StockTotalValue>Total value: {currentTotalValue.toFixed(2)}</StockTotalValue>
             <ProfitOrLoss isProfit={isProfit}>{profitLoss.toFixed(2)}</ProfitOrLoss>
         </PerformanceInfo>
