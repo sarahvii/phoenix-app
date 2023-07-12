@@ -71,8 +71,8 @@ router.post('/', (req, res) => {
         const newStock = {
           stockName: stockName,
           ticker: ticker,
-          orders: [order],
-          totalShares: order.sharesQuantity
+          totalShares: order.sharesQuantity,
+          orders: [order]
         };
 
         // Insert the new stock into the database
