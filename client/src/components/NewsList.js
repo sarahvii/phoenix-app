@@ -2,10 +2,10 @@ import React from 'react'
 import NewsItem from './NewsItem'
 import { styled } from 'styled-components';
 
-const NewsList = ( {generalNews} ) => {
+const NewsList = ( { news } ) => {
   return (
     <NewsListContainer>
-      {generalNews.map((item, index, image) => (
+      {news.map((item, index, image) => (
         <NewsItem key={index} item={item} image={image} />
       ))}
     </NewsListContainer>

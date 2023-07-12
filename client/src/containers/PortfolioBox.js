@@ -9,7 +9,7 @@ const PortfolioBox = ({portfolioStocks}) => {
         <h2>PortfolioBox</h2>
         <PieChart portfolioStocks={portfolioStocks}/>
         <StockList portfolioStocks={portfolioStocks}/>
-        <NewsPanel/>
+        <NewsPanel containerType="portfolio"/>
         </>
      );
 }

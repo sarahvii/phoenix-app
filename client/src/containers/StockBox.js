@@ -8,7 +8,7 @@ const StockBox = () => {
         <h2>StockBox</h2>
         <p>Individual stock details here</p>
         <BuyPanel />
-        <NewsPanel />
+        <NewsPanel containerType="stock" />
         </>
      );
 }
