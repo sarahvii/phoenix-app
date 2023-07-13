@@ -9,7 +9,7 @@ const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
   const [liveCompanyData, setLiveCompanyData] = useState(null);
 
   const { setCalculatedValsList } = useContext(StockContext);
-  
+
   useEffect(() => {
     fetch(`https://finnhub.io/api/v1/quote?symbol=${stock.ticker}&token=cim0421r01qucvvrg00gcim0421r01qucvvrg010`)
       .then((res) => res.json())
@@ -38,18 +38,20 @@ const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
   const { logo } = liveCompanyData;
   const { profitLoss, isProfit, totalShares, currentTotalValue } = calculateProfitLoss(stock.orders, livePriceData.c);
 
+
+
   return (
     <StockItemDiv onClick={() => handleStockClick(stock.ticker)}>
       <CompanyInfo>
         <StockTicker>{stock.ticker}</StockTicker>
         <StockName>{liveCompanyData.name}</StockName>
-        <StockCurrentPrice>Current price: {livePriceData.c}</StockCurrentPrice>
+        <StockCurrentPrice>${livePriceData.c}</StockCurrentPrice><PriceChangePercent value={livePriceData.dp}> ({livePriceData.dp.toFixed(2)}%)  </PriceChangePercent>
       </CompanyInfo>
       <Logo src={logo} alt="company logo" />
       <PerformanceInfo>
         <StockTotalShares>{totalShares.toFixed(2)} Shares</StockTotalShares>
-        <StockTotalValue>Total value: {currentTotalValue.toFixed(2)}</StockTotalValue>
-        <ProfitOrLoss isProfit={isProfit}>{profitLoss.toFixed(2)}</ProfitOrLoss>
+        <StockTotalValue>Total value: ${currentTotalValue.toFixed(2)}</StockTotalValue>
+        <ProfitOrLoss isProfit={isProfit}>${Math.abs(profitLoss).toFixed(2)}</ProfitOrLoss>
       </PerformanceInfo>
     </StockItemDiv>
   );
@@ -81,9 +83,17 @@ const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
   `;
   
   const StockCurrentPrice = styled.p`
+    display: inline;
     font-size: 15px;
   `;
   
+  const PriceChangePercent = styled.p`
+    display: inline;
+    color: ${props => (props.value > 0 ? 'green' : 'red')};
+    font-size: 15px;
+    font-weight: bold;
+    `
+
   const StockTotalValue = styled.p``;
   
   const Logo = styled.img`
@@ -101,5 +111,6 @@ const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
     font-size: 20px;
     font-weight: bold;
   `;
+
 
 export default StockItem;

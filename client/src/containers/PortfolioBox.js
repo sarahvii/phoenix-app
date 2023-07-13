@@ -58,13 +58,13 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
             <SummeryTitle>Performance</SummeryTitle>
             <SummeryValuesContainer>
                 <TotalPortfolioValue>
-                Total Portfolio Value: {totalPortfolioValue.toFixed(2)}
+                Total Portfolio Value: ${totalPortfolioValue.toFixed(2)}
                 </TotalPortfolioValue>
                 <TotalPortfolioProfitLoss isProfit={isProfit}>
-                Total Portfolio Profit/Loss: {totalPortfolioProfitLoss.toFixed(2)}
+                Total Portfolio Profit/Loss: ${totalPortfolioProfitLoss.toFixed(2)}
                 </TotalPortfolioProfitLoss>
                 <PercentageProfitLoss isProfit={isProfit}>
-                Percentage Profit/Loss: {profitLossPercentage.toFixed(2)}%
+                Percentage Profit/Loss: ${profitLossPercentage.toFixed(2)}%
                 </PercentageProfitLoss>
             </SummeryValuesContainer>
           </PortfolioSummaryContainer>
@@ -92,7 +92,6 @@ const PortfolioBoxSummeryPieContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  /* align-items: center; */
   height: 50vh;
   margin: 10px;
 `;
@@ -103,19 +102,19 @@ const PortfolioSummaryContainer = styled.div`
   justify-content: flex-start;
 `;
 
-const TotalPortfolioValue = styled.h3`
+const TotalPortfolioValue = styled.h4`
   margin: 10px;
   padding: 0px;
   color: black;
 `;
 
-const TotalPortfolioProfitLoss = styled.h3`
+const TotalPortfolioProfitLoss = styled.h4`
   margin: 10px;
   padding: 0px;
   color: ${(props) => (props.isProfit ? "green" : "red")};
 `;
 
-const PercentageProfitLoss = styled.h3`
+const PercentageProfitLoss = styled.h4`
   margin: 10px;
   padding: 0px;
 `;
@@ -129,6 +128,7 @@ const SummeryValuesContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: flex-start;
     margin: 10px;
     padding: 20px;
 `;
