@@ -25,11 +25,11 @@ const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
   }, [stock.ticker]);
 
   useEffect(() => {
-    if (liveCompanyData && livePriceData) {
+    if (livePriceData) {
       const calculatedVals = calculateProfitLoss(stock.orders, livePriceData.c);
       setCalculatedValsList((prevList) => [...prevList, calculatedVals]);
     }
-  }, [liveCompanyData, livePriceData, stock.orders, setCalculatedValsList]);
+  }, [livePriceData, stock.orders, setCalculatedValsList]);
 
   if (!liveCompanyData || !livePriceData) {
     return "Loading...";

@@ -122,7 +122,7 @@ const PercentageProfitLoss = styled.h4`
 const SummeryTitle = styled.h2`
   margin: 10px;
   padding: 0px;
-  `;
+`;
 
 const SummeryValuesContainer = styled.div`
     display: flex;
