@@ -64,7 +64,7 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
                 Total Portfolio Profit/Loss: ${totalPortfolioProfitLoss.toFixed(2)}
                 </TotalPortfolioProfitLoss>
                 <PercentageProfitLoss isProfit={isProfit}>
-                Percentage Profit/Loss: ${profitLossPercentage.toFixed(2)}%
+                Percentage Profit/Loss: {profitLossPercentage.toFixed(2)}%
                 </PercentageProfitLoss>
             </SummeryValuesContainer>
           </PortfolioSummaryContainer>
