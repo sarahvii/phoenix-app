@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import styled from 'styled-components';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import pie from 'highcharts/modules/series-label';
@@ -11,11 +12,11 @@ const PieChart = ({ portfolioStocks }) => {
       type: 'pie'
     },
     title: {
-      text: 'Portfolio Stocks'
+      text: 'Portfolio Breakdown'
     },
     series: [
       {
-        name: 'Stocks',
+        name: 'Shares',
         data: portfolioStocks
           ? portfolioStocks.map((stock) => ({
               name: stock.ticker,
@@ -28,14 +29,15 @@ const PieChart = ({ portfolioStocks }) => {
 
   return (
     <>
-      <h1>🥧</h1>
-      {portfolioStocks ? (
-        <HighchartsReact highcharts={Highcharts} options={options} />
-      ) : (
-        <p>Loading chart...</p>
-      )}
+    
+          {portfolioStocks ? (
+            <HighchartsReact highcharts={Highcharts} options={options} />
+          ) : (
+            <p>Loading chart...</p>
+          )}
     </>
   );
 };
+
 
 export default PieChart;
