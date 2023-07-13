@@ -114,3 +114,6 @@ const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
 
 
 export default StockItem;
+
+
+
