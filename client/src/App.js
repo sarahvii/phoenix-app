@@ -35,10 +35,6 @@ function App() {
         <Route path="/portfolio" element={portfolioStocks !== null && <PortfolioBox portfolioStocks={portfolioStocks} setSelectedStock={setSelectedStock} />} />
         <Route path="/stocks" element={<StockBox selectedStock={selectedStock}/>} />
       </Routes>
-
-      {/* <HomeBox /> */}
-      {/* {portfolioStocks !== null && <PortfolioBox portfolioStocks={portfolioStocks} setSelectedStock={setSelectedStock} />} */}
-      {/* <StockBox selectedStock={selectedStock}/> */}
     </div>
   );
 }

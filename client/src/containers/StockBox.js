@@ -9,6 +9,8 @@ const StockBox = ({selectedStock}) => {
 
     const [livePriceData, setLivePriceData] = useState(null);
     const [liveCompanyData, setLiveCompanyData] = useState(null);
+    const [currentTime, setCurrentTime] = useState(new Date());
+
   
   
     useEffect(() => {
@@ -21,6 +23,8 @@ const StockBox = ({selectedStock}) => {
       )
         .then((res) => res.json())
         .then((data) => setLivePriceData(data));
+        setCurrentTime(new Date()); // Update currentTime after setting livePriceData
+
         console.log("live price data in StockBox", livePriceData);
     }, [selectedStock]);
   
@@ -64,6 +68,7 @@ const StockBox = ({selectedStock}) => {
                 <StockPriceChange value={livePriceData.d}> ${livePriceData.d.toFixed(2)}</StockPriceChange>
                 <PriceChangePercent value={livePriceData.dp}> ({livePriceData.dp.toFixed(2)}%)  </PriceChangePercent>
               </StockSummaryContainer>
+                <CurrentTime>As of {currentTime.toLocaleString()}</CurrentTime>
             </StockTitleSummeryContainer>
           </LogoContainer>
         <StockDetailsChartContainer>
@@ -261,6 +266,13 @@ const Logo = styled.img`
   margin: 0px;
   font-weight: bold;
   `
+
+  const CurrentTime = styled.p`
+  font-size: 18px;
+  font-style: italic;
+  color: grey;
+  `;
+
 
 
 export default StockBox;
