@@ -29,7 +29,7 @@ function App() {
     <div className="App">
       <NavBar />
       <SearchBar setSelectedStock={setSelectedStock} />
-      <HomeBox />
+      {/* <HomeBox /> */}
       {portfolioStocks !== null && <PortfolioBox portfolioStocks={portfolioStocks} setSelectedStock={setSelectedStock} />}
       <StockBox selectedStock={selectedStock}/>
     </div>
