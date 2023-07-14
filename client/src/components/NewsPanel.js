@@ -47,7 +47,6 @@ const NewsPanel = ({ containerType, selectedStock }) => {
 
   return (
     <NewsPanelContainer>
-      <p>NEWS</p>
       <NewsList news={news} />
     </NewsPanelContainer>
   );

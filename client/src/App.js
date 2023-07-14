@@ -6,6 +6,7 @@ import PortfolioBox from './containers/PortfolioBox';
 import StockBox from './containers/StockBox';
 import SearchBar from './components/SearchBar';
 import PortfolioStocksService from './services/PortfolioStocksService';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [portfolioStocks, setPortfolioStocks] = useState(null);
@@ -29,9 +30,15 @@ function App() {
     <div className="App">
       <NavBar />
       <SearchBar setSelectedStock={setSelectedStock} />
-      <HomeBox />
-      {portfolioStocks !== null && <PortfolioBox portfolioStocks={portfolioStocks} setSelectedStock={setSelectedStock} />}
-      <StockBox selectedStock={selectedStock}/>
+      <Routes>
+        <Route path="/" element={<HomeBox/>} />
+        <Route path="/portfolio" element={portfolioStocks !== null && <PortfolioBox portfolioStocks={portfolioStocks} setSelectedStock={setSelectedStock} />} />
+        <Route path="/stocks" element={<StockBox selectedStock={selectedStock}/>} />
+      </Routes>
+
+      {/* <HomeBox /> */}
+      {/* {portfolioStocks !== null && <PortfolioBox portfolioStocks={portfolioStocks} setSelectedStock={setSelectedStock} />} */}
+      {/* <StockBox selectedStock={selectedStock}/> */}
     </div>
   );
 }

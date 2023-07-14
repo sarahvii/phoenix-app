@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { StockProvider } from './services/StockContext';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <Router>
   <StockProvider>
     <App />
   </StockProvider>
+  </Router>
 );
 
 // If you want to start measuring performance in your app, pass a function

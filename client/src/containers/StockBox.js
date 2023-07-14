@@ -88,6 +88,7 @@ const StockBox = ({selectedStock}) => {
           <BuyPanel />
           <NewsPanel containerType="stock" selectedStock={selectedStock} />
       </StockBoxContainer>
+
         </>
      );
 
