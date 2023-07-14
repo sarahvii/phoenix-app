@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const BASE_URL = "https://finnhub.io/api/v1/stock/";
 
 export default function SearchBar({ setSelectedStock }) {
   const [symbol, setSymbol] = useState('');
   const [details, setDetails] = useState(null);
+  const navigate = useNavigate();
 
   const detail = (symbol) => {
     return fetch(`${BASE_URL}profile2?symbol=${symbol}&token=cim0421r01qucvvrg00gcim0421r01qucvvrg010`).then((res) => res.json());
@@ -16,7 +18,9 @@ export default function SearchBar({ setSelectedStock }) {
     console.log(response);
     setDetails(response);
     setSelectedStock(response.ticker);
+    navigate("/stocks")
   } catch (err) {
+    console.log(err)
     setDetails({ error: "symbol not found" });
   }
 };

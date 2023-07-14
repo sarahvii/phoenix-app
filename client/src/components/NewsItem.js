@@ -16,11 +16,11 @@ const NewsItem = ( {item} ) => {
 };
 
 const NewsItemContainer = styled.div`
-border: 1px solid black;
+border: 5px solid black;
 margin: 10px;
 padding: 20px;
 display: flex;
-width: 15rem;
+min-width: 15rem;
 flex-direction: column;
 justify-content: space-between;
 align-items: center;

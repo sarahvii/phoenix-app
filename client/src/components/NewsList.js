@@ -14,6 +14,6 @@ const NewsList = ( { news } ) => {
 
 const NewsListContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;`
+  overflow-x: auto;`
 
-export default NewsList
+export default NewsList;
