@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import BuyPanel from "../components/BuyPanel";
 import NewsPanel from "../components/NewsPanel";
+// import NewsList from "../components/NewsList";
 
 const StockBox = ({selectedStock}) => {
 
@@ -86,10 +87,12 @@ const StockBox = ({selectedStock}) => {
           <StockChart>Stock Chart</StockChart>
         </StockDetailsChartContainer>
           <BuyPanel />
-          <NewsPanel containerType="stock" selectedStock={selectedStock} />
+
       </StockBoxContainer>
+      <NewsPanel containerType="stock" selectedStock={selectedStock} />
 
         </>
+        
      );
 
 

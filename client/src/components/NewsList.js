@@ -13,6 +13,7 @@ const NewsList = ( { news } ) => {
 };
 
 const NewsListContainer = styled.div`
-  display: inline-flex;`
+  display: flex;
+  overflow-x: auto;`
 
-export default NewsList
+export default NewsList;
