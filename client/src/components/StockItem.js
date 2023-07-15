@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import calculateProfitLoss from "../services/CalculateProfitOrLoss";
 import {StockContext} from "../services/StockContext";
+import { Link } from "react-router-dom";
 
 
 const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
@@ -41,21 +42,25 @@ const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
 
 
   return (
-    <StockItemDiv onClick={() => handleStockClick(stock.ticker)}>
-      <CompanyInfo>
-        <StockTicker>{stock.ticker}</StockTicker>
-        <StockName>{liveCompanyData.name}</StockName>
-        <StockCurrentPrice>${livePriceData.c}</StockCurrentPrice><PriceChangePercent value={livePriceData.dp}> ({livePriceData.dp.toFixed(2)}%)  </PriceChangePercent>
-      </CompanyInfo>
-      <Logo src={logo} alt="company logo" />
-      <PerformanceInfo>
-        <StockTotalShares>{totalShares.toFixed(2)} Shares</StockTotalShares>
-        <StockTotalValue>Total value: ${currentTotalValue.toFixed(2)}</StockTotalValue>
-        <ProfitOrLoss isProfit={isProfit}>${Math.abs(profitLoss).toFixed(2)}</ProfitOrLoss>
-      </PerformanceInfo>
-    </StockItemDiv>
+    <StyledLink to="/stocks">
+      <StockItemDiv onClick={() => handleStockClick(stock.ticker)}>
+        <CompanyInfo>
+          <StockTicker>{stock.ticker}</StockTicker>
+          <StockName>{liveCompanyData.name}</StockName>
+          <StockCurrentPrice>${livePriceData.c}</StockCurrentPrice><PriceChangePercent value={livePriceData.dp}> ({livePriceData.dp.toFixed(2)}%)  </PriceChangePercent>
+        </CompanyInfo>
+        <Logo src={logo} alt="company logo" />
+        <PerformanceInfo>
+          <StockTotalShares>{totalShares.toFixed(2)} Shares</StockTotalShares>
+          <StockTotalValue>Total value: ${currentTotalValue.toFixed(2)}</StockTotalValue>
+          <ProfitOrLoss isProfit={isProfit}>${Math.abs(profitLoss).toFixed(2)}</ProfitOrLoss>
+        </PerformanceInfo>
+      </StockItemDiv>
+    </StyledLink>
   );
 };
+
+
   const StockItemDiv = styled.div`
     border: 5px solid black;
     margin: 10px;
@@ -110,6 +115,11 @@ const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
     color: ${(props) => (props.isProfit ? "green" : "red")};
     font-size: 20px;
     font-weight: bold;
+  `;
+
+  const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: inherit;
   `;
 
 
