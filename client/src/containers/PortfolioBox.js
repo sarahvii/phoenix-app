@@ -12,6 +12,7 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
   const [totalPortfolioProfitLoss, setTotalPortfolioProfitLoss] = useState(0);
   const [profitLossPercentage, setProfitLossPercentage] = useState(0);
   const [isProfit, setIsProfit] = useState(false);
+  const [portfolioStocksWithValues, setPortfolioStocksWithValues] = useState([]);
 
   useEffect(() => {
     console.log("calculatedValsList", calculatedValsList);
@@ -40,7 +41,9 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
     };
 
     calculateTotals();
-  }, [calculatedValsList]);
+    setPortfolioStocksWithValues(addValueToStock(portfolioStocks, calculatedValsList));
+    console.log("portfolioStocksWithValues", portfolioStocksWithValues);
+  }, [calculatedValsList, portfolioStocks]);
 
   const handleCalculatedValues = (stock, liveCompanyData, livePriceData) => {
     if (liveCompanyData && livePriceData) {
@@ -49,33 +52,50 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
     }
   };
 
+  const addValueToStock = (portfolioStocks, currentTotalValuesList) => {
+    console.log("currentTotalValuesList", currentTotalValuesList);
+    let newPortfolioStocks = [...portfolioStocks];
+
+    if (currentTotalValuesList && currentTotalValuesList.length > 0) {
+      for (let i = 0; i < portfolioStocks.length; i++) {
+        const stock = { ...portfolioStocks[i] };
+        const value = currentTotalValuesList[i];
+        stock.value = value;
+
+        newPortfolioStocks[i] = stock;
+      }
+    }
+
+    return newPortfolioStocks;
+  };
+
   return (
     <StockContext.Provider value={{ calculatedValsList, setCalculatedValsList }}>
       <PortfolioBoxContainer>
-            <h2>Portfolio Overview</h2>
+        <h2>Portfolio Overview</h2>
         <PortfolioBoxSummeryPieContainer>
           <PortfolioSummaryContainer>
             <SummeryTitle>Performance</SummeryTitle>
             <SummeryValuesContainer>
-                <TotalPortfolioValue>
+              <TotalPortfolioValue>
                 Total Portfolio Value: ${totalPortfolioValue.toFixed(2)}
-                </TotalPortfolioValue>
-                <TotalPortfolioProfitLoss isProfit={isProfit}>
+              </TotalPortfolioValue>
+              <TotalPortfolioProfitLoss isProfit={isProfit}>
                 Total Portfolio Profit/Loss: ${totalPortfolioProfitLoss.toFixed(2)}
-                </TotalPortfolioProfitLoss>
-                <PercentageProfitLoss isProfit={isProfit}>
+              </TotalPortfolioProfitLoss>
+              <PercentageProfitLoss isProfit={isProfit}>
                 Percentage Profit/Loss: {profitLossPercentage.toFixed(2)}%
-                </PercentageProfitLoss>
+              </PercentageProfitLoss>
             </SummeryValuesContainer>
           </PortfolioSummaryContainer>
-          <PieChart portfolioStocks={portfolioStocks} />
+          <PieChart portfolioStocks={portfolioStocksWithValues} setSelectedStock={setSelectedStock} />
         </PortfolioBoxSummeryPieContainer>
         <StockList
-          portfolioStocks={portfolioStocks}
+          portfolioStocks={portfolioStocksWithValues}
           setSelectedStock={setSelectedStock}
           handleCalculatedValues={handleCalculatedValues}
         />
-        <NewsPanel containerType="portfolio" portfolioStocks={portfolioStocks} />
+        <NewsPanel containerType="portfolio" portfolioStocks={portfolioStocksWithValues} />
       </PortfolioBoxContainer>
     </StockContext.Provider>
   );
@@ -125,13 +145,12 @@ const SummeryTitle = styled.h2`
 `;
 
 const SummeryValuesContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin: 10px;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 10px;
+  padding: 20px;
 `;
-
 
 export default PortfolioBox;
