@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { format } from "date-fns";
+
 
 import BuyPanel from "../components/BuyPanel";
 import NewsPanel from "../components/NewsPanel";
@@ -47,6 +49,9 @@ const StockBox = ({selectedStock}) => {
   
     const { logo } = liveCompanyData;
 
+    const formattedDate = format(currentTime, "do MMMM yyyy, hh:mm:ss a");
+
+
 
     return ( 
         <>
@@ -68,7 +73,7 @@ const StockBox = ({selectedStock}) => {
                 <StockPriceChange value={livePriceData.d}> ${livePriceData.d.toFixed(2)}</StockPriceChange>
                 <PriceChangePercent value={livePriceData.dp}> ({livePriceData.dp.toFixed(2)}%)  </PriceChangePercent>
               </StockSummaryContainer>
-                <CurrentTime>As of {currentTime.toLocaleString()}</CurrentTime>
+                <CurrentTime>As of {formattedDate}</CurrentTime>
             </StockTitleSummeryContainer>
           </LogoContainer>
         <StockDetailsChartContainer>
