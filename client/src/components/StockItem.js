@@ -51,7 +51,7 @@ const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
         </CompanyInfo>
         <Logo src={logo} alt="company logo" />
         <PerformanceInfo>
-          <StockTotalShares>{totalShares.toFixed(2)} Shares</StockTotalShares>
+          <StockTotalShares>{totalShares} Shares</StockTotalShares>
           <StockTotalValue>Total value: ${currentTotalValue.toFixed(2)}</StockTotalValue>
           <ProfitOrLoss isProfit={isProfit}>${Math.abs(profitLoss).toFixed(2)}</ProfitOrLoss>
         </PerformanceInfo>

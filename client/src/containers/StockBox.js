@@ -101,7 +101,7 @@ const StockBox = ({selectedStock}) => {
             <CandleStickChart stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker}></CandleStickChart>
           </StockChartContainer>
         </StockDetailsChartContainer>
-          <BuyPanel />
+          <BuyPanel currentPrice={livePriceData.c} stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker}/>
 
       </StockBoxContainer>
       <NewsPanel containerType="stock" selectedStock={selectedStock} />
