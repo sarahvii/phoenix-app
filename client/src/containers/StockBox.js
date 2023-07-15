@@ -218,8 +218,8 @@ const Logo = styled.img`
   `;
 
   const StockChartContainer = styled.div`
-  width: 25%;
-  height: 25%;
+  width: 90%;
+  height: 50%;
   margin: 10px;
   border: 3px solid black;
   `;
