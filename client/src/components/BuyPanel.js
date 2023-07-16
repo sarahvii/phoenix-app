@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 // import PortfolioStocksService from './services/PortfolioStocksService';
 
 
@@ -10,6 +11,8 @@ const BuyPanel = ({currentPrice, stockName, stockTicker}) => {
   const handleSharesChange = (event) => {
     setShares(event.target.value);
   }
+
+  const navigate = useNavigate();
 
   const handleBuyStock = async (event) => {
     event.preventDefault();
@@ -43,6 +46,8 @@ const BuyPanel = ({currentPrice, stockName, stockTicker}) => {
   
       if (response.ok) {
         console.log("Stock bought successfully");
+        navigate("/portfolio")
+        
         // Add any success handling here
       } else {
         console.error("Failed to buy stock");
@@ -86,6 +91,7 @@ const BuyPanel = ({currentPrice, stockName, stockTicker}) => {
   
       if (response.ok) {
         console.log("Stock sold successfully");
+        navigate("/portfolio")
         // Add any success handling here
       } else {
         console.error("Failed to sell stock");
