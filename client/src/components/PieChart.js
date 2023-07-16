@@ -7,10 +7,12 @@ import pie from 'highcharts/modules/series-label';
 pie(Highcharts);
 
 const PieChart = ({ portfolioStocks }) => {
+
   if (!portfolioStocks || portfolioStocks.length === 0) {
     return <div>No data available for the chart.</div>;
   }
 
+  
   const options = {
     chart: {
       type: 'pie'
@@ -18,34 +20,30 @@ const PieChart = ({ portfolioStocks }) => {
     title: {
       text: 'Portfolio Breakdown'
     },
-    tooltip: {
-      formatter: function () {
-        return `<b>${this.point.name}</b>: $${Highcharts.numberFormat(this.y, 0, '.', '')}`; // format the label of the value field
-      }
-    },
     series: [
       {
-        name: 'Current Value',
-        data: portfolioStocks.map((stock) => ({
-          name: stock.ticker,
-          y: stock.value?.currentTotalValue || 0 // Handle undefined value
-        }))
+        name: 'Shares',
+        data: portfolioStocks
+          ? portfolioStocks.map((stock) => ({
+              name: stock.ticker,
+              y: stock.totalShares
+            }))
+          : []
       }
     ]
   };
 
   return (
     <>
-      {portfolioStocks.length > 0 ? (
-        <HighchartsReact highcharts={Highcharts} options={options} />
-      ) : (
-        <p>Loading chart...</p>
-      )}
+    
+          {portfolioStocks ? (
+            <HighchartsReact highcharts={Highcharts} options={options} />
+          ) : (
+            <p>Loading chart...</p>
+          )}
     </>
   );
 };
-
-
 
 
 export default PieChart;
