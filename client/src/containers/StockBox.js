@@ -16,8 +16,7 @@ const StockBox = ({selectedStock}) => {
     const [liveCompanyData, setLiveCompanyData] = useState(null);
     const [currentTime, setCurrentTime] = useState(new Date());
 
-  
-  
+
     useEffect(() => {
       if (!selectedStock) {
         return; 
@@ -30,22 +29,30 @@ const StockBox = ({selectedStock}) => {
         .then((data) => setLivePriceData(data));
         setCurrentTime(new Date()); // Update currentTime after setting livePriceData
 
-        console.log("live price data in StockBox", livePriceData);
     }, [selectedStock]);
   
     useEffect(() => {
       if (!selectedStock) {
         return; 
       }
-
       fetch(
         `https://finnhub.io/api/v1/stock/profile2?symbol=${selectedStock}&token=cim0421r01qucvvrg00gcim0421r01qucvvrg010`
       )
         .then((res) => res.json())
         .then((data) => setLiveCompanyData(data));
-        console.log("live company data in StockBox", liveCompanyData);
     }, [selectedStock]);
-  
+
+
+    //useEffects below are to allow console.logs to print after the data is fetched
+      useEffect(() => {
+        console.log("live price data in StockBox", livePriceData);
+      }, [livePriceData]);
+      
+      useEffect(() => {
+        console.log("live company data in StockBox", liveCompanyData);
+      }, [liveCompanyData]);
+
+    
     if (!liveCompanyData || !livePriceData) {
       return "Loading...";
     }
