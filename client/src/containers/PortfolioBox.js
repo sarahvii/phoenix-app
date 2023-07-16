@@ -88,7 +88,7 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
               </PercentageProfitLoss>
             </SummeryValuesContainer>
           </PortfolioSummaryContainer>
-          <PieChart portfolioStocks={portfolioStocksWithValues} />
+          <PieChart portfolioStocks={portfolioStocksWithValues} setSelectedStock={setSelectedStock} />
         </PortfolioBoxSummeryPieContainer>
         <StockList
           portfolioStocks={portfolioStocksWithValues}
