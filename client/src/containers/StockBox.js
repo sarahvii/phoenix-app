@@ -5,6 +5,9 @@ import { format } from "date-fns";
 
 import BuyPanel from "../components/BuyPanel";
 import NewsPanel from "../components/NewsPanel";
+import CandleStickChart from "../components/CandleStickChart";
+
+
 // import NewsList from "../components/NewsList";
 
 const StockBox = ({selectedStock}) => {
@@ -94,7 +97,9 @@ const StockBox = ({selectedStock}) => {
                 <DetailKey>Low</DetailKey><DetailValue>${livePriceData.l}</DetailValue>
               </DetailContainer>
           </StockDetailsContainer>
-          <StockChart>Stock Chart</StockChart>
+          <StockChartContainer>
+            <CandleStickChart stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker}></CandleStickChart>
+          </StockChartContainer>
         </StockDetailsChartContainer>
           <BuyPanel />
 
@@ -212,7 +217,7 @@ const Logo = styled.img`
   text-decoration: none;
   `;
 
-  const StockChart = styled.div`
+  const StockChartContainer = styled.div`
   width: 25%;
   height: 25%;
   margin: 10px;
