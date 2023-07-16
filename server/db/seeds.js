@@ -31,7 +31,7 @@ db.orders.insertMany(
     },
     {
       "stockName": "Alphabet Inc.",
-      "ticker": "GOOG",
+      "ticker": "GOOGL",
       "totalShares": 150,
       "orders": [
         {

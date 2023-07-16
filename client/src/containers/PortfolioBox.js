@@ -5,6 +5,9 @@ import StockList from "../components/StockList";
 import NewsPanel from "../components/NewsPanel";
 import { StockContext } from "../services/StockContext";
 import calculateProfitLoss from "../services/CalculateProfitOrLoss";
+import addValueToStock from "../services/AddValueToStock";
+import calculateTotals from "../services/CalculateTotals";
+
 
 const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
   const { calculatedValsList, setCalculatedValsList } = useContext(StockContext);
@@ -15,58 +18,23 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
   const [portfolioStocksWithValues, setPortfolioStocksWithValues] = useState([]);
 
   useEffect(() => {
-    console.log("calculatedValsList", calculatedValsList);
+    console.log("calculatedValsList at start of useEffect", calculatedValsList);
 
-    const calculateTotals = () => {
-      let totalValue = 0;
-      let totalProfitLoss = 0;
-      let profitLossPercentage = 0;
+    //this function is used to calculate the total value of the portfolio and the total profit/loss of the portfolio
+    calculateTotals(calculatedValsList, setTotalPortfolioValue, setTotalPortfolioProfitLoss, setProfitLossPercentage, setIsProfit);
 
-      calculatedValsList.forEach((stock) => {
-        totalValue += stock.currentTotalValue;
-        totalProfitLoss += stock.profitLoss;
-      });
-
-      setTotalPortfolioValue(totalValue);
-      setTotalPortfolioProfitLoss(totalProfitLoss);
-
-      if (totalValue !== 0) {
-        profitLossPercentage = (totalProfitLoss / totalValue) * 100;
-        setProfitLossPercentage(profitLossPercentage);
-      }
-
-      if (totalProfitLoss > 0) {
-        setIsProfit(true);
-      }
-    };
-
-    calculateTotals();
     setPortfolioStocksWithValues(addValueToStock(portfolioStocks, calculatedValsList));
     console.log("portfolioStocksWithValues", portfolioStocksWithValues);
+    
   }, [calculatedValsList, portfolioStocks]);
 
+
+  //this is the function that is used to get live data from each stock in the portfolio and send it up to the portfolio box to be totalled
   const handleCalculatedValues = (stock, liveCompanyData, livePriceData) => {
     if (liveCompanyData && livePriceData) {
       const calculatedVals = calculateProfitLoss(stock.orders, livePriceData.c);
       setCalculatedValsList((prevList) => [...prevList, calculatedVals]);
     }
-  };
-
-  const addValueToStock = (portfolioStocks, currentTotalValuesList) => {
-    console.log("currentTotalValuesList", currentTotalValuesList);
-    let newPortfolioStocks = [...portfolioStocks];
-
-    if (currentTotalValuesList && currentTotalValuesList.length > 0) {
-      for (let i = 0; i < portfolioStocks.length; i++) {
-        const stock = { ...portfolioStocks[i] };
-        const value = currentTotalValuesList[i];
-        stock.value = value;
-
-        newPortfolioStocks[i] = stock;
-      }
-    }
-
-    return newPortfolioStocks;
   };
 
   return (

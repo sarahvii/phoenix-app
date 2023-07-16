@@ -12,19 +12,31 @@ function App() {
   const [portfolioStocks, setPortfolioStocks] = useState(null);
   const [selectedStock, setSelectedStock] = useState(null);
 
-  const fetchStocksFromDatabase = useCallback(() => {
+  // const fetchStocksFromDatabase = useCallback(() => {
+  //   PortfolioStocksService.getStocks()
+  //     .then((data) => {
+  //       setPortfolioStocks(data);
+  //       console.log("db data", data); 
+  //     });
+  // }, []);
+
+
+  // // this is to avoid an infinite loop until we have buttons to add stocks to the portfolio
+  // useEffect(() => {
+  //   fetchStocksFromDatabase();
+  // }, [fetchStocksFromDatabase]);
+
+  const fetchStocksFromDatabase = () => {
     PortfolioStocksService.getStocks()
       .then((data) => {
         setPortfolioStocks(data);
         console.log("db data", data); 
       });
-  }, []);
+  }
 
-
-  // this is to avoid an infinite loop until we have buttons to add stocks to the portfolio
   useEffect(() => {
     fetchStocksFromDatabase();
-  }, [fetchStocksFromDatabase]);
+  }, []);
 
 
 
