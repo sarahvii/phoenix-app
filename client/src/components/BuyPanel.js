@@ -1,18 +1,43 @@
-import React from 'react'
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import PortfolioStocksService from './services/PortfolioStocksService';
+import PortfolioContext from '../services/PortfolioContext';
 
 
 const BuyPanel = ({currentPrice, stockName, stockTicker}) => {
 
   const [shares, setShares] = useState(0);
+  const { portfolioData, setPortfolioData, shouldRefresh, setShouldRefresh } = useContext(PortfolioContext);
+  const navigate = useNavigate();
+
+  // useEffect(() => {   // added useEffect
+  //   if (shouldRefresh) {
+  //     fetchUpdatedPortfolioData();
+  //     setShouldRefresh(false);
+  //   }
+  // }, [shouldRefresh]);
+
+  useEffect(() => {
+    setShouldRefresh(true);
+  }, []); //added
 
   const handleSharesChange = (event) => {
     setShares(event.target.value);
   }
 
-  const navigate = useNavigate();
+  // const fetchUpdatedPortfolioData = async () => {  // added fetch
+  //   try {
+  //     const response = await fetch('http://localhost:9000/api/orders');
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       setPortfolioData(data);
+  //     }
+  //     else {
+  //       console.error('Failed to fetch updated portfolio data');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error while fetching updated porfolio data:', error);
+  //   }
+  // }
 
   const handleBuyStock = async (event) => {
     event.preventDefault();
@@ -46,6 +71,8 @@ const BuyPanel = ({currentPrice, stockName, stockTicker}) => {
   
       if (response.ok) {
         console.log("Stock bought successfully");
+        setPortfolioData(data); // added
+        setShouldRefresh(true); // added
         navigate("/portfolio")
         
         // Add any success handling here
@@ -91,6 +118,8 @@ const BuyPanel = ({currentPrice, stockName, stockTicker}) => {
   
       if (response.ok) {
         console.log("Stock sold successfully");
+        setPortfolioData(data); // added
+        setShouldRefresh(true); // added
         navigate("/portfolio")
         // Add any success handling here
       } else {

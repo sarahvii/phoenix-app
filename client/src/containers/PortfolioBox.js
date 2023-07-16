@@ -5,16 +5,42 @@ import StockList from "../components/StockList";
 import NewsPanel from "../components/NewsPanel";
 import { StockContext } from "../services/StockContext";
 import calculateProfitLoss from "../services/CalculateProfitOrLoss";
+import PortfolioContext from "../services/PortfolioContext";
 
 const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
   const { calculatedValsList, setCalculatedValsList } = useContext(StockContext);
+  const { setPortfolioData } = useContext(PortfolioContext); // added
   const [totalPortfolioValue, setTotalPortfolioValue] = useState(0);
   const [totalPortfolioProfitLoss, setTotalPortfolioProfitLoss] = useState(0);
   const [profitLossPercentage, setProfitLossPercentage] = useState(0);
   const [isProfit, setIsProfit] = useState(false);
   const [portfolioStocksWithValues, setPortfolioStocksWithValues] = useState([]);
+  const { shouldRefresh, setShouldRefresh } = useContext(PortfolioContext); // added
+
+  // const fetchUpdatedPortfolioData = async () => {  //added, but also in buy panel.
+  //   try {
+  //     const response = await fetch("http://localhost:9000/api/orders");
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       setPortfolioData(data);
+  //     } else {
+  //       console.error("Failed to fetch updated portfolio data");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error while fetching updated portfolio data:", error);
+  //   }
+  // };
 
   useEffect(() => {
+  if (shouldRefresh) {
+    // fetchUpdatedPortfolioData();
+    setShouldRefresh(false);
+  }
+}, [shouldRefresh])
+
+  useEffect(() => {
+
+
     console.log("calculatedValsList", calculatedValsList);
 
     const calculateTotals = () => {
@@ -43,7 +69,8 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
     calculateTotals();
     setPortfolioStocksWithValues(addValueToStock(portfolioStocks, calculatedValsList));
     console.log("portfolioStocksWithValues", portfolioStocksWithValues);
-  }, [calculatedValsList, portfolioStocks]);
+
+  }, [calculatedValsList, portfolioStocks, setPortfolioData]); // added porfolioStocksWithValues - take out
 
   const handleCalculatedValues = (stock, liveCompanyData, livePriceData) => {
     if (liveCompanyData && livePriceData) {
