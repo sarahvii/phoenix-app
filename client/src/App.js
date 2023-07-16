@@ -21,10 +21,12 @@ function App() {
   }, []);
 
 
-  //this is to avoid an infinite loop until we have buttons to add stocks to the portfolio
+  // this is to avoid an infinite loop until we have buttons to add stocks to the portfolio
   useEffect(() => {
     fetchStocksFromDatabase();
   }, [fetchStocksFromDatabase]);
+
+
 
   return (
     <div className="App">

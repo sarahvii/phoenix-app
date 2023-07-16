@@ -71,7 +71,7 @@ router.post('/', (req, res) => {
         const newStock = {
           stockName: stockName,
           ticker: ticker,
-          totalShares: order.sharesQuantity,
+          totalShares: parseInt(order.sharesQuantity),
           orders: [order]
         };
 
