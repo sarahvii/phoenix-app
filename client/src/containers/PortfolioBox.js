@@ -19,6 +19,7 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
 
   useEffect(() => {
     console.log("calculatedValsList at start of useEffect", calculatedValsList);
+    console.log("portfolioStocks at start of useEffect", portfolioStocks);
 
     //this function is used to calculate the total value of the portfolio and the total profit/loss of the portfolio
     calculateTotals(calculatedValsList, setTotalPortfolioValue, setTotalPortfolioProfitLoss, setProfitLossPercentage, setIsProfit);
