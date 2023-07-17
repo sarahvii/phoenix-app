@@ -44,13 +44,13 @@ const StockBox = ({selectedStock}) => {
 
 
     //useEffects below are to allow console.logs to print after the data is fetched
-      useEffect(() => {
-        console.log("live price data in StockBox", livePriceData);
-      }, [livePriceData]);
+      // useEffect(() => {
+      //   console.log("live price data in StockBox", livePriceData);
+      // }, [livePriceData]);
       
-      useEffect(() => {
-        console.log("live company data in StockBox", liveCompanyData);
-      }, [liveCompanyData]);
+      // useEffect(() => {
+      //   console.log("live company data in StockBox", liveCompanyData);
+      // }, [liveCompanyData]);
 
     
     if (!liveCompanyData || !livePriceData) {

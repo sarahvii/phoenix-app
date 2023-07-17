@@ -1,5 +1,4 @@
 const addValueToStock = (portfolioStocks, currentTotalValuesList) => {
-    console.log("currentTotalValuesList", currentTotalValuesList);
     let newPortfolioStocks = [...portfolioStocks];
 
     if (currentTotalValuesList && currentTotalValuesList.length > 0) {

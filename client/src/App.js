@@ -32,7 +32,8 @@ function App() {
     PortfolioStocksService.getStocks()
       .then((data) => {
         setPortfolioStocks(data);
-        console.log("db data", data); 
+        console.log("data fetched from DB", data); 
+        console.log("shouldRefresh status: ", shouldRefresh);
       });
   }
 
