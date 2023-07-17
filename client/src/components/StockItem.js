@@ -28,6 +28,7 @@ const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
   useEffect(() => {
     if (livePriceData) {
       const calculatedVals = calculateProfitLoss(stock.orders, livePriceData.c);
+      calculatedVals.ticker = stock.ticker;
       setCalculatedValsList((prevList) => [...prevList, calculatedVals]);
     }
   }, [livePriceData, stock.orders, setCalculatedValsList]);
