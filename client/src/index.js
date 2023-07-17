@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { StockProvider } from './services/StockContext';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { PortfolioProvider } from './services/PortfolioContext';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
   <StockProvider>
+    <PortfolioProvider>
     <App />
+    </PortfolioProvider>
   </StockProvider>
   </Router>
 );
