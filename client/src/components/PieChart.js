@@ -53,7 +53,7 @@ const PieChart = ({ portfolioStocks, setSelectedStock }) => {
         name: 'Current Value',
         data: portfolioStocks.map((stock) => ({
           name: stock.ticker,
-          y: stock.value?.currentTotalValue || 0, // Handle undefined value
+          y: stock.values?.currentTotalValue || 0, // Handle undefined value
         })),
       },
     ],

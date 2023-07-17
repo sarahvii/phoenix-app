@@ -6,7 +6,7 @@ const addValueToStock = (portfolioStocks, currentTotalValuesList) => {
       for (let i = 0; i < portfolioStocks.length; i++) {
         const stock = { ...portfolioStocks[i] };
         const value = currentTotalValuesList[i];
-        stock.value = value;
+        stock.values = value;
 
         newPortfolioStocks[i] = stock;
       }
