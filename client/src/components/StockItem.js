@@ -29,9 +29,30 @@ const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
     if (livePriceData) {
       const calculatedVals = calculateProfitLoss(stock.orders, livePriceData.c);
       calculatedVals.ticker = stock.ticker;
-      setCalculatedValsList((prevList) => [...prevList, calculatedVals]);
+  
+      setCalculatedValsList((prevList) => {
+        let updatedList = [...prevList];
+        let foundMatches = false;
+  
+        updatedList = updatedList.map((item) => {
+          if (item.ticker === stock.ticker) {
+            foundMatches = true;
+            return calculatedVals; // Replace existing data
+          } else {
+            return item;
+          }
+        });
+  
+        if (!foundMatches) {
+          updatedList.push(calculatedVals); // Add new data
+        }
+  
+        return updatedList;
+      });
     }
-  }, [livePriceData, stock.orders, setCalculatedValsList]);
+  }, [livePriceData, stock.orders, stock.ticker, setCalculatedValsList]);
+  
+  
 
   if (!liveCompanyData || !livePriceData) {
     return "Loading...";
