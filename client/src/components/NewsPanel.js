@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import NewsList from './NewsList';
 import styled from 'styled-components';
-import defaultImage from '../wance-paleri-NnRIrQ1USyw-unsplash.jpg'
+import defaultImage1 from '../images/defaultImage1.jpg';
+import defaultImage2 from '../images/defaultImage2.jpg';
+import defaultImage3 from '../images/defaultImage3.jpg';
+import defaultImage4 from '../images/defaultImage4.jpg';
+import defaultImage5 from '../images/defaultImage5.jpg';
+
+
+
+const defaultImages = [defaultImage1, defaultImage2, defaultImage3, defaultImage4, defaultImage5];
 
 const NewsPanel = ({ containerType, selectedStock }) => {
   const [news, setNews] = useState([]);
@@ -25,9 +33,9 @@ const NewsPanel = ({ containerType, selectedStock }) => {
 
         console.log('Fetched news data:', data); // Display the fetched news data
 
-        const updatedNews = data.slice(0, 10).map((item) => ({
+        const updatedNews = data.slice(0, 10).map((item, index) => ({
           ...item,
-          image: item.image !== '' ? item.image : defaultImage, // Replace empty image with default image URL
+          image: item.image !== '' ? item.image : defaultImages[index % defaultImages.length], // Cycle through default images
         }));
 
         setNews(updatedNews);
@@ -53,9 +61,9 @@ const NewsPanel = ({ containerType, selectedStock }) => {
 
           console.log('Fetched stock news data:', data); // Display the fetched stock news data
 
-          const updatedNews = data.slice(0, 10).map((item) => ({
+          const updatedNews = data.slice(0, 10).map((item, index) => ({
             ...item,
-            image: item.image !== '' ? item.image : defaultImage, // Replace empty image with default image URL
+            image: item.image !== '' ? item.image : defaultImages[index % defaultImages.length], // Cycle through default images
           }));
 
           setNews(updatedNews);
