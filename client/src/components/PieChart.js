@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import pie from 'highcharts/modules/series-label';
