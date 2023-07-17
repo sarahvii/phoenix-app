@@ -21,7 +21,6 @@ const NewsPanel = ({ containerType, selectedStock }) => {
       try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log('newsdata', data);
         setNews(data.slice(0, 10));
       } catch (error) {
         console.error('Error fetching news: ', error);
@@ -42,7 +41,6 @@ const NewsPanel = ({ containerType, selectedStock }) => {
         try {
           const response = await fetch(url);
           const data = await response.json();
-          console.log('stockNewsData', data);
           setNews(data.slice(0, 10));
         } catch (error) {
           console.error('Error fetching stock news: ', error);

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const BuyPanel = ({ currentPrice, stockName, stockTicker }) => {
   const [shares, setShares] = useState(0);
-  const { setPortfolioData, setShouldRefresh } = useContext(PortfolioContext); //added
+  const { setPortfolioData, setShouldRefresh, shouldRefresh } = useContext(PortfolioContext); //added
   const navigate = useNavigate();
 
   const handleSharesChange = (event) => {
@@ -15,7 +15,7 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker }) => {
   const handleStockTrade = async (event, type) => {
     event.preventDefault();
     const action = type === 'buy' ? 'buying' : 'selling';
-    console.log(action, 'stock');
+    console.log(action, stockName);
     // console.log('shares', shares);
     // console.log('currentPrice', currentPrice);
     // console.log('stockName', stockName);
@@ -44,13 +44,23 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker }) => {
       });
 
       if (response.ok) {
-        console.log('Stock', action, 'successfully');
+        console.log("Sucessful order:",  data);
         setPortfolioData(data); // added
-        setShouldRefresh(true); // added
+
+
+
+        if (shouldRefresh) {
+          setShouldRefresh(false); // toggle off shouldRefresh
+        } else {
+          setShouldRefresh(true); // toggle on shouldRefresh
+        }
+
+
+
         navigate("/portfolio")
         // Add any success handling here
       } else {
-        console.error('Failed to', action, 'stock');
+        console.error('Failed to', action, stockName);
         // Add any error handling here
       }
     } catch (error) {
