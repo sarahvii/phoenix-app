@@ -3,8 +3,7 @@ import styled from 'styled-components';
 
 const Modal = ({ open, onClose, details, handleYesClick, setSelectedStock }) => {
 
-
-  const handleYesButtonClick = () => {
+  const handleYesButtonClick = () => { 
     setSelectedStock(details.ticker); // Set the selected stock in the internal state
     handleYesClick(); // Call the handleYesClick function from SearchBar
   };
@@ -14,17 +13,23 @@ const Modal = ({ open, onClose, details, handleYesClick, setSelectedStock }) => 
   return (
     <ModalOverlay>
       <ModalContainer>
-        <div className="content">
-          {details && !details.error ? (
-            <div>
-              <h2>{details.name}</h2>
-              <p>{details.ticker}</p>
-              <img src={details.logo} alt={details.name} />
-            </div>
-          ) : (
-            <h1>{details.error}</h1>
-          )}
-        </div>
+      {details && Object.keys(details).length > 0 ? ( // If returned object is empty symbol not found is rendered
+          <div className="content">
+            {!details.error ? (
+              <>
+                <h2>{details.name}</h2>
+                <p>{details.ticker}</p>
+                <img src={details.logo} alt={details.name} />
+              </>
+            ) : (
+              <h1>{details.error}</h1>
+            )}
+          </div>
+        ) : (
+          <div className="content">
+            <p>Symbol not found</p>
+          </div>
+        )}
         <div className="buttonContainer">
           <button className="buttonYes" onClick={handleYesButtonClick}>
             <span className="bold">Yes</span>
