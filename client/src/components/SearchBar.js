@@ -10,9 +10,10 @@ const SearchBar = ({ setSelectedStock }) => {
   const [symbol, setSymbol] = useState('');
   const [details, setDetails] = useState(null);
   const [openModal, setOpenModal] = useState(false);
-  const [selectedStock, setSelectedStockInternal] = useState(null); // Rename the state variable to selectedStock
+  const [selectedStock, setSelectedStockInternal] = useState(null); // Must be internal.
   const navigate = useNavigate();
   const { setShouldRefresh } = useContext(PortfolioContext);
+
 
   const detail = async (symbol) => {
     try {
@@ -43,7 +44,7 @@ const SearchBar = ({ setSelectedStock }) => {
   };
 
   const handleYesClick = () => {
-    setSelectedStock(details.ticker); // Set the selected stock in the external state / MUST be details.ticker or only renders on second attempt, conflict with selectedStock
+    setSelectedStock(details.ticker); // Set the selected stock in the external state / MUST be details.ticker not selectedStock otherwise only renders on second attempt
     setOpenModal(false); 
     setShouldRefresh(true);
     navigate('/stocks'); 
