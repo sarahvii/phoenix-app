@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import { addBusinessDays } from 'date-fns';
+import React, { useState, useContext } from 'react';
+import PortfolioContext from '../services/PortfolioContext';
+import { useNavigate } from 'react-router-dom';
 
 const BuyPanel = ({ currentPrice, stockName, stockTicker }) => {
   const [shares, setShares] = useState(0);
+  const { setPortfolioData, setShouldRefresh } = useContext(PortfolioContext); //added
+  const navigate = useNavigate();
 
   const handleSharesChange = (event) => {
     setShares(event.target.value);
@@ -40,6 +45,9 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker }) => {
 
       if (response.ok) {
         console.log('Stock', action, 'successfully');
+        setPortfolioData(data); // added
+        setShouldRefresh(true); // added
+        navigate("/portfolio")
         // Add any success handling here
       } else {
         console.error('Failed to', action, 'stock');
