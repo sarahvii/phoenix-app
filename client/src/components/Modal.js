@@ -53,6 +53,7 @@ left: 0;
 display: flex;
 justify-content: center;
 align-items: center;
+z-index: 1000;
 `;
 
 const ModalContainer = styled.div`
@@ -62,6 +63,7 @@ border-radius: 8px;
 box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.2);
 max-width: 400px;
 width: 90%;
+z-index: 1001;
 
 h2 {
   font-size: 24px;
