@@ -63,7 +63,7 @@ const NewsPanel = ({ containerType, selectedStock }) => {
 
           const updatedNews = data.slice(0, 10).map((item, index) => ({
             ...item,
-            image: item.image !== '' ? item.image : defaultImages[index % defaultImages.length], // Cycle through default images
+            image: item.image !== '' ? item.image : defaultImages[index % defaultImages.length], // Cycle through default images using index
           }));
 
           setNews(updatedNews);
