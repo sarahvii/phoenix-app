@@ -97,6 +97,11 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, setWatchList, togg
 
 
     const OwnershipDetailsContainer = () => {
+
+      if (!stockDetails) {
+        return null; 
+      }
+
       return (
         <div>
           <p>You own { stockDetails.totalShares } shares of {' ' + stockDetails.ticker}</p>

@@ -54,7 +54,7 @@ function App() {
   return (
     <div className="App">
       <NavBar searchBar={<SearchBar setSelectedStock={setSelectedStock} />} />
-      <WatchList watchList={watchList}/>
+      <WatchList watchList={watchList} setSelectedStock={setSelectedStock}/>
       <Routes>
         <Route path="/" element={<HomeBox/>} />
         <Route path="/portfolio" element={portfolioStocks !== null && <PortfolioBox portfolioStocks={portfolioStocks} setSelectedStock={setSelectedStock} />} />
