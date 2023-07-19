@@ -5,6 +5,8 @@ import HomeBox from './containers/HomeBox';
 import PortfolioBox from './containers/PortfolioBox';
 import StockBox from './containers/StockBox';
 import SearchBar from './components/SearchBar';
+import About from './components/About';
+import Footer from './components/Footer';
 import PortfolioStocksService from './services/PortfolioStocksService';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PortfolioContext from './services/PortfolioContext'; // added
@@ -14,19 +16,6 @@ function App() {
   const [selectedStock, setSelectedStock] = useState(null);
   const { shouldRefresh } = useContext(PortfolioContext); // added
 
-  // const fetchStocksFromDatabase = useCallback(() => {
-  //   PortfolioStocksService.getStocks()
-  //     .then((data) => {
-  //       setPortfolioStocks(data);
-  //       console.log("db data", data); 
-  //     });
-  // }, []);
-
-
-  // // this is to avoid an infinite loop until we have buttons to add stocks to the portfolio
-  // useEffect(() => {
-  //   fetchStocksFromDatabase();
-  // }, [fetchStocksFromDatabase]);
 
   const fetchStocksFromDatabase = () => {
     PortfolioStocksService.getStocks()
@@ -50,7 +39,9 @@ function App() {
         <Route path="/" element={<HomeBox/>} />
         <Route path="/portfolio" element={portfolioStocks !== null && <PortfolioBox portfolioStocks={portfolioStocks} setSelectedStock={setSelectedStock} />} />
         <Route path="/stocks" element={<StockBox selectedStock={selectedStock} portfolioStocks={portfolioStocks}/>} />
+        <Route path="/about" element={<About/>}/>
       </Routes>
+      <Footer/>
     </div>
   );
 }

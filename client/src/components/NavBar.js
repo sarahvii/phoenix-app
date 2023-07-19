@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 
 const NavBar = ({searchBar}) => {
@@ -11,7 +12,10 @@ const NavBar = ({searchBar}) => {
         <NavItems>
           <ListItem>
             <StyledLink to="/portfolio">
-              <StyledIcon icon={faHouse} />
+              <StyledIcon icon={faHouse} title='Portfolio' />
+            </StyledLink>
+            <StyledLink to="/about">
+              <StyledIcon icon={faCircleInfo} title='About'/>
             </StyledLink>
           </ListItem>
         </NavItems>
@@ -62,6 +66,7 @@ const StyledLink = styled(Link)`
 const StyledIcon = styled(FontAwesomeIcon)`
   height: 40px;
   width: 40px;
+  margin-right: 10px;
 `;
 
 export default NavBar;

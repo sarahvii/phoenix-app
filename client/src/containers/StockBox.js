@@ -93,8 +93,7 @@ const StockBox = ({selectedStock, portfolioStocks}) => {
     const OwnershipDetailsContainer = () => {
       return (
         <div>
-          <p>You own { stockDetails.totalShares } shares of {' ' + stockDetails.stockName}</p>
-          
+          <p>You own { stockDetails.totalShares } shares of {' ' + stockDetails.ticker}</p>
         </div>
       );
     };
