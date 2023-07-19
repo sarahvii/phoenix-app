@@ -5,7 +5,7 @@ import {StockContext} from "../services/StockContext";
 import { Link } from "react-router-dom";
 
 
-const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
+const StockItem = ({ stock, handleStockClick}) => {
   const [livePriceData, setLivePriceData] = useState(null);
   const [liveCompanyData, setLiveCompanyData] = useState(null);
 
