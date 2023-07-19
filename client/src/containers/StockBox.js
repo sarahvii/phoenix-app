@@ -12,7 +12,7 @@ import CandleStickChart from "../components/CandleStickChart";
 
 // import NewsList from "../components/NewsList";
 
-const StockBox = ({selectedStock, portfolioStocks, watchList, setWatchList, toggleWatchList}) => {
+const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) => {
 
     const [livePriceData, setLivePriceData] = useState(null);
     const [liveCompanyData, setLiveCompanyData] = useState(null);

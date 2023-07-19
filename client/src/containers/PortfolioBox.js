@@ -9,7 +9,7 @@ import addValueToStock from "../services/AddValueToStock";
 import calculateTotals from "../services/CalculateTotals";
 
 
-const PortfolioBox = ({ portfolioStocks, setSelectedStock, toggleWatchList }) => {
+const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
   const { calculatedValsList, setCalculatedValsList } = useContext(StockContext);
   const [totalPortfolioValue, setTotalPortfolioValue] = useState(0);
   const [totalPortfolioProfitLoss, setTotalPortfolioProfitLoss] = useState(0);
@@ -60,7 +60,6 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock, toggleWatchList }) =>
           portfolioStocks={portfolioStocksWithValues}
           setSelectedStock={setSelectedStock}
           handleCalculatedValues={handleCalculatedValues}
-          toggleWatchList={toggleWatchList}
         />
         <NewsPanel containerType="portfolio" portfolioStocks={portfolioStocksWithValues} />
       </PortfolioBoxContainer>
