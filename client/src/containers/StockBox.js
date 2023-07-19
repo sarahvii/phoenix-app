@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { format } from "date-fns";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 
 import BuyPanel from "../components/BuyPanel";
@@ -10,19 +12,19 @@ import CandleStickChart from "../components/CandleStickChart";
 
 // import NewsList from "../components/NewsList";
 
-const StockBox = ({selectedStock, portfolioStocks}) => {
+const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) => {
 
     const [livePriceData, setLivePriceData] = useState(null);
     const [liveCompanyData, setLiveCompanyData] = useState(null);
     const [currentTime, setCurrentTime] = useState(new Date());
     const [stockDetails, setStockDetails] = useState(null);
+    const [isWatched, setIsWatched] = useState(false);
 
 
     let isOwned = false;
     
     if (portfolioStocks !== null) {
       isOwned = portfolioStocks.some(stock => stock.ticker === selectedStock);
-
     }
 
 
@@ -35,7 +37,6 @@ const StockBox = ({selectedStock, portfolioStocks}) => {
         })
       }
     }
-
 
 
 
@@ -66,6 +67,16 @@ const StockBox = ({selectedStock, portfolioStocks}) => {
         .then((data) => setLiveCompanyData(data));
     }, [selectedStock]);
 
+    useEffect(() => {
+      console.log("watchList in StockBox", watchList);
+    
+      if (watchList && selectedStock) {
+        const selectedStockExists = watchList.some(item => item.ticker === selectedStock);
+        setIsWatched(selectedStockExists);
+      }
+    }, [watchList, selectedStock]);
+    
+
 
 
     //useEffects below are to allow console.logs to print after the data is fetched
@@ -73,9 +84,9 @@ const StockBox = ({selectedStock, portfolioStocks}) => {
       //   console.log("live price data in StockBox", livePriceData);
       // }, [livePriceData]);
       
-      // useEffect(() => {
-      //   console.log("live company data in StockBox", liveCompanyData);
-      // }, [liveCompanyData]);
+      useEffect(() => {
+        console.log("live company data in StockBox", liveCompanyData);
+      }, [liveCompanyData]);
 
     
     if (!liveCompanyData || !livePriceData) {
@@ -91,12 +102,21 @@ const StockBox = ({selectedStock, portfolioStocks}) => {
 
 
     const OwnershipDetailsContainer = () => {
+
+      if (!stockDetails) {
+        return null; 
+      }
       return (
         <div>
           <p>You own { stockDetails.totalShares } shares of {' ' + stockDetails.ticker}</p>
         </div>
       );
     };
+
+    const handleToggleWatchList = () => {
+      const updatedIsWatched = toggleWatchList(selectedStock, liveCompanyData.logo);
+      setIsWatched(updatedIsWatched);
+    }
 
 
 
@@ -126,7 +146,11 @@ const StockBox = ({selectedStock, portfolioStocks}) => {
           </LogoContainer>
         <StockDetailsChartContainer>
 
+
+
+
           <StockDetailsContainer>
+            <StyledIcon icon={faStar} onClick={handleToggleWatchList} isWatched={isWatched} />
               <DetailContainer>
                 <DetailKey>Market cap:</DetailKey><DetailValue>${liveCompanyData.marketCapitalization.toFixed(2)}</DetailValue>
               </DetailContainer>
@@ -160,6 +184,7 @@ const StockBox = ({selectedStock, portfolioStocks}) => {
 
 
 };
+
 
 const StockBoxContainer = styled.div`
   border: 5px solid black;
@@ -328,7 +353,16 @@ const Logo = styled.img`
   const CurrentTime = styled.p`
   font-size: 18px;
   font-style: italic;
-  color: grey;
+  color: grey;  
+  `;
+
+  const StyledIcon = styled(FontAwesomeIcon)`
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 50%;
+  color: ${(props) => (props.isWatched ? "rgb(237, 237, 7)" : "rgb(153, 153, 255)")}
   `;
 
   /* const OwnershipDetailsContainer = styled.div`

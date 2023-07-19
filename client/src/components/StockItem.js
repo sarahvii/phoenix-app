@@ -3,11 +3,13 @@ import styled from "styled-components";
 import calculateProfitLoss from "../services/CalculateProfitOrLoss";
 import {StockContext} from "../services/StockContext";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
+const StockItem = ({ stock, handleStockClick}) => {
   const [livePriceData, setLivePriceData] = useState(null);
   const [liveCompanyData, setLiveCompanyData] = useState(null);
+
 
   const { setCalculatedValsList } = useContext(StockContext);
 
@@ -51,8 +53,7 @@ const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
       });
     }
   }, [livePriceData, stock.orders, stock.ticker, setCalculatedValsList]);
-  
-  
+
 
   if (!liveCompanyData || !livePriceData) {
     return "Loading...";
@@ -60,7 +61,6 @@ const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
 
   const { logo } = liveCompanyData;
   const { profitLoss, isProfit, totalShares, currentTotalValue } = calculateProfitLoss(stock.orders, livePriceData.c);
-
 
 
   return (
@@ -77,6 +77,7 @@ const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
           <StockTotalValue>Total value: ${currentTotalValue.toFixed(2)}</StockTotalValue>
           <ProfitOrLoss isProfit={isProfit}>${Math.abs(profitLoss).toFixed(2)}</ProfitOrLoss>
         </PerformanceInfo>
+
       </StockItemDiv>
     </StyledLink>
   );
@@ -143,6 +144,8 @@ const StockItem = ({ stock, handleStockClick, handleCalculatedValues }) => {
     text-decoration: none;
     color: inherit;
   `;
+
+
 
 
 export default StockItem;
