@@ -2,6 +2,10 @@ import { addBusinessDays } from 'date-fns';
 import React, { useState, useContext } from 'react';
 import PortfolioContext from '../services/PortfolioContext';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMinus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const BuyPanel = ({ currentPrice, stockName, stockTicker }) => {
   const [shares, setShares] = useState(0);
@@ -69,11 +73,14 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker }) => {
     }
   };
 
+  const minusIcon = <FontAwesomeIcon icon={faMinus} style={{color: "#f2020e",}} />
+  const plusIcon = <FontAwesomeIcon icon={faPlus} style={{color: "#2df505",}} />
+
+
   return (
     <>
       <form id="buy_form">
         <label>
-          Amount to buy:
           <input
             type="number"
             placeholder="0"
@@ -83,14 +90,20 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker }) => {
           />
         </label>
         <button type="submit" onClick={(e) => handleStockTrade(e, 'buy')}>
-          Buy Stock
+          Buy Shares {plusIcon}
         </button>
         <button type="submit" onClick={(e) => handleStockTrade(e, 'sell')}>
-          Sell Stock
+          Sell Shares {minusIcon}
         </button>
       </form>
     </>
   );
 };
 
+const styledButton = styled.button`
+  background-color: rgb(255, 255, 255, 0.0);
+  `;
+
 export default BuyPanel;
+
+

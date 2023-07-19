@@ -50,7 +50,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeBox/>} />
         <Route path="/portfolio" element={portfolioStocks !== null && <PortfolioBox portfolioStocks={portfolioStocks} setSelectedStock={setSelectedStock} />} />
-        <Route path="/stocks" element={<StockBox selectedStock={selectedStock}/>} />
+        <Route path="/stocks" element={<StockBox selectedStock={selectedStock} portfolioStocks={portfolioStocks}/>} />
       </Routes>
     </div>
   );

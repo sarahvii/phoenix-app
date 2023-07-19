@@ -55,7 +55,7 @@ const CandlestickChart = ({ stockName, stockTicker }) => {
   
     const options = {
       title: {
-        text: 'Stock Candlestick Chart',
+        text: (stockName ? ` ${stockName}` : ''),
       },
       xAxis: {
         type: 'datetime',
@@ -63,14 +63,21 @@ const CandlestickChart = ({ stockName, stockTicker }) => {
           day: '%e %b',
         },
       },
+      yAxis: {
+        title: {
+          text: '',
+        },
+      },
       series: [
         {
           type: 'candlestick',
-          name: 'Stock Price',
+          name: 'Stock Price History ($)',
           data: seriesData,
+          color: 'transparent',
         },
       ],
     };
+    
   
     return (
       <div>
