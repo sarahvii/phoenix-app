@@ -3,11 +3,15 @@ import styled from "styled-components";
 import calculateProfitLoss from "../services/CalculateProfitOrLoss";
 import {StockContext} from "../services/StockContext";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 
-const StockItem = ({ stock, handleStockClick}) => {
+const StockItem = ({ stock, handleStockClick, toggleWatchList}) => {
   const [livePriceData, setLivePriceData] = useState(null);
   const [liveCompanyData, setLiveCompanyData] = useState(null);
+  const [isWatched, setIsWatched] = useState(false);
+
 
   const { setCalculatedValsList } = useContext(StockContext);
 
@@ -61,6 +65,10 @@ const StockItem = ({ stock, handleStockClick}) => {
   const { logo } = liveCompanyData;
   const { profitLoss, isProfit, totalShares, currentTotalValue } = calculateProfitLoss(stock.orders, livePriceData.c);
 
+  const handleToggleWatchList = () => {
+    const updatedIsWatched = toggleWatchList(stock.ticker, liveCompanyData.logo);
+    setIsWatched(updatedIsWatched);
+  }
 
 
   return (
@@ -77,6 +85,8 @@ const StockItem = ({ stock, handleStockClick}) => {
           <StockTotalValue>Total value: ${currentTotalValue.toFixed(2)}</StockTotalValue>
           <ProfitOrLoss isProfit={isProfit}>${Math.abs(profitLoss).toFixed(2)}</ProfitOrLoss>
         </PerformanceInfo>
+        <StyledIcon icon={faStar} onClick={handleToggleWatchList} isWatched={isWatched} />
+
       </StockItemDiv>
     </StyledLink>
   );
@@ -143,6 +153,17 @@ const StockItem = ({ stock, handleStockClick}) => {
     text-decoration: none;
     color: inherit;
   `;
+
+  const StyledIcon = styled(FontAwesomeIcon)`
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 50%;
+  color: ${(props) => (props.isWatched ? "rgb(237, 237, 7)" : "rgb(153, 153, 255)")}
+  `;
+
+
 
 
 export default StockItem;

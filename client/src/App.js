@@ -57,7 +57,7 @@ function App() {
       <WatchList watchList={watchList} setSelectedStock={setSelectedStock}/>
       <Routes>
         <Route path="/" element={<HomeBox/>} />
-        <Route path="/portfolio" element={portfolioStocks !== null && <PortfolioBox portfolioStocks={portfolioStocks} setSelectedStock={setSelectedStock} />} />
+        <Route path="/portfolio" element={portfolioStocks !== null && <PortfolioBox portfolioStocks={portfolioStocks} setSelectedStock={setSelectedStock} toggleWatchList={toggleWatchList}/>} />
         <Route path="/stocks" element={<StockBox selectedStock={selectedStock} portfolioStocks={portfolioStocks} toggleWatchList={toggleWatchList} watchList={watchList} setWatchList={setWatchList}/>} />
         <Route path="/about" element={<About/>}/> 
       </Routes>

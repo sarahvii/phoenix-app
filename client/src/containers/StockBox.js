@@ -25,7 +25,6 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, setWatchList, togg
     
     if (portfolioStocks !== null) {
       isOwned = portfolioStocks.some(stock => stock.ticker === selectedStock);
-
     }
 
 
@@ -70,7 +69,13 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, setWatchList, togg
 
     useEffect(() => {
       console.log("watchList in StockBox", watchList);
-    }, [watchList]);
+    
+      if (watchList && selectedStock) {
+        const selectedStockExists = watchList.some(item => item.ticker === selectedStock);
+        setIsWatched(selectedStockExists);
+      }
+    }, [watchList, selectedStock]);
+    
 
 
 
@@ -101,7 +106,6 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, setWatchList, togg
       if (!stockDetails) {
         return null; 
       }
-
       return (
         <div>
           <p>You own { stockDetails.totalShares } shares of {' ' + stockDetails.ticker}</p>
@@ -349,7 +353,7 @@ const Logo = styled.img`
   const CurrentTime = styled.p`
   font-size: 18px;
   font-style: italic;
-  color: grey;
+  color: grey;  
   `;
 
   const StyledIcon = styled(FontAwesomeIcon)`
@@ -358,8 +362,7 @@ const Logo = styled.img`
   margin: 10px;
   padding: 10px;
   border-radius: 50%;
-  color: ${(props) => (props.isWatched ? "rgb(237, 237, 7)" : "rgb(153, 153, 255)")};
-
+  color: ${(props) => (props.isWatched ? "rgb(237, 237, 7)" : "rgb(153, 153, 255)")}
   `;
 
   /* const OwnershipDetailsContainer = styled.div`

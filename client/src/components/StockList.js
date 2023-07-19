@@ -1,7 +1,7 @@
 import React from "react";
 import StockItem from "./StockItem";
 
-const StockList = ({ portfolioStocks, setSelectedStock, handleCalculatedValues }) => {
+const StockList = ({ portfolioStocks, setSelectedStock, handleCalculatedValues, toggleWatchList }) => {
   const handleStockClick = (ticker) => {
     setSelectedStock(ticker);
     console.log("clicked ticker", ticker);
@@ -18,6 +18,7 @@ const StockList = ({ portfolioStocks, setSelectedStock, handleCalculatedValues }
               stock={stock}
               handleStockClick={handleStockClick}
               handleCalculatedValues={handleCalculatedValues}
+              toggleWatchList={toggleWatchList}
             />
           );
         }
