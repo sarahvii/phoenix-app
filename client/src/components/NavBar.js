@@ -55,17 +55,7 @@ const StyledLink = styled(Link)`
   color: black;
 
   &:hover {
-    color: blue;
-  }
-
-  &:hover:after {
-    content: ' Portfolio';
-    display: inline;
-    width: 0;
-    height: 2px;
-    transition: width 7ms ease-in-out;
-    z-index: 1;
-
+    color: #00b4d8;
   }
 `;
 

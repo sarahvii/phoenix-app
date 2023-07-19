@@ -81,6 +81,10 @@ const StyledIcon = styled(FontAwesomeIcon)`
   height: 40px;
   width: 40px;
   margin: 10px;
+
+  &:hover {
+    color: purple;
+  }
 `
 
 export default SearchBar;
