@@ -10,11 +10,33 @@ import CandleStickChart from "../components/CandleStickChart";
 
 // import NewsList from "../components/NewsList";
 
-const StockBox = ({selectedStock}) => {
+const StockBox = ({selectedStock, portfolioStocks}) => {
 
     const [livePriceData, setLivePriceData] = useState(null);
     const [liveCompanyData, setLiveCompanyData] = useState(null);
     const [currentTime, setCurrentTime] = useState(new Date());
+    const [stockDetails, setStockDetails] = useState(null);
+
+
+    let isOwned = false;
+    
+    if (portfolioStocks !== null) {
+      isOwned = portfolioStocks.some(stock => stock.ticker === selectedStock);
+
+    }
+
+
+    const retrieveStockDetails = (isOwned, selectedStock, portfolioStocks) => {
+      if (isOwned) {
+        portfolioStocks.map(stock => {
+          if (stock.ticker === selectedStock) {
+            setStockDetails(stock);
+          }
+        })
+      }
+    }
+
+
 
 
     useEffect(() => {
@@ -28,6 +50,8 @@ const StockBox = ({selectedStock}) => {
         .then((res) => res.json())
         .then((data) => setLivePriceData(data));
         setCurrentTime(new Date()); // Update currentTime after setting livePriceData
+        retrieveStockDetails(isOwned, selectedStock, portfolioStocks);
+
 
     }, [selectedStock]);
   
@@ -41,6 +65,7 @@ const StockBox = ({selectedStock}) => {
         .then((res) => res.json())
         .then((data) => setLiveCompanyData(data));
     }, [selectedStock]);
+
 
 
     //useEffects below are to allow console.logs to print after the data is fetched
@@ -63,9 +88,22 @@ const StockBox = ({selectedStock}) => {
 
 
 
+
+
+    const OwnershipDetailsContainer = () => {
+      return (
+        <div>
+          <p>You own { stockDetails.totalShares } shares of {' ' + stockDetails.ticker}</p>
+        </div>
+      );
+    };
+
+
+
+
+
     return ( 
         <>
-        <h2>StockBox</h2>
         <StockBoxContainer>
           <LogoContainer>
             <LogoLink href={liveCompanyData.weburl} target="_blank">
@@ -87,28 +125,31 @@ const StockBox = ({selectedStock}) => {
             </StockTitleSummeryContainer>
           </LogoContainer>
         <StockDetailsChartContainer>
+
           <StockDetailsContainer>
               <DetailContainer>
-                <DetailKey>Market cap</DetailKey><DetailValue>${liveCompanyData.marketCapitalization.toFixed(2)}</DetailValue>
+                <DetailKey>Market cap:</DetailKey><DetailValue>${liveCompanyData.marketCapitalization.toFixed(2)}</DetailValue>
               </DetailContainer>
               <DetailContainer>
-                <DetailKey>Previous close</DetailKey><DetailValue>${livePriceData.pc}</DetailValue>
+                <DetailKey>Previous close:</DetailKey><DetailValue>${livePriceData.pc}</DetailValue>
               </DetailContainer>
               <DetailContainer>
-                <DetailKey>Open</DetailKey><DetailValue>${livePriceData.o}</DetailValue>
+                <DetailKey>Open:</DetailKey><DetailValue>${livePriceData.o}</DetailValue>
               </DetailContainer>
               <DetailContainer>
-                <DetailKey>High</DetailKey><DetailValue>${livePriceData.h}</DetailValue>
+                <DetailKey>High:</DetailKey><DetailValue>${livePriceData.h}</DetailValue>
               </DetailContainer>
               <DetailContainer>
-                <DetailKey>Low</DetailKey><DetailValue>${livePriceData.l}</DetailValue>
+                <DetailKey>Low:</DetailKey><DetailValue>${livePriceData.l}</DetailValue>
               </DetailContainer>
+          {isOwned && <OwnershipDetailsContainer/>}
+          <BuyPanel currentPrice={livePriceData.c} stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker}/>
           </StockDetailsContainer>
+
           <StockChartContainer>
             <CandleStickChart stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker}></CandleStickChart>
           </StockChartContainer>
         </StockDetailsChartContainer>
-          <BuyPanel currentPrice={livePriceData.c} stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker}/>
 
       </StockBoxContainer>
       <NewsPanel containerType="stock" selectedStock={selectedStock} />
@@ -289,6 +330,17 @@ const Logo = styled.img`
   font-style: italic;
   color: grey;
   `;
+
+  /* const OwnershipDetailsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  width: 50%;
+  margin: 10px;
+  ` */
+
+
 
 
 

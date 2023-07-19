@@ -70,7 +70,7 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
 const PortfolioBoxContainer = styled.div`
   display: flex;
   flex-direction: column;
-  border: 5px solid black;
+  /* border: 5px solid black; */
   margin: 10px;
 `;
 
