@@ -19,6 +19,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
     const [currentTime, setCurrentTime] = useState(new Date());
     const [stockDetails, setStockDetails] = useState(null);
     const [isWatched, setIsWatched] = useState(false);
+    const [ordersShowHide, setOrdersShowHide] = useState(false);
 
 
     let isOwned = false;
@@ -68,8 +69,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
     }, [selectedStock]);
 
     useEffect(() => {
-      console.log("watchList in StockBox", watchList);
-    
+      console.log("watchList in StockBox", watchList);    
       if (watchList && selectedStock) {
         const selectedStockExists = watchList.some(item => item.ticker === selectedStock);
         setIsWatched(selectedStockExists);
@@ -97,21 +97,84 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 
     const formattedDate = format(currentTime, "do MMMM yyyy, hh:mm:ss a");
 
-
-
-
-
     const OwnershipDetailsContainer = () => {
-
       if (!stockDetails) {
-        return null; 
+        return null;
       }
-      return (
-        <div>
-          <p>You own { stockDetails.totalShares } shares of {' ' + stockDetails.ticker}</p>
-        </div>
-      );
+    
+      console.log("stockDetails in StockBox", stockDetails);
+
+      const handleShowOrders = (e) => {
+        e.preventDefault();
+        console.log("Show orders");
+        setOrdersShowHide(!ordersShowHide);
+      }
+
+    
+        return (
+          <div>
+            <p>You own {stockDetails.totalShares} shares of {' ' + stockDetails.ticker}</p>
+            <OrderHistory>
+              <Button type="submit" onClick={(e) => handleShowOrders(e)}>Show Order History</Button>
+                {ordersShowHide && <OrderHistoryContainer>
+                  {stockDetails.orders.map((order, index) => (
+                    <Order key={index}>
+                      <OrderItem>{order.date}</OrderItem>
+                      <OrderItem>{order.pricePerShare}</OrderItem>
+                      <OrderType order={order}>{order.type.toUpperCase() + ' '}({order.sharesQuantity})</OrderType>
+                    </Order>
+                  ))}
+                </OrderHistoryContainer>}
+            </OrderHistory>
+          </div>
+        );
     };
+
+    const Button = styled.button``;
+
+    const OrderHistory = styled.div`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      `;
+
+    const OrderHistoryContainer = styled.div`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      padding: 10px;
+      width: 100%;
+      `;
+
+    const Order = styled.div`
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #e6e6e6;
+      border-radius: 5px;
+      padding: 5px;
+      margin-bottom: 5px;
+      width: 100%;
+      `;
+
+    const OrderType = styled.div`
+      color: ${props => props.order.type === "buy" ? "#00c805" : "#ff0000"};
+      font-weight: bold;
+      font-size: 8px;
+      `;
+
+    const OrderItem = styled.span`
+      font-size: 8px;
+      `;
+
+      
+    
 
     const handleToggleWatchList = () => {
       const updatedIsWatched = toggleWatchList(selectedStock, liveCompanyData.logo);
@@ -146,11 +209,9 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
           </LogoContainer>
         <StockDetailsChartContainer>
 
-
-
-
           <StockDetailsContainer>
             <StyledIcon icon={faStar} onClick={handleToggleWatchList} isWatched={isWatched} />
+          <BuyPanel currentPrice={livePriceData.c} stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker}/>
               <DetailContainer>
                 <DetailKey>Market cap:</DetailKey><DetailValue>${liveCompanyData.marketCapitalization.toFixed(2)}</DetailValue>
               </DetailContainer>
@@ -167,7 +228,6 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
                 <DetailKey>Low:</DetailKey><DetailValue>${livePriceData.l}</DetailValue>
               </DetailContainer>
           {isOwned && <OwnershipDetailsContainer/>}
-          <BuyPanel currentPrice={livePriceData.c} stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker}/>
           </StockDetailsContainer>
 
           <StockChartContainer>
@@ -177,6 +237,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 
       </StockBoxContainer>
       <NewsPanel containerType="stock" selectedStock={selectedStock} />
+
 
         </>
         
@@ -364,6 +425,9 @@ const Logo = styled.img`
   border-radius: 50%;
   color: ${(props) => (props.isWatched ? "rgb(237, 237, 7)" : "rgb(153, 153, 255)")}
   `;
+
+  const OrderHistory = styled.div`
+  `
 
   /* const OwnershipDetailsContainer = styled.div`
   display: flex;
