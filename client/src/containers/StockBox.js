@@ -105,7 +105,6 @@ const StockBox = ({selectedStock, portfolioStocks}) => {
 
     return ( 
         <>
-        <h2>StockBox</h2>
         <StockBoxContainer>
           <LogoContainer>
             <LogoLink href={liveCompanyData.weburl} target="_blank">
