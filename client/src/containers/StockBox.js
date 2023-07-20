@@ -68,8 +68,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
     }, [selectedStock]);
 
     useEffect(() => {
-      console.log("watchList in StockBox", watchList);
-    
+      console.log("watchList in StockBox", watchList);    
       if (watchList && selectedStock) {
         const selectedStockExists = watchList.some(item => item.ticker === selectedStock);
         setIsWatched(selectedStockExists);
@@ -102,16 +101,28 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 
 
     const OwnershipDetailsContainer = () => {
-
       if (!stockDetails) {
-        return null; 
+        return null;
       }
+    
+      console.log("stockDetails in StockBox", stockDetails);
+    
       return (
         <div>
-          <p>You own { stockDetails.totalShares } shares of {' ' + stockDetails.ticker}</p>
+          <p>You own {stockDetails.totalShares} shares of {' ' + stockDetails.ticker}</p>
+          <OrderHistory>
+            {stockDetails.orders.map((order, index) => (
+              <div key={index}>
+                <p>Date: {order.date}</p>
+                <p>Price Per Share: {order.pricePerShare}</p>
+                <p>Order Type: {order.type}</p>
+              </div>
+            ))}
+          </OrderHistory>
         </div>
       );
     };
+    
 
     const handleToggleWatchList = () => {
       const updatedIsWatched = toggleWatchList(selectedStock, liveCompanyData.logo);
@@ -151,6 +162,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 
           <StockDetailsContainer>
             <StyledIcon icon={faStar} onClick={handleToggleWatchList} isWatched={isWatched} />
+          <BuyPanel currentPrice={livePriceData.c} stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker}/>
               <DetailContainer>
                 <DetailKey>Market cap:</DetailKey><DetailValue>${liveCompanyData.marketCapitalization.toFixed(2)}</DetailValue>
               </DetailContainer>
@@ -167,7 +179,6 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
                 <DetailKey>Low:</DetailKey><DetailValue>${livePriceData.l}</DetailValue>
               </DetailContainer>
           {isOwned && <OwnershipDetailsContainer/>}
-          <BuyPanel currentPrice={livePriceData.c} stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker}/>
           </StockDetailsContainer>
 
           <StockChartContainer>
@@ -177,6 +188,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 
       </StockBoxContainer>
       <NewsPanel containerType="stock" selectedStock={selectedStock} />
+
 
         </>
         
@@ -364,6 +376,9 @@ const Logo = styled.img`
   border-radius: 50%;
   color: ${(props) => (props.isWatched ? "rgb(237, 237, 7)" : "rgb(153, 153, 255)")}
   `;
+
+  const OrderHistory = styled.div`
+  `
 
   /* const OwnershipDetailsContainer = styled.div`
   display: flex;
