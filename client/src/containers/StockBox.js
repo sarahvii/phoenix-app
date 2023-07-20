@@ -19,6 +19,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
     const [currentTime, setCurrentTime] = useState(new Date());
     const [stockDetails, setStockDetails] = useState(null);
     const [isWatched, setIsWatched] = useState(false);
+    const [ordersShowHide, setOrdersShowHide] = useState(false);
 
 
     let isOwned = false;
@@ -96,32 +97,83 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 
     const formattedDate = format(currentTime, "do MMMM yyyy, hh:mm:ss a");
 
-
-
-
-
     const OwnershipDetailsContainer = () => {
       if (!stockDetails) {
         return null;
       }
     
       console.log("stockDetails in StockBox", stockDetails);
+
+      const handleShowOrders = (e) => {
+        e.preventDefault();
+        console.log("Show orders");
+        setOrdersShowHide(!ordersShowHide);
+      }
+
     
-      return (
-        <div>
-          <p>You own {stockDetails.totalShares} shares of {' ' + stockDetails.ticker}</p>
-          <OrderHistory>
-            {stockDetails.orders.map((order, index) => (
-              <div key={index}>
-                <p>Date: {order.date}</p>
-                <p>Price Per Share: {order.pricePerShare}</p>
-                <p>Order Type: {order.type}</p>
-              </div>
-            ))}
-          </OrderHistory>
-        </div>
-      );
+        return (
+          <div>
+            <p>You own {stockDetails.totalShares} shares of {' ' + stockDetails.ticker}</p>
+            <OrderHistory>
+              <Button type="submit" onClick={(e) => handleShowOrders(e)}>Show Order History</Button>
+                {ordersShowHide && <OrderHistoryContainer>
+                  {stockDetails.orders.map((order, index) => (
+                    <Order key={index}>
+                      <OrderItem>{order.date}</OrderItem>
+                      <OrderItem>{order.pricePerShare}</OrderItem>
+                      <OrderType order={order}>{order.type.toUpperCase() + ' '}({order.sharesQuantity})</OrderType>
+                    </Order>
+                  ))}
+                </OrderHistoryContainer>}
+            </OrderHistory>
+          </div>
+        );
     };
+
+    const Button = styled.button``;
+
+    const OrderHistory = styled.div`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      `;
+
+    const OrderHistoryContainer = styled.div`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      padding: 10px;
+      width: 100%;
+      `;
+
+    const Order = styled.div`
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #e6e6e6;
+      border-radius: 5px;
+      padding: 5px;
+      margin-bottom: 5px;
+      width: 100%;
+      `;
+
+    const OrderType = styled.div`
+      color: ${props => props.order.type === "buy" ? "#00c805" : "#ff0000"};
+      font-weight: bold;
+      font-size: 8px;
+      `;
+
+    const OrderItem = styled.span`
+      font-size: 8px;
+      `;
+
+      
     
 
     const handleToggleWatchList = () => {
@@ -156,9 +208,6 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
             </StockTitleSummeryContainer>
           </LogoContainer>
         <StockDetailsChartContainer>
-
-
-
 
           <StockDetailsContainer>
             <StyledIcon icon={faStar} onClick={handleToggleWatchList} isWatched={isWatched} />
