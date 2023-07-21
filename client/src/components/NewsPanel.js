@@ -18,13 +18,13 @@ const NewsPanel = ({ containerType, selectedStock }) => {
     const fetchData = async () => {
       let url;
       if (containerType === 'home') {
-        url = 'https://finnhub.io/api/v1/news?category=general&token=cim0421r01qucvvrg00gcim0421r01qucvvrg010';
+        url = `https://finnhub.io/api/v1/news?category=general&token=${process.env.REACT_APP_FINNHUB_API_TOKEN}`;
       } else if (containerType === 'portfolio') {
         const currentDate = new Date().toISOString().slice(0, 10);
         const fromDate = new Date();
         fromDate.setFullYear(fromDate.getFullYear() - 1);
         const from = fromDate.toISOString().slice(0, 10);
-        url = `https://finnhub.io/api/v1/company-news?symbol=AAPL&from=${from}&to=${currentDate}&token=cim0421r01qucvvrg00gcim0421r01qucvvrg010`;
+        url = `https://finnhub.io/api/v1/company-news?symbol=AAPL&from=${from}&to=${currentDate}&token=${process.env.REACT_APP_FINNHUB_API_TOKEN}`;
       }
 
       try {
@@ -54,7 +54,7 @@ const NewsPanel = ({ containerType, selectedStock }) => {
         const fromDate = new Date();
         fromDate.setFullYear(fromDate.getFullYear() - 1);
         const from = fromDate.toISOString().slice(0, 10);
-        const url = `https://finnhub.io/api/v1/company-news?symbol=${selectedStock}&from=${from}&to=${currentDate}&token=cim0421r01qucvvrg00gcim0421r01qucvvrg010`;
+        const url = `https://finnhub.io/api/v1/company-news?symbol=${selectedStock}&from=${from}&to=${currentDate}&token=${process.env.REACT_APP_FINNHUB_API_TOKEN}`;
         try {
           const response = await fetch(url);
           const data = await response.json();
