@@ -15,6 +15,7 @@ const StockList = ({ portfolioStocks, setSelectedStock, handleCalculatedValues }
         } else {
           return (
             <StockItem
+              key={stock.ticker}
               stock={stock}
               handleStockClick={handleStockClick}
               handleCalculatedValues={handleCalculatedValues}
