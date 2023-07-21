@@ -47,7 +47,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
       }
 
       fetch(
-        `https://finnhub.io/api/v1/quote?symbol=${selectedStock}&token=cim0421r01qucvvrg00gcim0421r01qucvvrg010`
+        `https://finnhub.io/api/v1/quote?symbol=${selectedStock}&token=${process.env.REACT_APP_FINNHUB_API_TOKEN}`
       )
         .then((res) => res.json())
         .then((data) => setLivePriceData(data));
@@ -62,7 +62,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
         return; 
       }
       fetch(
-        `https://finnhub.io/api/v1/stock/profile2?symbol=${selectedStock}&token=cim0421r01qucvvrg00gcim0421r01qucvvrg010`
+        `https://finnhub.io/api/v1/stock/profile2?symbol=${selectedStock}&token=${process.env.REACT_APP_FINNHUB_API_TOKEN}`
       )
         .then((res) => res.json())
         .then((data) => setLiveCompanyData(data));

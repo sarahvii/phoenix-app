@@ -19,7 +19,7 @@ const CandlestickChart = ({ stockName, stockTicker }) => {
       const fromDate = new Date();
       fromDate.setFullYear(fromDate.getFullYear() - 1);
       const from = Math.floor(fromDate.getTime() / 1000);
-      const url = `https://finnhub.io/api/v1/stock/candle?symbol=${stockTicker}&resolution=D&from=${from}&to=${currentDate}&token=cim0421r01qucvvrg00gcim0421r01qucvvrg010`;
+      const url = `https://finnhub.io/api/v1/stock/candle?symbol=${stockTicker}&resolution=D&from=${from}&to=${currentDate}&token=${process.env.REACT_APP_FINNHUB_API_TOKEN}`;
 
       try {
         const response = await fetch(url);

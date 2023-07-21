@@ -14,14 +14,14 @@ const StockItem = ({ stock, handleStockClick}) => {
   const { setCalculatedValsList } = useContext(StockContext);
 
   useEffect(() => {
-    fetch(`https://finnhub.io/api/v1/quote?symbol=${stock.ticker}&token=cim0421r01qucvvrg00gcim0421r01qucvvrg010`)
+    fetch(`https://finnhub.io/api/v1/quote?symbol=${stock.ticker}&token=${process.env.REACT_APP_FINNHUB_API_TOKEN}`)
       .then((res) => res.json())
       .then((data) => setLivePriceData(data));
   }, [stock.ticker]);
 
   useEffect(() => {
     fetch(
-      `https://finnhub.io/api/v1/stock/profile2?symbol=${stock.ticker}&token=cim0421r01qucvvrg00gcim0421r01qucvvrg010`
+      `https://finnhub.io/api/v1/stock/profile2?symbol=${stock.ticker}&token=${process.env.REACT_APP_FINNHUB_API_TOKEN}`
     )
       .then((res) => res.json())
       .then((data) => setLiveCompanyData(data));

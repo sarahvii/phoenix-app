@@ -7,7 +7,6 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const BASE_URL = 'https://finnhub.io/api/v1/stock/';
-const API_TOKEN = 'cim0421r01qucvvrg00gcim0421r01qucvvrg010';
 
 const SearchBar = ({ setSelectedStock }) => {
   const [symbol, setSymbol] = useState('');
@@ -20,7 +19,7 @@ const SearchBar = ({ setSelectedStock }) => {
 
   const detail = async (symbol) => {
     try {
-      const response = await fetch(`${BASE_URL}profile2?symbol=${symbol}&token=${API_TOKEN}`);
+      const response = await fetch(`${BASE_URL}profile2?symbol=${symbol}&token=${process.env.REACT_APP_FINNHUB_API_TOKEN}`);
       const data = await response.json();
       return data;
     } catch (err) {
