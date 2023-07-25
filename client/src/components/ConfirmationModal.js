@@ -20,7 +20,7 @@ const ConfirmationModal = ({ open, onClose, details, confirmAction, handleConfir
               <h2>{details.name}</h2>
               <p>{details.ticker}</p>
               {fromBuyPanel && details.shares !== null ? (
-              <p>You have {details.transactionType === 'buy' ? "purchased" : "sold"} {details.shares} {details.shares === 1 ? "share" : "shares"} of {details.name} for ${details.currentPrice} per share.</p>
+              <p>You have {details.orderType === 'buy' ? "bought" : "sold"} {details.shares} {details.shares === 1 ? "share" : "shares"} of {details.name} for ${details.currentPrice} per share.</p>
                 ) : null}
             </div>
             <div className="buttonContainer">
