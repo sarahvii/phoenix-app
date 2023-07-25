@@ -6,14 +6,17 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import ConfirmationModal from './ConfirmationModal';
 
-const BuyPanel = ({ currentPrice, stockName, stockTicker }) => {
+const BuyPanel = ({ currentPrice, stockName, stockTicker, logo }) => {
   const [shares, setShares] = useState(0);
   const { setPortfolioData, setShouldRefresh, shouldRefresh } = useContext(PortfolioContext); //added
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
+  const [orderType, setOrderType] = useState(null);
 
   const handleSharesChange = (event) => {
-    setShares(event.target.value);
+    setShares(Number(event.target.value));
   };
 
   const handleStockTrade = async (event, type) => {
@@ -24,6 +27,8 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker }) => {
     // console.log('currentPrice', currentPrice);
     // console.log('stockName', stockName);
     // console.log('stockTicker', stockTicker);
+    setOpenModal(true);
+    setOrderType(type);
 
     const order = {
       sharesQuantity: parseInt(shares),
@@ -61,7 +66,7 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker }) => {
 
 
 
-        navigate("/portfolio")
+
         // Add any success handling here
       } else {
         console.error('Failed to', action, stockName);
@@ -76,9 +81,21 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker }) => {
   const minusIcon = <FontAwesomeIcon icon={faMinus} style={{color: "#f2020e",}} />
   const plusIcon = <FontAwesomeIcon icon={faPlus} style={{color: "#2df505",}} />
 
+  const handleModalConfirm = () => {
+    handleModalClose();
+    setShouldRefresh(true);
+    navigate('/portfolio');
+  };
+
+  const handleModalClose = () => {
+    setOpenModal(false);
+  };
+
+
 
   return (
     <>
+
       <form id="buy_form">
         <label>
           <input
@@ -88,7 +105,9 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker }) => {
             value={shares}
             onChange={handleSharesChange}
           />
+
         </label>
+
         <button type="submit" onClick={(e) => handleStockTrade(e, 'buy')}>
           Buy Shares {plusIcon}
         </button>
@@ -96,13 +115,21 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker }) => {
           Sell Shares {minusIcon}
         </button>
       </form>
+      <ConfirmationModal 
+      open={openModal} 
+      onClose={handleModalClose}
+      details={{name: stockName, ticker: stockTicker, shares: shares, logo: logo, currentPrice: currentPrice, orderType: orderType}}
+      confirmAction={handleModalConfirm}
+      handleConfirm={handleModalConfirm}
+      handleCancel={handleModalClose}
+      fromBuyPanel={true} />
     </>
   );
 };
 
-const styledButton = styled.button`
-  background-color: rgb(255, 255, 255, 0.0);
-  `;
+// const styledButton = styled.button`
+//   background-color: rgb(255, 255, 255, 0.0);
+//   `;
 
 export default BuyPanel;
 
