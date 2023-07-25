@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Modal from './Modal';
+import ConfirmationModal from './ConfirmationModal';
 import styled from 'styled-components';
 import PortfolioContext from '../services/PortfolioContext';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -40,16 +40,29 @@ const SearchBar = ({ setSelectedStock }) => {
     }
   };
 
-  const handleModalClose = () => {
+  // const handleModalClose = () => {
+  //   setOpenModal(false);
+  //   setSymbol('');
+  // };
+
+  // const handleYesClick = () => {
+  //   setSelectedStock(details.ticker); // Set the selected stock in the external state / MUST be details.ticker not selectedStock otherwise only renders on second attempt
+  //   setOpenModal(false); 
+  //   setShouldRefresh(true);
+  //   navigate('/stocks'); 
+  // };
+
+  const handleModalConfirm = () => {
+    setSelectedStock(details.ticker);
+    setShouldRefresh(true);
+    navigate('/stocks');
     setOpenModal(false);
     setSymbol('');
   };
 
-  const handleYesClick = () => {
-    setSelectedStock(details.ticker); // Set the selected stock in the external state / MUST be details.ticker not selectedStock otherwise only renders on second attempt
-    setOpenModal(false); 
-    setShouldRefresh(true);
-    navigate('/stocks'); 
+  const handleModalCancel = () => {
+    setOpenModal(false);
+    setSymbol('');
   };
 
   return (
@@ -58,7 +71,12 @@ const SearchBar = ({ setSelectedStock }) => {
       <Button className="searchButton" onClick={handleClick}>
         <StyledIcon icon={faMagnifyingGlass} />
       </Button>
-      <Modal open={openModal} onClose={handleModalClose} details={details} handleYesClick={handleYesClick} setSelectedStock={setSelectedStockInternal} /> {/* Pass details, handleYesClick, and setSelectedStock to the Modal */}
+      <ConfirmationModal 
+      open={openModal} 
+      onClose={handleModalCancel} 
+      details={details} 
+      confirmAction={() => setSelectedStockInternal(details.ticker)} handleConfirm={handleModalConfirm} handleCancel={handleModalCancel}
+      fromBuyPanel={false} />
     </SearchBarContainer>
   );
 }

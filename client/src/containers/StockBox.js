@@ -13,6 +13,7 @@ import CandleStickChart from "../components/CandleStickChart";
 // import NewsList from "../components/NewsList";
 
 const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) => {
+  console.log('toggle', toggleWatchList)
 
     const [livePriceData, setLivePriceData] = useState(null);
     const [liveCompanyData, setLiveCompanyData] = useState(null);
@@ -211,7 +212,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 
           <StockDetailsContainer>
             <StyledIcon icon={faStar} onClick={handleToggleWatchList} isWatched={isWatched} />
-          <BuyPanel currentPrice={livePriceData.c} stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker}/>
+          <BuyPanel currentPrice={livePriceData.c} stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker} logo={liveCompanyData.logo}/>
               <DetailContainer>
                 <DetailKey>Market cap:</DetailKey><DetailValue>${liveCompanyData.marketCapitalization.toFixed(2)}</DetailValue>
               </DetailContainer>

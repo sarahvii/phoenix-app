@@ -41,6 +41,7 @@ const NewsPanel = ({ containerType, selectedStock }) => {
         setNews(updatedNews);
       } catch (error) {
         console.error('Error fetching news: ', error);
+        // console.error('Error response:', await error.text());
       }
     };
 
