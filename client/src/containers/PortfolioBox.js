@@ -54,9 +54,12 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
               </PercentageProfitLoss>
             </SummeryValuesContainer>
           </PerformanceContainer>
-          <PieChartContainer>
-          <PieChart portfolioStocks={portfolioStocksWithValues} setSelectedStock={setSelectedStock} />
-          </PieChartContainer>
+          <PieContainer>
+            <PieChartTitle>Portfolio Breakdown</PieChartTitle>
+            <PieChartContainer>
+              <PieChart portfolioStocks={portfolioStocksWithValues} setSelectedStock={setSelectedStock} />
+            </PieChartContainer>
+          </PieContainer>
         </PortfolioBoxSummaryPieContainer>
 
         <StockList
@@ -115,14 +118,22 @@ const SummeryValuesContainer = styled.div`
   `;
 
 const PieChartContainer = styled.div`
+margin: 10px 0px;
+padding: 12px;
+background-color: #fff;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+border-radius: 12px;
+`;
+
+const PieContainer = styled.div`
 background-color: #DFE1E6;
-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 border-radius: 12px;
 margin: 0px 20px 0px 20px;
-padding: 16px;
+padding: 6px 16px 16px 16px;
 display: flex;
+flex: 1;
 flex-direction: column;
-justify-content: flex-start;
 `;
 
 
@@ -168,6 +179,14 @@ background-color: pink;
 `;
 
 const SummeryTitle = styled.h2`
+  margin: 10px 0px;
+  padding: 12px;
+  background-color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+`;
+
+const PieChartTitle = styled.h2`
   margin: 10px 0px;
   padding: 12px;
   background-color: #fff;
