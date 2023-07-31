@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import styled from "styled-components";
 import PieChart from "../components/PieChart";
 import StockList from "../components/StockList";
@@ -16,6 +16,9 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
   const [profitLossPercentage, setProfitLossPercentage] = useState(0);
   const [isProfit, setIsProfit] = useState(false);
   const [portfolioStocksWithValues, setPortfolioStocksWithValues] = useState([]);
+  const [pieContainerHeight, setPieContainerHeight] = useState(300);
+
+  const  chartContainerRef = useRef(null);
 
   useEffect(() => {
 
@@ -34,6 +37,15 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
       setCalculatedValsList((prevList) => [...prevList, calculatedVals]);
     }
   };
+
+  //sets PieContainer height whenever height of HighCharts container changes
+  useEffect(() => {
+    const chartContainer = chartContainerRef.current;
+    if (chartContainer) {
+      const chartHeight = chartContainer.clientHeight;
+      setPieContainerHeight(chartHeight);
+    }
+  }, [chartContainerRef.current])
 
   return (
     <StockContext.Provider value={{ calculatedValsList, setCalculatedValsList }}>
@@ -54,19 +66,20 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
               </PercentageProfitLoss>
             </SummeryValuesContainer>
           </PerformanceContainer>
-          <PieContainer>
+          <PieContainer pieContainerHeight={pieContainerHeight}>
             <PieChartTitle>Portfolio Breakdown</PieChartTitle>
-            <PieChartContainer>
+            <PieChartContainer ref={chartContainerRef}>
               <PieChart portfolioStocks={portfolioStocksWithValues} setSelectedStock={setSelectedStock} />
             </PieChartContainer>
           </PieContainer>
         </PortfolioBoxSummaryPieContainer>
-
+        <StockListContainer>
         <StockList
           portfolioStocks={portfolioStocksWithValues}
           setSelectedStock={setSelectedStock}
           handleCalculatedValues={handleCalculatedValues}
         />
+        </StockListContainer>
         <NewsPanel containerType="portfolio" portfolioStocks={portfolioStocksWithValues} />
       </PortfolioBoxContainer>
     </StockContext.Provider>
@@ -134,6 +147,7 @@ padding: 6px 16px 16px 16px;
 display: flex;
 flex: 1;
 flex-direction: column;
+height: ${(props) => props.pieContainerHeight}px;
 `;
 
 
@@ -193,6 +207,18 @@ const PieChartTitle = styled.h2`
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
 `;
+
+const StockListContainer = styled.div`
+background-color: green;
+// display: flex;
+// flex-direction: column;
+// margin: 10px;
+
+//   @media screen and (min-width: 768px) {
+//     flex-direction: row;
+//     justify-content: center;
+//   }
+// `;
 
 
 

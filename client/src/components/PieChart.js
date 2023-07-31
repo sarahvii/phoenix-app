@@ -64,7 +64,7 @@ const PieChart = ({ portfolioStocks, setSelectedStock }) => {
   return (
     <>
       {portfolioStocks.length > 0 ? (
-        <HighchartsReact highcharts={Highcharts} options={options} />
+        <HighchartsReact highcharts={Highcharts} options={options}/>
       ) : (
         <p>Loading chart...</p>
       )}
