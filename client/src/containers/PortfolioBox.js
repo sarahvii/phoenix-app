@@ -71,7 +71,7 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
 };
 
 const PortfolioBoxContainer = styled.div`
-  background-color: yellow;
+  // background-color: yellow;
   display: flex;
   flex-direction: column;
   /* border: 5px solid black; */
@@ -79,31 +79,32 @@ const PortfolioBoxContainer = styled.div`
 `;
 
 const PortfolioBoxSummaryPieContainer = styled.div`
-  background-color: grey;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  // background-color: grey;
+  // box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   padding: 16px;
   display: flex;
   height: 50vh;
   margin: 10px auto;
-  width: 83%;
+  width: 86%;
 `;
 
 
 const PerformanceContainer = styled.div`
-  background-color: teal;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #DFE1E6;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   margin: 0px 20px 0px 20px;
-  padding: 16px;
+  padding: 6px 16px 16px 16px;
   display: flex;
   flex: 1;
   flex-direction: column;
-  // justify-content: flex-start;
 `;
 
 const SummeryValuesContainer = styled.div`
-  background-color: red;
+  background-color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -114,7 +115,7 @@ const SummeryValuesContainer = styled.div`
   `;
 
 const PieChartContainer = styled.div`
-background-color: teal;
+background-color: #DFE1E6;
 box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 border-radius: 12px;
 margin: 0px 20px 0px 20px;
@@ -148,7 +149,6 @@ justify-content: flex-start;
 
 
 const TotalPortfolioValue = styled.h4`
-
   margin: 10px;
   padding: 0px;
   color: black;
@@ -168,9 +168,11 @@ background-color: pink;
 `;
 
 const SummeryTitle = styled.h2`
-background-color: pink;
-  margin: 10px;
-  padding: 0px;
+  margin: 10px 0px;
+  padding: 12px;
+  background-color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
 `;
 
 
