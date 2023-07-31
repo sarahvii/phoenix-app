@@ -23,6 +23,9 @@ const NewsListContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
 }
+  width: 100%;
+  margin: 0 auto;
+
 
 `
 

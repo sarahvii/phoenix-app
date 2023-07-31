@@ -54,7 +54,7 @@ const ConfirmationModal = ({ open, onClose, details, confirmAction, handleConfir
     const ModalContainer = styled.div`
     background-color: #fff;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 12px;
     box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.2);
     max-width: 400px;
     width: 90%;

@@ -135,7 +135,7 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker, logo }) => {
 const StyledPanel = styled.div`
   background-color: #fff;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 6px;
+  border-radius: 12px;
   padding: 16px;
 `;
 

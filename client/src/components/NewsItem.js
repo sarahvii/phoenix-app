@@ -19,7 +19,7 @@ const NewsItemContainer = styled.div`
 border: 5px solid black;
 background-color: #fff;
 box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-border-radius: 6px;
+border-radius: 12px;
 margin: 10px;
 padding: 20px;
 display: flex;

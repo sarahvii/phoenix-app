@@ -37,10 +37,10 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
 
   return (
     <StockContext.Provider value={{ calculatedValsList, setCalculatedValsList }}>
+      <h2>Portfolio Overview</h2>
       <PortfolioBoxContainer>
-        <h2>Portfolio Overview</h2>
-        <PortfolioBoxSummeryPieContainer>
-          <PortfolioSummaryContainer>
+        <PortfolioBoxSummaryPieContainer>
+          <PerformanceContainer>
             <SummeryTitle>Performance</SummeryTitle>
             <SummeryValuesContainer>
               <TotalPortfolioValue>
@@ -53,9 +53,12 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
                 Percentage Profit/Loss: {profitLossPercentage.toFixed(2)}%
               </PercentageProfitLoss>
             </SummeryValuesContainer>
-          </PortfolioSummaryContainer>
+          </PerformanceContainer>
+          <PieChartContainer>
           <PieChart portfolioStocks={portfolioStocksWithValues} setSelectedStock={setSelectedStock} />
-        </PortfolioBoxSummeryPieContainer>
+          </PieChartContainer>
+        </PortfolioBoxSummaryPieContainer>
+
         <StockList
           portfolioStocks={portfolioStocksWithValues}
           setSelectedStock={setSelectedStock}
@@ -68,55 +71,108 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
 };
 
 const PortfolioBoxContainer = styled.div`
+  background-color: yellow;
   display: flex;
   flex-direction: column;
   /* border: 5px solid black; */
   margin: 10px;
 `;
 
-const PortfolioBoxSummeryPieContainer = styled.div`
+const PortfolioBoxSummaryPieContainer = styled.div`
+  background-color: grey;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 16px;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
   height: 50vh;
-  margin: 10px;
+  margin: 10px auto;
+  width: 83%;
 `;
 
-const PortfolioSummaryContainer = styled.div`
+
+const PerformanceContainer = styled.div`
+  background-color: teal;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  margin: 0px 20px 0px 20px;
+  padding: 16px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  // justify-content: flex-start;
+`;
+
+const SummeryValuesContainer = styled.div`
+  background-color: red;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 1px;
+  padding: 20px;
+  flex: 1;
+  `;
+
+const PieChartContainer = styled.div`
+background-color: teal;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+border-radius: 12px;
+margin: 0px 20px 0px 20px;
+padding: 16px;
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
 `;
 
+
+// const PortfolioBoxSummeryPieContainer = styled.div`
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+//   height: 50vh;
+//   margin: 10px;
+// `;
+
+
+
+
+
+
+
+// const PortfolioSummaryContainer = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-start;
+// `;
+
+
+
 const TotalPortfolioValue = styled.h4`
+
   margin: 10px;
   padding: 0px;
   color: black;
 `;
 
 const TotalPortfolioProfitLoss = styled.h4`
+background-color: pink;
   margin: 10px;
   padding: 0px;
   color: ${(props) => (props.isProfit ? "green" : "red")};
 `;
 
 const PercentageProfitLoss = styled.h4`
+background-color: pink;
   margin: 10px;
   padding: 0px;
 `;
 
 const SummeryTitle = styled.h2`
+background-color: pink;
   margin: 10px;
   padding: 0px;
 `;
 
-const SummeryValuesContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 10px;
-  padding: 20px;
-`;
+
 
 export default PortfolioBox;
