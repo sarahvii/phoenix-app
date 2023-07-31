@@ -14,6 +14,16 @@ const NewsList = ( { news } ) => {
 
 const NewsListContainer = styled.div`
   display: flex;
-  overflow-x: auto;`
+  overflow-x: auto;
+
+  overflow: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+}
+
+`
 
 export default NewsList;
