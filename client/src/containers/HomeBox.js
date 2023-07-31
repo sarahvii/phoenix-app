@@ -1,13 +1,10 @@
 import React from "react";
-import HomeChart from "../components/HomeChart";
-import NewsPanel from "../components/NewsPanel";
+import WelcomePage from "../components/HomeChart";
 
 const HomeBox = () => {
     return (
         <>
-        <h2>HomeBox</h2>
-        <HomeChart/>
-        <NewsPanel containerType="home"/>
+        <WelcomePage/>
         </>   
      );
 }

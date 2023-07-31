@@ -95,7 +95,7 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker, logo }) => {
 
   return (
     <>
-
+    <StyledPanel>
       <form id="buy_form">
         <label>
           <input
@@ -123,6 +123,7 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker, logo }) => {
       handleConfirm={handleModalConfirm}
       handleCancel={handleModalClose}
       fromBuyPanel={true} />
+      </StyledPanel>
     </>
   );
 };
@@ -130,6 +131,13 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker, logo }) => {
 // const styledButton = styled.button`
 //   background-color: rgb(255, 255, 255, 0.0);
 //   `;
+
+const StyledPanel = styled.div`
+  background-color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  padding: 16px;
+`;
 
 export default BuyPanel;
 

@@ -83,16 +83,19 @@ const StockItem = ({ stock, handleStockClick}) => {
   );
 };
 
-
-  const StockItemDiv = styled.div`
-    border: 5px solid black;
-    margin: 10px;
-    padding: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  `;
+const StockItemDiv = styled.div`
+  border: 5px solid black;
+  background-color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  margin: 10px;
+  padding: 20px;
+  display: flex;
+  min-width: 15rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  `
   
   const CompanyInfo = styled.div`
     width: 25%;
