@@ -24,9 +24,6 @@ const PieChart = ({ portfolioStocks, setSelectedStock }) => {
   const options = {
     chart: {
       type: 'pie',
-      // backgroundColor: '#DFE1E6',
-      // borderRadius: 12,
-      // height: '100%'
     },
     title: {
       text: '',

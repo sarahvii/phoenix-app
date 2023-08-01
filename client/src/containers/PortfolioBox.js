@@ -16,7 +16,7 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
   const [profitLossPercentage, setProfitLossPercentage] = useState(0);
   const [isProfit, setIsProfit] = useState(false);
   const [portfolioStocksWithValues, setPortfolioStocksWithValues] = useState([]);
-  const [pieContainerHeight, setPieContainerHeight] = useState(300);
+  // const [pieContainerHeight, setPieContainerHeight] = useState(300);
 
   const  chartContainerRef = useRef(null);
 
@@ -39,13 +39,13 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
   };
 
   //sets PieContainer height whenever height of HighCharts container changes
-  useEffect(() => {
-    const chartContainer = chartContainerRef.current;
-    if (chartContainer) {
-      const chartHeight = chartContainer.clientHeight;
-      setPieContainerHeight(chartHeight);
-    }
-  }, [chartContainerRef.current])
+  // useEffect(() => {
+  //   const chartContainer = chartContainerRef.current;
+  //   if (chartContainer) {
+  //     const chartHeight = chartContainer.clientHeight;
+  //     setPieContainerHeight(chartHeight);
+  //   }
+  // }, [chartContainerRef.current])
 
   return (
     <StockContext.Provider value={{ calculatedValsList, setCalculatedValsList }}>
@@ -66,7 +66,7 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
               </PercentageProfitLoss>
             </SummeryValuesContainer>
           </PerformanceContainer>
-          <PieContainer pieContainerHeight={pieContainerHeight}>
+          <PieContainer>
             <PieChartTitle>Portfolio Breakdown</PieChartTitle>
             <PieChartContainer ref={chartContainerRef}>
               <PieChart portfolioStocks={portfolioStocksWithValues} setSelectedStock={setSelectedStock} />
@@ -103,6 +103,7 @@ const PortfolioBoxSummaryPieContainer = styled.div`
   height: 50vh;
   margin: 10px auto;
   width: 86%;
+  flex: 1;
 `;
 
 
@@ -136,6 +137,7 @@ padding: 12px;
 background-color: #fff;
 box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 border-radius: 12px;
+
 `;
 
 const PieContainer = styled.div`
@@ -147,31 +149,7 @@ padding: 6px 16px 16px 16px;
 display: flex;
 flex: 1;
 flex-direction: column;
-height: ${(props) => props.pieContainerHeight}px;
 `;
-
-
-// const PortfolioBoxSummeryPieContainer = styled.div`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   height: 50vh;
-//   margin: 10px;
-// `;
-
-
-
-
-
-
-
-// const PortfolioSummaryContainer = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: flex-start;
-// `;
-
-
 
 const TotalPortfolioValue = styled.h4`
   margin: 10px;
@@ -180,14 +158,14 @@ const TotalPortfolioValue = styled.h4`
 `;
 
 const TotalPortfolioProfitLoss = styled.h4`
-background-color: pink;
+// background-color: pink;
   margin: 10px;
   padding: 0px;
   color: ${(props) => (props.isProfit ? "green" : "red")};
 `;
 
 const PercentageProfitLoss = styled.h4`
-background-color: pink;
+// background-color: pink;
   margin: 10px;
   padding: 0px;
 `;
@@ -209,7 +187,7 @@ const PieChartTitle = styled.h2`
 `;
 
 const StockListContainer = styled.div`
-background-color: green;
+// background-color: green;
 // display: flex;
 // flex-direction: column;
 // margin: 10px;
@@ -219,7 +197,6 @@ background-color: green;
 //     justify-content: center;
 //   }
 // `;
-
 
 
 export default PortfolioBox;
