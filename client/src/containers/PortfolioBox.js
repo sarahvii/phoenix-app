@@ -16,7 +16,6 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
   const [profitLossPercentage, setProfitLossPercentage] = useState(0);
   const [isProfit, setIsProfit] = useState(false);
   const [portfolioStocksWithValues, setPortfolioStocksWithValues] = useState([]);
-  // const [pieContainerHeight, setPieContainerHeight] = useState(300);
 
   const  chartContainerRef = useRef(null);
 
@@ -38,41 +37,39 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
     }
   };
 
-  //sets PieContainer height whenever height of HighCharts container changes
-  // useEffect(() => {
-  //   const chartContainer = chartContainerRef.current;
-  //   if (chartContainer) {
-  //     const chartHeight = chartContainer.clientHeight;
-  //     setPieContainerHeight(chartHeight);
-  //   }
-  // }, [chartContainerRef.current])
 
   return (
     <StockContext.Provider value={{ calculatedValsList, setCalculatedValsList }}>
-      <PortfolioOverviewTitle>Portfolio Overview</PortfolioOverviewTitle>
+
       <PortfolioBoxContainer>
-        <PortfolioBoxSummaryPieContainer>
-          <PerformanceContainer>
-            <SummeryTitle>Performance</SummeryTitle>
-            <SummeryValuesContainer>
-              <TotalPortfolioValue>
-                Total Portfolio Value: ${totalPortfolioValue.toFixed(2)}
-              </TotalPortfolioValue>
-              <TotalPortfolioProfitLoss isProfit={isProfit}>
-                Total Portfolio Profit/Loss: ${totalPortfolioProfitLoss.toFixed(2)}
-              </TotalPortfolioProfitLoss>
-              <PercentageProfitLoss isProfit={isProfit}>
-                Percentage Profit/Loss: {profitLossPercentage.toFixed(2)}%
-              </PercentageProfitLoss>
-            </SummeryValuesContainer>
-          </PerformanceContainer>
-          <PieContainer>
-            <PieChartTitle>Portfolio Breakdown</PieChartTitle>
-            <PieChartContainer ref={chartContainerRef}>
-              <PieChart portfolioStocks={portfolioStocksWithValues} setSelectedStock={setSelectedStock} />
-            </PieChartContainer>
-          </PieContainer>
-        </PortfolioBoxSummaryPieContainer>
+        <PortfolioOverviewTitle>Portfolio Overview</PortfolioOverviewTitle>
+          <PortfolioBoxSummaryPieContainer>
+            <PortfolioInternalContainer>
+              <PortfolioBoxTitle>Performance</PortfolioBoxTitle>
+
+              <PortfolioDisplayContainer>
+                <TotalPortfolioValue>
+                  Total Portfolio Value: ${totalPortfolioValue.toFixed(2)}
+                </TotalPortfolioValue>
+                <TotalPortfolioProfitLoss isProfit={isProfit}>
+                  Total Portfolio Profit/Loss: ${totalPortfolioProfitLoss.toFixed(2)}
+                </TotalPortfolioProfitLoss>
+                <PercentageProfitLoss isProfit={isProfit}>
+                  Percentage Profit/Loss: {profitLossPercentage.toFixed(2)}%
+                </PercentageProfitLoss>
+              </PortfolioDisplayContainer>
+
+            </PortfolioInternalContainer>
+
+            <PortfolioInternalContainer>
+              <PortfolioBoxTitle>Portfolio Breakdown</PortfolioBoxTitle>
+             <PortfolioDisplayContainer ref={chartContainerRef}>
+                <PieChart portfolioStocks={portfolioStocksWithValues} setSelectedStock={setSelectedStock} />
+              </PortfolioDisplayContainer>
+            </PortfolioInternalContainer>
+          </PortfolioBoxSummaryPieContainer>
+
+
         <StockListContainer>
         <StockList
           portfolioStocks={portfolioStocksWithValues}
@@ -87,12 +84,14 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
 };
 
 const PortfolioBoxContainer = styled.div`
+  background-color: yellow;
   display: flex;
   flex-direction: column;
   margin: 10px;
 `;
 
 const PortfolioBoxSummaryPieContainer = styled.div`
+  background-color: pink;
   border-radius: 12px;
   padding: 16px;
   display: flex;
@@ -105,11 +104,10 @@ const PortfolioBoxSummaryPieContainer = styled.div`
   @media screen and (max-width: 768px) {
     flex-direction: column;
   }
-
 `;
 
 
-const PerformanceContainer = styled.div`    /// can this just be a duplicated container with pie container???
+const PortfolioInternalContainer = styled.div`    /// can this just be a duplicated container with pie container???
   background-color: #DFE1E6;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
@@ -120,8 +118,9 @@ const PerformanceContainer = styled.div`    /// can this just be a duplicated co
   flex-direction: column;
 `;
 
-const SummeryValuesContainer = styled.div`
-  background-color: #fff;
+const PortfolioDisplayContainer = styled.div`
+  background-color: palegreen;
+  // background-color: #fff;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   display: flex;
@@ -129,29 +128,21 @@ const SummeryValuesContainer = styled.div`
   justify-content: space-between;
   align-items: flex-start;
   margin: 1px;
-  padding: 20px;
+  padding: 12px;
   flex: 1;
   `;
 
-const PieContainer = styled.div`
-  background-color: #DFE1E6;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
-  margin: 10px 20px 0px 20px;     
-  padding: 6px 16px 16px 16px;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  `;
-
-const PieChartContainer = styled.div`
-margin: 10px 0px;
-padding: 12px;
-background-color: #fff;
-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-border-radius: 12px;
-
-`;
+// const PieContainer = styled.div`
+//   background-color: orange;
+//   // background-color: #DFE1E6;
+//   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+//   border-radius: 12px;
+//   margin: 10px 20px 0px 20px;     
+//   padding: 6px 16px 16px 16px;
+//   display: flex;
+//   flex: 1;
+//   flex-direction: column;
+//   `;
 
 
 
@@ -174,7 +165,7 @@ const PercentageProfitLoss = styled.h4`
   padding: 0px;
 `;
 
-const SummeryTitle = styled.h2`
+const PortfolioBoxTitle = styled.h2`
   margin: 10px 0px;
   padding: 12px;
   background-color: #fff;
@@ -182,13 +173,13 @@ const SummeryTitle = styled.h2`
   border-radius: 12px;
 `;
 
-const PieChartTitle = styled.h2`
-  margin: 10px 0px;
-  padding: 12px;
-  background-color: #fff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
-`;
+// const PieChartTitle = styled.h2`
+//   margin: 10px 0px;
+//   padding: 12px;
+//   background-color: #fff;
+//   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+//   border-radius: 12px;
+// `;
 
 const StockListContainer = styled.div`
 // background-color: green;
@@ -201,6 +192,9 @@ const StockListContainer = styled.div`
 //     justify-content: center;
 //   }
 // `;
+
+
+
 
 const PortfolioOverviewTitle = styled.h2`
   background-color: hsl(215,90%,32.7%);
