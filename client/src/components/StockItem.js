@@ -85,21 +85,17 @@ const StockItem = ({ stock, handleStockClick}) => {
   );
 };
 
-// const StockItemDiv = styled.div`
-//   border: 5px solid black;
-//   background-color: #fff;
-//   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-//   border-radius: 12px;
-//   margin: 10px auto;
-//   padding: 20px;
-//   display: flex;
-//   min-width: 15rem;
-//   flex-direction: row;
-//   justify-content: space-between;
-//   align-items: center;
-//   width: 80%;
 
-//   `;
+const Logo = styled.img`
+  width: 10%;
+  height: 10%;
+  border-radius: 50%;
+  transition: transform 0.2s ease-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
 
 
 const PortfolioDisplayContainer = styled.div`
@@ -114,7 +110,15 @@ const PortfolioDisplayContainer = styled.div`
   padding: 20px;
   flex: 1;
   min-width: 15rem;
-  width: 95%
+  width: 95%;  
+  
+  
+  &:hover {
+    background-color: #DFE1E6;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+  }
+
+  
   `;
 
   const StockListInternalContainer = styled.div`
@@ -158,11 +162,6 @@ const PortfolioDisplayContainer = styled.div`
 
   const StockTotalValue = styled.p``;
   
-  const Logo = styled.img`
-    width: 10%;
-    height: 10%;
-    border-radius: 50%;
-  `;
   
   const PerformanceInfo = styled.div`
     width: 25%;

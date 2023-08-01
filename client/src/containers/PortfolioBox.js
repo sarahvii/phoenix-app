@@ -115,14 +115,8 @@ height: 50vh;
 margin: 10px auto;
 width: 86%;
 flex: 1;
-
-// @media screen and (max-width: 768px) {
-//   flex-direction: column;
-// }
-// `
+`
 ;
-
-
 
 
 
@@ -138,8 +132,7 @@ const PortfolioInternalContainer = styled.div`
 `;
 
 const PortfolioDisplayContainer = styled.div`
-  background-color: palegreen;
-  // background-color: #fff;
+  background-color: #fff;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   display: flex;
@@ -179,9 +172,6 @@ const PortfolioBoxTitle = styled.h2`
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
 `;
-
-
-
 
 
 const PortfolioOverviewTitle = styled.h2`
