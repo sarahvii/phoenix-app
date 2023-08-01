@@ -65,7 +65,8 @@ const StockItem = ({ stock, handleStockClick}) => {
 
   return (
     <StyledLink to="/stocks">
-      <StockItemDiv onClick={() => handleStockClick(stock.ticker)}>
+      <StockListInternalContainer>
+      <PortfolioDisplayContainer onClick={() => handleStockClick(stock.ticker)}>
         <CompanyInfo>
           <StockTicker>{stock.ticker}</StockTicker>
           <StockName>{liveCompanyData.name}</StockName>
@@ -78,26 +79,54 @@ const StockItem = ({ stock, handleStockClick}) => {
           <ProfitOrLoss isProfit={isProfit}>${Math.abs(profitLoss).toFixed(2)}</ProfitOrLoss>
         </PerformanceInfo>
 
-      </StockItemDiv>
+      </PortfolioDisplayContainer>
+      </StockListInternalContainer>
     </StyledLink>
   );
 };
 
-const StockItemDiv = styled.div`
-  border: 5px solid black;
+// const StockItemDiv = styled.div`
+//   border: 5px solid black;
+//   background-color: #fff;
+//   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+//   border-radius: 12px;
+//   margin: 10px auto;
+//   padding: 20px;
+//   display: flex;
+//   min-width: 15rem;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   align-items: center;
+//   width: 80%;
+
+//   `;
+
+
+const PortfolioDisplayContainer = styled.div`
   background-color: #fff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
-  margin: 10px auto;
-  padding: 20px;
   display: flex;
-  min-width: 15rem;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  margin: 10px auto;
+  padding: 20px;
+  flex: 1;
+  min-width: 15rem;
+  width: 95%
+  `;
 
-  `
+  const StockListInternalContainer = styled.div`
+  background-color: #DFE1E6;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  margin: 10px 20px 0px 20px;
+  padding: 1px 1px 1px 1px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  `;
   
   const CompanyInfo = styled.div`
     width: 25%;

@@ -69,14 +69,16 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
             </PortfolioInternalContainer>
           </PortfolioBoxSummaryPieContainer>
 
+          <StockListExternalContainer>
+            {/* <StockListInternalContainer> */}
+              <StockList
+                portfolioStocks={portfolioStocksWithValues}
+                setSelectedStock={setSelectedStock}
+                handleCalculatedValues={handleCalculatedValues}
+              />
+            {/* </StockListInternalContainer> */}
+          </StockListExternalContainer>
 
-        <StockListContainer>
-        <StockList
-          portfolioStocks={portfolioStocksWithValues}
-          setSelectedStock={setSelectedStock}
-          handleCalculatedValues={handleCalculatedValues}
-        />
-        </StockListContainer>
         <NewsPanel containerType="portfolio" portfolioStocks={portfolioStocksWithValues} />
       </PortfolioBoxContainer>
     </StockContext.Provider>
@@ -84,14 +86,12 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
 };
 
 const PortfolioBoxContainer = styled.div`
-  background-color: yellow;
   display: flex;
   flex-direction: column;
   margin: 10px;
 `;
 
 const PortfolioBoxSummaryPieContainer = styled.div`
-  background-color: pink;
   border-radius: 12px;
   padding: 16px;
   display: flex;
@@ -106,8 +106,27 @@ const PortfolioBoxSummaryPieContainer = styled.div`
   }
 `;
 
+const StockListExternalContainer = styled.div`
+border-radius: 12px;
+padding: 16px;
+display: flex;
+flex-direction: column;
+height: 50vh;
+margin: 10px auto;
+width: 86%;
+flex: 1;
 
-const PortfolioInternalContainer = styled.div`    /// can this just be a duplicated container with pie container???
+// @media screen and (max-width: 768px) {
+//   flex-direction: column;
+// }
+// `
+;
+
+
+
+
+
+const PortfolioInternalContainer = styled.div` 
   background-color: #DFE1E6;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
@@ -131,18 +150,6 @@ const PortfolioDisplayContainer = styled.div`
   padding: 12px;
   flex: 1;
   `;
-
-// const PieContainer = styled.div`
-//   background-color: orange;
-//   // background-color: #DFE1E6;
-//   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-//   border-radius: 12px;
-//   margin: 10px 20px 0px 20px;     
-//   padding: 6px 16px 16px 16px;
-//   display: flex;
-//   flex: 1;
-//   flex-direction: column;
-//   `;
 
 
 
@@ -173,25 +180,6 @@ const PortfolioBoxTitle = styled.h2`
   border-radius: 12px;
 `;
 
-// const PieChartTitle = styled.h2`
-//   margin: 10px 0px;
-//   padding: 12px;
-//   background-color: #fff;
-//   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-//   border-radius: 12px;
-// `;
-
-const StockListContainer = styled.div`
-// background-color: green;
-// display: flex;
-// flex-direction: column;
-// margin: 10px;
-
-//   @media screen and (min-width: 768px) {
-//     flex-direction: row;
-//     justify-content: center;
-//   }
-// `;
 
 
 
