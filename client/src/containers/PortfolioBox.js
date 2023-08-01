@@ -49,7 +49,7 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
 
   return (
     <StockContext.Provider value={{ calculatedValsList, setCalculatedValsList }}>
-      <h2>Portfolio Overview</h2>
+      <PortfolioOverviewTitle>Portfolio Overview</PortfolioOverviewTitle>
       <PortfolioBoxContainer>
         <PortfolioBoxSummaryPieContainer>
           <PerformanceContainer>
@@ -87,31 +87,33 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
 };
 
 const PortfolioBoxContainer = styled.div`
-  // background-color: yellow;
   display: flex;
   flex-direction: column;
-  /* border: 5px solid black; */
   margin: 10px;
 `;
 
 const PortfolioBoxSummaryPieContainer = styled.div`
-  // background-color: grey;
-  // box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   padding: 16px;
   display: flex;
+  flex-direction: row;
   height: 50vh;
   margin: 10px auto;
   width: 86%;
   flex: 1;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+
 `;
 
 
-const PerformanceContainer = styled.div`
+const PerformanceContainer = styled.div`    /// can this just be a duplicated container with pie container???
   background-color: #DFE1E6;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
-  margin: 0px 20px 0px 20px;
+  margin: 10px 20px 0px 20px;
   padding: 6px 16px 16px 16px;
   display: flex;
   flex: 1;
@@ -131,6 +133,17 @@ const SummeryValuesContainer = styled.div`
   flex: 1;
   `;
 
+const PieContainer = styled.div`
+  background-color: #DFE1E6;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  margin: 10px 20px 0px 20px;     
+  padding: 6px 16px 16px 16px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  `;
+
 const PieChartContainer = styled.div`
 margin: 10px 0px;
 padding: 12px;
@@ -140,16 +153,7 @@ border-radius: 12px;
 
 `;
 
-const PieContainer = styled.div`
-background-color: #DFE1E6;
-box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-border-radius: 12px;
-margin: 0px 20px 0px 20px;
-padding: 6px 16px 16px 16px;
-display: flex;
-flex: 1;
-flex-direction: column;
-`;
+
 
 const TotalPortfolioValue = styled.h4`
   margin: 10px;
@@ -197,6 +201,15 @@ const StockListContainer = styled.div`
 //     justify-content: center;
 //   }
 // `;
+
+const PortfolioOverviewTitle = styled.h2`
+  background-color: hsl(215,90%,32.7%);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px; 
+`;
 
 
 export default PortfolioBox;
