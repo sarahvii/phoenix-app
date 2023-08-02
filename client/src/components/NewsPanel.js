@@ -87,6 +87,8 @@ const NewsPanel = ({ containerType, selectedStock }) => {
 const NewsPanelContainer = styled.div`
   overflow: auto;
   white-space: wrap;
+  width: 85%;
+  margin: 0 auto;
 `;
 
 export default NewsPanel;

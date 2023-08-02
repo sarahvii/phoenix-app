@@ -64,7 +64,7 @@ const NewsItemContainer = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  width: 90%;
+  width: 80%;
   `;
 
 
