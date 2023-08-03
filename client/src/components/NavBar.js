@@ -19,6 +19,7 @@ const NavBar = ({searchBar}) => {
             </StyledLink>
           </ListItem>
         </NavItems>
+        <h1>Phoenix Trading</h1>
         <SearchBar>
           {searchBar}
         </SearchBar>
@@ -29,6 +30,8 @@ const NavBar = ({searchBar}) => {
 }
 
 const Nav = styled.nav`
+  background-color: hsl(215,90%,32.7%);
+  color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -56,7 +59,7 @@ const StyledLink = styled(Link)`
   margin-right: 10px;
   font-weight: bold;
   font-size: 20px;
-  color: black;
+  color: white;
 
   &:hover {
     color: #00b4d8;

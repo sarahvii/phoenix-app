@@ -1,11 +1,11 @@
 import React from 'react'
 
-const HomeChart = () => {
+const WelcomePage = () => {
   return (
     <>
-      <p>This is where the HomeBox chart goes</p>
+      <p>Welcome Page</p>
     </>
   );
 }
 
-export default HomeChart
+export default WelcomePage

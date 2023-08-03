@@ -147,7 +147,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border-radius: 5px;
+      border-radius: 12px;
       padding: 10px;
       width: 100%;
       `;
@@ -158,7 +158,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
       align-items: center;
       justify-content: space-between;
       border: 1px solid #e6e6e6;
-      border-radius: 5px;
+      border-radius: 12px;
       padding: 5px;
       margin-bottom: 5px;
       width: 100%;

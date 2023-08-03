@@ -26,7 +26,7 @@ const PieChart = ({ portfolioStocks, setSelectedStock }) => {
       type: 'pie',
     },
     title: {
-      text: 'Portfolio Breakdown',
+      text: '',
     },
     tooltip: {
       formatter: function () {
@@ -61,7 +61,7 @@ const PieChart = ({ portfolioStocks, setSelectedStock }) => {
   return (
     <>
       {portfolioStocks.length > 0 ? (
-        <HighchartsReact highcharts={Highcharts} options={options} />
+        <HighchartsReact highcharts={Highcharts} options={options}/>
       ) : (
         <p>Loading chart...</p>
       )}

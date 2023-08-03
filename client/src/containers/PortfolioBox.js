@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import styled from "styled-components";
 import PieChart from "../components/PieChart";
 import StockList from "../components/StockList";
@@ -16,6 +16,8 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
   const [profitLossPercentage, setProfitLossPercentage] = useState(0);
   const [isProfit, setIsProfit] = useState(false);
   const [portfolioStocksWithValues, setPortfolioStocksWithValues] = useState([]);
+
+  const  chartContainerRef = useRef(null);
 
   useEffect(() => {
 
@@ -35,32 +37,48 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
     }
   };
 
+
   return (
     <StockContext.Provider value={{ calculatedValsList, setCalculatedValsList }}>
+
       <PortfolioBoxContainer>
-        <h2>Portfolio Overview</h2>
-        <PortfolioBoxSummeryPieContainer>
-          <PortfolioSummaryContainer>
-            <SummeryTitle>Performance</SummeryTitle>
-            <SummeryValuesContainer>
-              <TotalPortfolioValue>
-                Total Portfolio Value: ${totalPortfolioValue.toFixed(2)}
-              </TotalPortfolioValue>
-              <TotalPortfolioProfitLoss isProfit={isProfit}>
-                Total Portfolio Profit/Loss: ${totalPortfolioProfitLoss.toFixed(2)}
-              </TotalPortfolioProfitLoss>
-              <PercentageProfitLoss isProfit={isProfit}>
-                Percentage Profit/Loss: {profitLossPercentage.toFixed(2)}%
-              </PercentageProfitLoss>
-            </SummeryValuesContainer>
-          </PortfolioSummaryContainer>
-          <PieChart portfolioStocks={portfolioStocksWithValues} setSelectedStock={setSelectedStock} />
-        </PortfolioBoxSummeryPieContainer>
-        <StockList
-          portfolioStocks={portfolioStocksWithValues}
-          setSelectedStock={setSelectedStock}
-          handleCalculatedValues={handleCalculatedValues}
-        />
+        <PortfolioOverviewTitle>Portfolio Overview</PortfolioOverviewTitle>
+          <PortfolioBoxSummaryPieContainer>
+            <PortfolioInternalContainer>
+              <PortfolioBoxTitle>Performance</PortfolioBoxTitle>
+
+              <PortfolioDisplayContainer>
+                <TotalPortfolioValue>
+                  Total Portfolio Value: ${totalPortfolioValue.toFixed(2)}
+                </TotalPortfolioValue>
+                <TotalPortfolioProfitLoss isProfit={isProfit}>
+                  Total Portfolio Profit/Loss: ${totalPortfolioProfitLoss.toFixed(2)}
+                </TotalPortfolioProfitLoss>
+                <PercentageProfitLoss isProfit={isProfit}>
+                  Percentage Profit/Loss: {profitLossPercentage.toFixed(2)}%
+                </PercentageProfitLoss>
+              </PortfolioDisplayContainer>
+
+            </PortfolioInternalContainer>
+
+            <PortfolioInternalContainer>
+              <PortfolioBoxTitle>Portfolio Breakdown</PortfolioBoxTitle>
+             <PortfolioDisplayContainer ref={chartContainerRef}>
+                <PieChart portfolioStocks={portfolioStocksWithValues} setSelectedStock={setSelectedStock} />
+              </PortfolioDisplayContainer>
+            </PortfolioInternalContainer>
+          </PortfolioBoxSummaryPieContainer>
+
+          <StockListExternalContainer>
+            {/* <StockListInternalContainer> */}
+              <StockList
+                portfolioStocks={portfolioStocksWithValues}
+                setSelectedStock={setSelectedStock}
+                handleCalculatedValues={handleCalculatedValues}
+              />
+            {/* </StockListInternalContainer> */}
+          </StockListExternalContainer>
+
         <NewsPanel containerType="portfolio" portfolioStocks={portfolioStocksWithValues} />
       </PortfolioBoxContainer>
     </StockContext.Provider>
@@ -70,23 +88,63 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
 const PortfolioBoxContainer = styled.div`
   display: flex;
   flex-direction: column;
-  /* border: 5px solid black; */
   margin: 10px;
 `;
 
-const PortfolioBoxSummeryPieContainer = styled.div`
+const PortfolioBoxSummaryPieContainer = styled.div`
+  border-radius: 12px;
+  padding: 16px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
   height: 50vh;
-  margin: 10px;
+  margin: 10px auto;
+  width: 86%;
+  flex: 1;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
-const PortfolioSummaryContainer = styled.div`
+const StockListExternalContainer = styled.div`
+border-radius: 12px;
+padding: 16px;
+display: flex;
+flex-direction: column;
+height: 50vh;
+margin: 10px auto;
+width: 86%;
+flex: 1;
+`
+;
+
+
+
+const PortfolioInternalContainer = styled.div` 
+  background-color: #DFE1E6;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  margin: 10px 20px 0px 20px;
+  padding: 6px 16px 16px 16px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+`;
+
+const PortfolioDisplayContainer = styled.div`
+  background-color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-`;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 1px;
+  padding: 12px;
+  flex: 1;
+  `;
+
+
 
 const TotalPortfolioValue = styled.h4`
   margin: 10px;
@@ -95,28 +153,35 @@ const TotalPortfolioValue = styled.h4`
 `;
 
 const TotalPortfolioProfitLoss = styled.h4`
+// background-color: pink;
   margin: 10px;
   padding: 0px;
   color: ${(props) => (props.isProfit ? "green" : "red")};
 `;
 
 const PercentageProfitLoss = styled.h4`
+// background-color: pink;
   margin: 10px;
   padding: 0px;
 `;
 
-const SummeryTitle = styled.h2`
-  margin: 10px;
-  padding: 0px;
+const PortfolioBoxTitle = styled.h2`
+  margin: 10px 0px;
+  padding: 12px;
+  background-color: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
 `;
 
-const SummeryValuesContainer = styled.div`
+
+const PortfolioOverviewTitle = styled.h2`
+  background-color: hsl(215,90%,32.7%);
+  color: white;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
-  margin: 10px;
-  padding: 20px;
+  align-items: center;
+  margin: 10px; 
 `;
+
 
 export default PortfolioBox;
