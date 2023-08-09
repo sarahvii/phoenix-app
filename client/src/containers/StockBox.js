@@ -3,11 +3,10 @@ import styled from "styled-components";
 import { format } from "date-fns";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-
-
 import BuyPanel from "../components/BuyPanel";
 import NewsPanel from "../components/NewsPanel";
 import CandleStickChart from "../components/CandleStickChart";
+import { PageContainer, OverviewTitle, ExternalContainerRow, ExternalContainerColumn, InternalContainerColumn, InternalContainerRow, DisplayContainer } from "../components/SharedStyles";
 
 
 // import NewsList from "../components/NewsList";
@@ -188,31 +187,49 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 
     return ( 
         <>
-        <StockBoxContainer>
-          <LogoContainer>
-            <LogoLink href={liveCompanyData.weburl} target="_blank">
-              <Logo src={logo} alt="company logo" />
-            </LogoLink>
-            <StockTitleSummeryContainer>
-              <StockTitleContainer>
-                <StockTitle>{liveCompanyData.name}</StockTitle><StockTicker>({liveCompanyData.ticker})</StockTicker>
-              </StockTitleContainer>
-              <StockTitleContainer>
-                <StockExchange>{liveCompanyData.exchange}.</StockExchange><Currency> Currency in {liveCompanyData.currency}</Currency>
-              </StockTitleContainer>
+        <PageContainer>
+          <OverviewTitle>Stock Overview</OverviewTitle>
+          <ExternalContainerRow>
+            <InternalContainerRow>
+              <DisplayContainer>
+              <DisplayContainer>
+                <LogoLink href={liveCompanyData.weburl} target="_blank">
+                  <Logo src={logo} alt="company logo" />
+                </LogoLink>
+              </DisplayContainer>
+
+              <DisplayContainer>
+
+                <StockTitleContainer>
+                  <StockTitle>{liveCompanyData.name}</StockTitle><StockTicker>({liveCompanyData.ticker})</StockTicker>
+                </StockTitleContainer>
+                <StockTitleContainer>
+                  <StockExchange>{liveCompanyData.exchange}.</StockExchange><Currency> Currency in {liveCompanyData.currency}</Currency>
+                </StockTitleContainer>
               <StockSummaryContainer>
                 <StockCurrentPrice>${livePriceData.c}</StockCurrentPrice>
                 <StockPriceChange value={livePriceData.d}> ${livePriceData.d.toFixed(2)}</StockPriceChange>
                 <PriceChangePercent value={livePriceData.dp}> ({livePriceData.dp.toFixed(2)}%)  </PriceChangePercent>
               </StockSummaryContainer>
                 <CurrentTime>As of {formattedDate}</CurrentTime>
-            </StockTitleSummeryContainer>
-          </LogoContainer>
-        <StockDetailsChartContainer>
+            </DisplayContainer>
+          
+            </DisplayContainer>
+            {/* </InternalContainer> */}
 
-          <StockDetailsContainer>
+
+            {/* <InternalContainer> */}
+            <DisplayContainer>
+              <DisplayContainer>
             <StyledIcon icon={faStar} onClick={handleToggleWatchList} isWatched={isWatched} />
-          <BuyPanel currentPrice={livePriceData.c} stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker} logo={liveCompanyData.logo}/>
+            </DisplayContainer>
+            <DisplayContainer>
+
+              <BuyPanel currentPrice={livePriceData.c} stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker} logo={liveCompanyData.logo}/>
+
+            </DisplayContainer>
+
+            <DisplayContainer>
               <DetailContainer>
                 <DetailKey>Market cap:</DetailKey><DetailValue>${liveCompanyData.marketCapitalization.toFixed(2)}</DetailValue>
               </DetailContainer>
@@ -229,15 +246,28 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
                 <DetailKey>Low:</DetailKey><DetailValue>${livePriceData.l}</DetailValue>
               </DetailContainer>
           {isOwned && <OwnershipDetailsContainer/>}
-          </StockDetailsContainer>
+          </DisplayContainer>
+          </DisplayContainer>
+          </InternalContainerRow>
+          </ExternalContainerRow>
 
-          <StockChartContainer>
-            <CandleStickChart stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker}></CandleStickChart>
-          </StockChartContainer>
-        </StockDetailsChartContainer>
+          <ExternalContainerColumn>
+          <InternalContainerColumn>
+            <DisplayContainer>
 
-      </StockBoxContainer>
-      <NewsPanel containerType="stock" selectedStock={selectedStock} />
+            <StockChartContainer>
+              <CandleStickChart stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker}></CandleStickChart>
+            </StockChartContainer>
+
+            </DisplayContainer>
+          </InternalContainerColumn>
+          </ExternalContainerColumn>
+
+
+
+        <NewsPanel containerType="stock" selectedStock={selectedStock} /> 
+      </PageContainer>
+
 
 
         </>
@@ -247,26 +277,6 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 
 };
 
-
-const StockBoxContainer = styled.div`
-  border: 5px solid black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-  margin: 10px;
-  width: 100%;
-  height: 100%;
-  `;
-
-  const LogoContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  height: 100%;
-  width: 100%;
-  `;
 
   const StockTitleContainer = styled.div`
   display: flex;
@@ -287,6 +297,7 @@ const StockBoxContainer = styled.div`
   `;
 
   const StockTitleSummeryContainer = styled.div`
+  background-color: lightblue;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -296,13 +307,13 @@ const StockBoxContainer = styled.div`
   margin-left: 50px;
   `;
 
-  const StockDetailsChartContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  `
+  // const StockDetailsChartContainer = styled.div`
+  // display: flex;
+  // flex-direction: row;
+  // align-items: center;
+  // height: 100%;
+  // width: 100%;
+  // `
   const StockTitle = styled.p`
   padding: 0px;
   color: black;
@@ -356,7 +367,9 @@ const Logo = styled.img`
   width: 90%;
   height: 50%;
   margin: 10px;
-  border: 3px solid black;
+  border: 1px solid black;
+  box-sizing: border-box;
+  align-self: center;
   `;
 
   const StockCurrentPrice = styled.p`
@@ -385,16 +398,18 @@ const Logo = styled.img`
   `
 
 
-  const StockDetailsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  height: 100%;
-  width: 50%;
-  margin: 10px;
-  `
+  // const StockDetailsContainer = styled.div`
+  // background-color: lightblue;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: flex-start;
+  // height: 100%;
+  // width: 50%;
+  // margin: 10px;
+  // `
 
   const DetailContainer = styled.div`
+  background-color: pink;
   display: flex;
   flex-direction: row;
   align-items: flex-start;

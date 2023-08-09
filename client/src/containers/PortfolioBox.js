@@ -7,6 +7,7 @@ import { StockContext } from "../services/StockContext";
 import calculateProfitLoss from "../services/CalculateProfitOrLoss";
 import addValueToStock from "../services/AddValueToStock";
 import calculateTotals from "../services/CalculateTotals";
+import { PageContainer, OverviewTitle, ExternalContainerColumn, ExternalContainerRow, InternalContainerColumn, DisplayContainer } from "../components/SharedStyles";
 
 
 const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
@@ -41,13 +42,15 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
   return (
     <StockContext.Provider value={{ calculatedValsList, setCalculatedValsList }}>
 
-      <PortfolioBoxContainer>
-        <PortfolioOverviewTitle>Portfolio Overview</PortfolioOverviewTitle>
-          <PortfolioBoxSummaryPieContainer>
-            <PortfolioInternalContainer>
-              <PortfolioBoxTitle>Performance</PortfolioBoxTitle>
+      <PageContainer>
+        <OverviewTitle>Portfolio Overview</OverviewTitle>
+        
+        
+        <ExternalContainerRow>
+          <InternalContainerColumn>
+            <PortfolioBoxTitle>Performance</PortfolioBoxTitle>
+            <DisplayContainer>
 
-              <PortfolioDisplayContainer>
                 <TotalPortfolioValue>
                   Total Portfolio Value: ${totalPortfolioValue.toFixed(2)}
                 </TotalPortfolioValue>
@@ -57,19 +60,32 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
                 <PercentageProfitLoss isProfit={isProfit}>
                   Percentage Profit/Loss: {profitLossPercentage.toFixed(2)}%
                 </PercentageProfitLoss>
-              </PortfolioDisplayContainer>
 
-            </PortfolioInternalContainer>
+            </DisplayContainer>
+          </InternalContainerColumn>
 
-            <PortfolioInternalContainer>
-              <PortfolioBoxTitle>Portfolio Breakdown</PortfolioBoxTitle>
-             <PortfolioDisplayContainer ref={chartContainerRef}>
+          <InternalContainerColumn>
+            <PortfolioBoxTitle>Portfolio Breakdown</PortfolioBoxTitle>
+            <DisplayContainer ref={chartContainerRef}>
+
+
+
                 <PieChart portfolioStocks={portfolioStocksWithValues} setSelectedStock={setSelectedStock} />
-              </PortfolioDisplayContainer>
-            </PortfolioInternalContainer>
-          </PortfolioBoxSummaryPieContainer>
 
-          <StockListExternalContainer>
+
+
+            </DisplayContainer>
+
+
+
+          </InternalContainerColumn>
+        </ExternalContainerRow>
+
+
+
+
+
+          <ExternalContainerColumn>
             {/* <StockListInternalContainer> */}
               <StockList
                 portfolioStocks={portfolioStocksWithValues}
@@ -77,72 +93,75 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
                 handleCalculatedValues={handleCalculatedValues}
               />
             {/* </StockListInternalContainer> */}
-          </StockListExternalContainer>
+          </ExternalContainerColumn>
+
+
+
+
+
 
         <NewsPanel containerType="portfolio" portfolioStocks={portfolioStocksWithValues} />
-      </PortfolioBoxContainer>
+      </PageContainer>
     </StockContext.Provider>
   );
 };
 
-const PortfolioBoxContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-`;
 
-const PortfolioBoxSummaryPieContainer = styled.div`
-  border-radius: 12px;
-  padding: 16px;
-  display: flex;
-  flex-direction: row;
-  height: 50vh;
-  margin: 10px auto;
-  width: 86%;
-  flex: 1;
 
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
+// const ExternalContainerRow = styled.div`
+//   background: lightgreen;
+//   border-radius: 12px;
+//   padding: 16px;
+//   display: flex;
+//   flex-direction: row;
+//   height: 50vh;
+//   margin: 10px auto;
+//   width: 86%;
+//   flex: 1;
 
-const StockListExternalContainer = styled.div`
-border-radius: 12px;
-padding: 16px;
-display: flex;
-flex-direction: column;
-height: 50vh;
-margin: 10px auto;
-width: 86%;
-flex: 1;
-`
-;
+//   @media screen and (max-width: 768px) {
+//     flex-direction: column;
+//   }
+// `;
+
+// const ExternalContainerColumn = styled.div`
+// background: lightpink;
+// border-radius: 12px;
+// padding: 16px;
+// display: flex;
+// flex-direction: column;
+// height: 50vh;
+// margin: 10px auto;
+// width: 86%;
+// flex: 1;
+// `
+// ;
 
 
 
-const PortfolioInternalContainer = styled.div` 
-  background-color: #DFE1E6;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
-  margin: 10px 20px 0px 20px;
-  padding: 6px 16px 16px 16px;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-`;
+// const InternalContainer = styled.div` 
+//   background-color: #DFE1E6;
+//   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+//   border-radius: 12px;
+//   margin: 10px 20px 0px 20px;
+//   padding: 6px 16px 16px 16px;
+//   display: flex;
+//   flex: 1;
+//   flex-direction: column;
+// `;
 
-const PortfolioDisplayContainer = styled.div`
-  background-color: #fff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 1px;
-  padding: 12px;
-  flex: 1;
-  `;
+// const DisplayContainer = styled.div`
+//   background-color: #fff;
+//   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+//   border-radius: 12px;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+//   align-items: flex-start;
+//   margin: 1px;
+//   padding: 12px;
+//   flex: 1;
+//   `;
 
 
 
@@ -174,14 +193,14 @@ const PortfolioBoxTitle = styled.h2`
 `;
 
 
-const PortfolioOverviewTitle = styled.h2`
-  background-color: hsl(215,90%,32.7%);
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px; 
-`;
+// const OverviewTitle = styled.h2`
+//   background-color: hsl(215,90%,32.7%);
+//   color: white;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   margin: 10px; 
+// `;
 
 
 export default PortfolioBox;
