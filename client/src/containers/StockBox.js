@@ -192,7 +192,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
           <ExternalContainerRow>
             <InternalContainerRow>
 
-              <DisplayContainer>
+              {/* <DisplayContainer> */}
               
                 <DisplayContainer>
                 <LogoLink href={liveCompanyData.weburl} target="_blank">
@@ -212,7 +212,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
                     <CurrentTime>As of {formattedDate}</CurrentTime>
                 </DisplayContainer>
           
-              </DisplayContainer>
+              {/* </DisplayContainer> */}
 
               <DisplayContainer>
 
