@@ -27,7 +27,6 @@ export const ExternalContainerColumn = styled.div`
     `;
 
 export const ExternalContainerRow = styled.div`
-  background: lightgreen;
   border-radius: 12px;
   padding: 16px;
   display: flex;
@@ -71,7 +70,7 @@ export const DisplayContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: flex-wrap;
   margin: 1px;
   padding: 12px;
   flex: 1;

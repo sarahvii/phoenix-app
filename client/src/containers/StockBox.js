@@ -191,45 +191,41 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
           <OverviewTitle>Stock Overview</OverviewTitle>
           <ExternalContainerRow>
             <InternalContainerRow>
+
               <DisplayContainer>
-              <DisplayContainer>
+              
+                <DisplayContainer>
                 <LogoLink href={liveCompanyData.weburl} target="_blank">
-                  <Logo src={logo} alt="company logo" />
-                </LogoLink>
+                    <Logo src={logo} alt="company logo" />
+                  </LogoLink>
+                  <StockTitleContainer>
+                    <StockTitle>{liveCompanyData.name}</StockTitle><StockTicker>({liveCompanyData.ticker})</StockTicker>
+                  </StockTitleContainer>
+                  <StockTitleContainer>
+                    <StockExchange>{liveCompanyData.exchange}.</StockExchange><Currency> Currency in {liveCompanyData.currency}</Currency>
+                  </StockTitleContainer>
+                  <StockSummaryContainer>
+                    <StockCurrentPrice>${livePriceData.c}</StockCurrentPrice>
+                    <StockPriceChange value={livePriceData.d}> ${livePriceData.d.toFixed(2)}</StockPriceChange>
+                    <PriceChangePercent value={livePriceData.dp}> ({livePriceData.dp.toFixed(2)}%)  </PriceChangePercent>
+                  </StockSummaryContainer>
+                    <CurrentTime>As of {formattedDate}</CurrentTime>
+                </DisplayContainer>
+          
               </DisplayContainer>
 
               <DisplayContainer>
 
-                <StockTitleContainer>
-                  <StockTitle>{liveCompanyData.name}</StockTitle><StockTicker>({liveCompanyData.ticker})</StockTicker>
-                </StockTitleContainer>
-                <StockTitleContainer>
-                  <StockExchange>{liveCompanyData.exchange}.</StockExchange><Currency> Currency in {liveCompanyData.currency}</Currency>
-                </StockTitleContainer>
-              <StockSummaryContainer>
-                <StockCurrentPrice>${livePriceData.c}</StockCurrentPrice>
-                <StockPriceChange value={livePriceData.d}> ${livePriceData.d.toFixed(2)}</StockPriceChange>
-                <PriceChangePercent value={livePriceData.dp}> ({livePriceData.dp.toFixed(2)}%)  </PriceChangePercent>
-              </StockSummaryContainer>
-                <CurrentTime>As of {formattedDate}</CurrentTime>
-            </DisplayContainer>
-          
-            </DisplayContainer>
-            {/* </InternalContainer> */}
 
 
-            {/* <InternalContainer> */}
-            <DisplayContainer>
-              <DisplayContainer>
-            <StyledIcon icon={faStar} onClick={handleToggleWatchList} isWatched={isWatched} />
-            </DisplayContainer>
-            <DisplayContainer>
 
-              <BuyPanel currentPrice={livePriceData.c} stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker} logo={liveCompanyData.logo}/>
+                <DisplayContainer>
+                <StyledIcon icon={faStar} onClick={handleToggleWatchList} isWatched={isWatched} />
+                  <BuyPanel currentPrice={livePriceData.c} stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker} logo={liveCompanyData.logo}/>
+                </DisplayContainer>
 
-            </DisplayContainer>
 
-            <DisplayContainer>
+                <DisplayContainer>
               <DetailContainer>
                 <DetailKey>Market cap:</DetailKey><DetailValue>${liveCompanyData.marketCapitalization.toFixed(2)}</DetailValue>
               </DetailContainer>
@@ -245,9 +241,19 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
               <DetailContainer>
                 <DetailKey>Low:</DetailKey><DetailValue>${livePriceData.l}</DetailValue>
               </DetailContainer>
-          {isOwned && <OwnershipDetailsContainer/>}
-          </DisplayContainer>
-          </DisplayContainer>
+            </DisplayContainer>
+
+            <DisplayContainer>
+
+                  {isOwned && <OwnershipDetailsContainer/>}
+            </DisplayContainer>
+
+
+
+              </DisplayContainer>
+
+
+
           </InternalContainerRow>
           </ExternalContainerRow>
 
@@ -296,16 +302,16 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
   margin-top: 10px;
   `;
 
-  const StockTitleSummeryContainer = styled.div`
-  background-color: lightblue;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  height: 100%;
-  width: 100%;
-  margin-bottom: 0px;
-  margin-left: 50px;
-  `;
+  // const StockTitleSummeryContainer = styled.div`
+  // background-color: lightblue;
+  // display: flex;
+  // flex-direction: column;
+  // align-items: flex-start;
+  // height: 100%;
+  // width: 100%;
+  // margin-bottom: 0px;
+  // margin-left: 50px;
+  // `;
 
   // const StockDetailsChartContainer = styled.div`
   // display: flex;
@@ -409,7 +415,6 @@ const Logo = styled.img`
   // `
 
   const DetailContainer = styled.div`
-  background-color: pink;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
