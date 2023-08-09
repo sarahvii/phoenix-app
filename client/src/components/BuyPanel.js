@@ -115,6 +115,8 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker, logo }) => {
           Sell Shares {minusIcon}
         </button>
       </form>
+      </StyledPanel>
+      
       <ConfirmationModal 
       open={openModal} 
       onClose={handleModalClose}
@@ -123,7 +125,6 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker, logo }) => {
       handleConfirm={handleModalConfirm}
       handleCancel={handleModalClose}
       fromBuyPanel={true} />
-      </StyledPanel>
     </>
   );
 };
@@ -133,10 +134,10 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker, logo }) => {
 //   `;
 
 const StyledPanel = styled.div`
-  background-color: #fff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 `;
 
 export default BuyPanel;
