@@ -187,8 +187,9 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 
     return ( 
         <>
+                  <OverviewTitle>Stock Overview</OverviewTitle>
         <PageContainer>
-          <OverviewTitle>Stock Overview</OverviewTitle>
+
           <ExternalContainerRow>
             <InternalContainerRow>
 
@@ -302,24 +303,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
   margin-top: 10px;
   `;
 
-  // const StockTitleSummeryContainer = styled.div`
-  // background-color: lightblue;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: flex-start;
-  // height: 100%;
-  // width: 100%;
-  // margin-bottom: 0px;
-  // margin-left: 50px;
-  // `;
 
-  // const StockDetailsChartContainer = styled.div`
-  // display: flex;
-  // flex-direction: row;
-  // align-items: center;
-  // height: 100%;
-  // width: 100%;
-  // `
   const StockTitle = styled.p`
   padding: 0px;
   color: black;
@@ -458,6 +442,8 @@ const Logo = styled.img`
   width: 50%;
   margin: 10px;
   ` */
+
+
 
 
 

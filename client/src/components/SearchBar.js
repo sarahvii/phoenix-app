@@ -100,7 +100,7 @@ const StyledIcon = styled(FontAwesomeIcon)`
   margin-left: 10px;
 
   &:hover {
-    color: purple;
+    color: #00b4d8;
   }
 `
 
