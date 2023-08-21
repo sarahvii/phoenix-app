@@ -9,10 +9,13 @@ export const PageContainer = styled.div`
 export const OverviewTitle = styled.h2`
   background-color: hsl(215,90%,32.7%);
   color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px; 
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px 0;
+  
 `;
 
 export const ExternalContainerColumn = styled.div`

@@ -41,9 +41,9 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
 
   return (
     <StockContext.Provider value={{ calculatedValsList, setCalculatedValsList }}>
-
+    <OverviewTitle>Portfolio Overview</OverviewTitle>
       <PageContainer>
-        <OverviewTitle>Portfolio Overview</OverviewTitle>
+
         
         
         <ExternalContainerRow>
