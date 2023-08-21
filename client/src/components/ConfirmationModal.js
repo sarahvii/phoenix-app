@@ -12,6 +12,23 @@ const ConfirmationModal = ({ open, onClose, details, confirmAction, handleConfir
         onClose();
     };
 
+    if (!details || !details.ticker) {
+      return (
+          <ModalOverlay>
+              <ModalContainer>
+                  <div className="content">
+                      <h3>Ticker not found</h3>
+                  </div>
+                  <div className="buttonContainer">
+                      <button className="buttonYes" onClick={handleConfirmButtonClick}>
+                          <span className="bold">OK</span>
+                      </button>
+                  </div>
+              </ModalContainer>
+          </ModalOverlay>
+      );
+  }
+
     return (
         <ModalOverlay>
           <ModalContainer>
@@ -63,6 +80,13 @@ const ConfirmationModal = ({ open, onClose, details, confirmAction, handleConfir
     h2 {
       font-size: 24px;
       margin-bottom: 10px;
+      color: black;
+    }
+
+    h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: black;
     }
     
     p {
