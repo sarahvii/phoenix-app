@@ -187,7 +187,7 @@ const PercentageProfitLoss = styled.h4`
 const PortfolioBoxTitle = styled.h2`
   margin: 10px 0px;
   padding: 12px;
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, 0.1);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
 `;

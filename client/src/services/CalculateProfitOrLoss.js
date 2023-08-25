@@ -1,9 +1,13 @@
 const calculateProfitLoss = (orders, currentPrice) => {
+
+
+    const sortedOrders = orders.sort((a, b) => new Date(a.date) - new Date(b.date));
+
     let totalShares = 0; // Total shares for each stock
     let totalCost = 0; // Total cost of buying shares
     let totalRevenue = 0; // Total revenue from selling shares
   
-    for (const order of orders) {
+    for (const order of sortedOrders) {
 
       if (order.type === 'buy') {
 
