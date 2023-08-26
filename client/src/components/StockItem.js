@@ -101,7 +101,7 @@ const Logo = styled.img`
 
 
 const PortfolioDisplayContainer = styled.div`
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   display: flex;

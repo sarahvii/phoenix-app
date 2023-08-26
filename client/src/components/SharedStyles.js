@@ -8,7 +8,7 @@ export const PageContainer = styled.div`
 
 export const OverviewTitle = styled.h2`
   background-color: hsl(215,90%,32.7%);
-  color: white;
+  color: #DFE1E6;
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -67,7 +67,7 @@ export const InternalContainerRow = styled.div`
 `;
 
 export const DisplayContainer = styled.div`
-  background-color: #fff;
+  background-color: #DFE1E6;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   display: flex;

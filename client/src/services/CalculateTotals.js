@@ -4,6 +4,15 @@
     let totalProfitLoss = 0;
     let profitLossPercentage = 0;
 
+    if (calculatedValsList.length === 0) {
+
+      setTotalPortfolioValue(0);
+      setTotalPortfolioProfitLoss(0);
+      setProfitLossPercentage(0);
+      setIsProfit(false);
+      return;
+    }
+
     calculatedValsList.forEach((stock) => {
       totalValue += stock.currentTotalValue;
       totalProfitLoss += stock.profitLoss;
@@ -20,6 +29,7 @@
     if (totalProfitLoss > 0) {
       setIsProfit(true);
     }
+  
   };
 
   export default calculateTotals;
