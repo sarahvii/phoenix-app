@@ -1,3 +1,5 @@
+//combines the portfolioStocks and currentTotalValuesList to create a new array of portfolioStocks with the matching values property added to each stock
+
 const addValueToStock = (portfolioStocks, currentTotalValuesList) => {
     let newPortfolioStocks = [...portfolioStocks];
 

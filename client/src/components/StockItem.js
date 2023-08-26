@@ -70,7 +70,9 @@ const StockItem = ({ stock, handleStockClick}) => {
         <CompanyInfo>
           <StockTicker>{stock.ticker}</StockTicker>
           <StockName>{liveCompanyData.name}</StockName>
-          <StockCurrentPrice>${livePriceData.c}</StockCurrentPrice><PriceChangePercent value={livePriceData.dp}> ({livePriceData.dp.toFixed(2)}%)  </PriceChangePercent>
+          <StockCurrentPrice>${livePriceData.c}</StockCurrentPrice>
+          <PriceChangePercent value={livePriceData.dp}>{livePriceData.dp !== undefined ? ` (${livePriceData.dp.toFixed(2)}%)` : ""}</PriceChangePercent>
+
         </CompanyInfo>
         <Logo src={logo} alt="company logo" />
         <PerformanceInfo>
