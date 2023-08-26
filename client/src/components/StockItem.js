@@ -78,7 +78,7 @@ const StockItem = ({ stock, handleStockClick}) => {
         <PerformanceInfo>
           <StockTotalShares>{totalShares} Shares</StockTotalShares>
           <StockTotalValue>Total value: ${currentTotalValue.toFixed(2)}</StockTotalValue>
-          <ProfitOrLoss isProfit={isProfit}>${Math.abs(profitLoss).toFixed(2)}</ProfitOrLoss>
+          <ProfitOrLoss profitLoss={profitLoss}>${Math.abs(profitLoss).toFixed(2)}</ProfitOrLoss>
         </PerformanceInfo>
 
       </PortfolioDisplayContainer>
@@ -157,9 +157,17 @@ const PortfolioDisplayContainer = styled.div`
   
   const PriceChangePercent = styled.p`
     display: inline;
-    color: ${props => (props.value > 0 ? 'green' : 'red')};
     font-size: 15px;
     font-weight: bold;
+    color: ${props => {
+      if (props.value > 0) {
+        return "green";
+      } else if (props.value < 0) {
+        return "red";
+      } else {
+        return "black";
+      }
+    }};
     `
 
   const StockTotalValue = styled.p``;
@@ -170,9 +178,17 @@ const PortfolioDisplayContainer = styled.div`
   `;
   
   const ProfitOrLoss = styled.p`
-    color: ${(props) => (props.isProfit ? "green" : "red")};
     font-size: 20px;
     font-weight: bold;
+    color: ${(props) => {
+      if (props.profitLoss > 0) {
+        return "green";
+      } else if (props.profitLoss < 0) {
+        return "red";
+      } else {
+        return "black";
+      }
+    }};
   `;
 
   const StyledLink = styled(Link)`
