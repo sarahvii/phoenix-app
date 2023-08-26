@@ -18,7 +18,7 @@ const NavBar = ({searchBar}) => {
           </StyledLink>
         </ListItem>
       </NavItems>
-      <Logo>Phoenix Trading</Logo>
+      <Logo>PhoenixTrader</Logo>
       <SearchBar>
         {searchBar}
       </SearchBar>
