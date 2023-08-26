@@ -42,7 +42,7 @@ const ConfirmationModal = ({ open, onClose, details, confirmAction, handleConfir
             </div>
             <div className="buttonContainer">
               <button className="buttonYes" onClick={handleConfirmButtonClick}>
-                <span className="bold">OK</span>
+                <span className="bold">Continue</span>
               </button>
               {!fromBuyPanel && 
                 <button className="buttonCancel" onClick={handleCancel}>
@@ -69,7 +69,7 @@ const ConfirmationModal = ({ open, onClose, details, confirmAction, handleConfir
     `;
     
     const ModalContainer = styled.div`
-    background-color: #fff;
+    background-color: rgba(27, 82, 153, 0.9);
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.2);

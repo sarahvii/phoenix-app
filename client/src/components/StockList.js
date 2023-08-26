@@ -1,5 +1,6 @@
 import React from "react";
 import StockItem from "./StockItem";
+import styled from "styled-components";
 
 const StockList = ({ portfolioStocks, setSelectedStock, handleCalculatedValues }) => {
   const handleStockClick = (ticker) => {
@@ -9,6 +10,7 @@ const StockList = ({ portfolioStocks, setSelectedStock, handleCalculatedValues }
 
   return (
     <>
+      <Title>Owned Stocks</Title>
       {portfolioStocks.map((stock) => {
         if (stock.totalShares <= 0) {
           return null;
@@ -26,5 +28,16 @@ const StockList = ({ portfolioStocks, setSelectedStock, handleCalculatedValues }
     </>
   );
 };
+
+const Title = styled.h2`
+  margin-right: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+`;
 
 export default StockList;

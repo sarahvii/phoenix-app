@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './App.css';
 import NavBar from './components/NavBar';
 import HomeBox from './containers/HomeBox';
@@ -8,7 +8,7 @@ import SearchBar from './components/SearchBar';
 import About from './components/About';
 import Footer from './components/Footer';
 import PortfolioStocksService from './services/PortfolioStocksService';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import PortfolioContext from './services/PortfolioContext';
 import { set } from 'date-fns';
 import WatchList from './components/WatchList';
@@ -18,6 +18,7 @@ function App() {
   const [selectedStock, setSelectedStock] = useState(null);
   const [watchList, setWatchList] = useState([]); 
   const { shouldRefresh } = useContext(PortfolioContext);
+  const navigate = useNavigate();
 
 
   const fetchStocksFromDatabase = () => {
@@ -31,6 +32,7 @@ function App() {
 
   useEffect(() => {
     fetchStocksFromDatabase();
+    navigate('/portfolio');
   }, [shouldRefresh]);
 
   const toggleWatchList = (ticker, logo) => {

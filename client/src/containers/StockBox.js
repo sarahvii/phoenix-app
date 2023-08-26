@@ -76,19 +76,13 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
       }
     }, [watchList, selectedStock]);
     
-
-
-
-    //useEffects below are to allow console.logs to print after the data is fetched
-      // useEffect(() => {
-      //   console.log("live price data in StockBox", livePriceData);
-      // }, [livePriceData]);
-      
-      useEffect(() => {
-        console.log("live company data in StockBox", liveCompanyData);
-      }, [liveCompanyData]);
+    useEffect(() => {
+      console.log("live company data in StockBox", liveCompanyData);
+    }, [liveCompanyData]);
 
     
+
+
     if (!liveCompanyData || !livePriceData) {
       return "Loading...";
     }
@@ -115,7 +109,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
           <div>
             <p>You own {stockDetails.totalShares} shares of {' ' + stockDetails.ticker}</p>
             <OrderHistory>
-              <Button type="submit" onClick={(e) => handleShowOrders(e)}>Show Order History</Button>
+              <Button type="submit" onClick={(e) => handleShowOrders(e)}>{ordersShowHide ? "Hide Order History" : "Show Order History"}</Button>
                 {ordersShowHide && <OrderHistoryContainer>
                   {stockDetails.orders.map((order, index) => (
                     <Order key={index}>
@@ -130,7 +124,23 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
         );
     };
 
-    const Button = styled.button``;
+    const Button = styled.button`
+      background-color: rgb(255, 255, 255, 0.0);
+      color: white;
+      padding: 5px 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 15px;
+      border-radius: 5px;
+      border: 1px solid white;
+      transition-duration: 0.4s;
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: black;
+      }
+  `;
 
     const OrderHistory = styled.div`
       display: flex;
@@ -206,11 +216,11 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
                     <StockExchange>{liveCompanyData.exchange}.</StockExchange><Currency> Currency in {liveCompanyData.currency}</Currency>
                   </StockTitleContainer>
                   <StockSummaryContainer>
-                    <StockCurrentPrice>${livePriceData.c}</StockCurrentPrice>
-                    <StockPriceChange value={livePriceData.d}> ${livePriceData.d.toFixed(2)}</StockPriceChange>
+                    <StockCurrentPrice title="current price">${livePriceData.c}</StockCurrentPrice>
+                    <StockPriceChange title="stock price change (since last close)" value={livePriceData.d}> ${livePriceData.d.toFixed(2)}</StockPriceChange>
                     <PriceChangePercent value={livePriceData.dp}> ({livePriceData.dp.toFixed(2)}%)  </PriceChangePercent>
                   </StockSummaryContainer>
-                    <CurrentTime>As of {formattedDate}</CurrentTime>
+                  <CurrentTime>As of {formattedDate}</CurrentTime>
                 </DisplayContainer>
           
               {/* </DisplayContainer> */}
@@ -221,7 +231,8 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 
 
                 <DisplayContainer>
-                <StyledIcon icon={faStar} onClick={handleToggleWatchList} isWatched={isWatched} />
+                <StyledIcon icon={faStar} onClick={handleToggleWatchList} isWatched={isWatched}/>
+                <WatchListMessage>{isWatched ? "You are watching this stock (click the star to toggle the watchlist)" : "You are not watching this stock (click the star to toggle the watchlist)"}</WatchListMessage>
                   <BuyPanel currentPrice={livePriceData.c} stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker} logo={liveCompanyData.logo}/>
                 </DisplayContainer>
 
@@ -285,22 +296,28 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 };
 
 
+  const WatchListMessage = styled.p`
+    font-size: 10px;
+    color: lightgrey;
+    `;
+
   const StockTitleContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  height: 100%;
-  width: 100%;
-  margin: 0px
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+    margin: 0px
   `;
 
   const StockSummaryContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin-top: 10px;
+    line-height: 1.5;
   `;
 
 
@@ -323,7 +340,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
   `
   const StockExchange = styled.p`
   padding: 0px;
-  color: grey;
+  color: lightgrey;
   margin-right: 10px;
   margin-bottom: 0px;
   margin-top: 0px;
@@ -333,7 +350,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
   const Currency = styled.p`
   display: inline;
   padding: 0px;
-  color: grey;
+  color: lightgrey;
   margin-right: 10px;
   margin-bottom: 0px;
   margin-top: 0px;
@@ -362,7 +379,7 @@ const Logo = styled.img`
   align-self: center;
   `;
 
-  const StockCurrentPrice = styled.p`
+  const StockCurrentPrice = styled.span`
   padding: 0px;
   color: black;
   margin-right: 10px;
@@ -372,61 +389,49 @@ const Logo = styled.img`
 
   `
   
-  const StockPriceChange = styled.p`
+  const StockPriceChange = styled.span`
   padding: 0px;
   color: black;
   margin-right: 10px;
   margin-top: 0px;
-  color: ${props => props.value > 0 ? "green" : "red"};
+  color: ${props => props.value > 0 ? "lightgreen" : "rgb(176, 67, 63)"};
   `
 
-  const PriceChangePercent = styled.p`
+  const PriceChangePercent = styled.span`
   padding: 0px;
-  color: ${props => props.value > 0 ? "green" : "red"};
+  color: ${props => props.value > 0 ? "lightgreen" : "rgb(176, 67, 63)"};
   margin-top: 0px;
 
   `
-
-
-  // const StockDetailsContainer = styled.div`
-  // background-color: lightblue;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: flex-start;
-  // height: 100%;
-  // width: 50%;
-  // margin: 10px;
-  // `
-
   const DetailContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
+  padding: 5px;
   `;
 
   const DetailKey = styled.span`
   padding: 0px; 
-  margin-right: 20px;
+
   `
 
   const DetailValue = styled.span`
   padding: 0px;
-  margin: 0px;
   font-weight: bold;
+  color: white;
   `
 
   const CurrentTime = styled.p`
-  font-size: 18px;
+  font-size: 11px;
   font-style: italic;
-  color: grey;  
+  color: lightgrey;  
   `;
 
   const StyledIcon = styled(FontAwesomeIcon)`
-  width: 30px;
-  height: 30px;
-  margin: 10px;
-  padding: 10px;
+  width: 50px;
+  height: 50px;
+  margin-left: 50%;
   border-radius: 50%;
   color: ${(props) => (props.isWatched ? "rgb(237, 237, 7)" : "rgb(153, 153, 255)")}
   `;

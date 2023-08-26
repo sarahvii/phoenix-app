@@ -70,15 +70,15 @@ const StockItem = ({ stock, handleStockClick}) => {
         <CompanyInfo>
           <StockTicker>{stock.ticker}</StockTicker>
           <StockName>{liveCompanyData.name}</StockName>
-          <StockCurrentPrice>${livePriceData.c}</StockCurrentPrice>
-          <PriceChangePercent value={livePriceData.dp}>{livePriceData.dp !== undefined ? ` (${livePriceData.dp.toFixed(2)}%)` : ""}</PriceChangePercent>
+          <StockCurrentPrice title="current stock price">${livePriceData.c}</StockCurrentPrice>
+          <PriceChangePercent title="stock price change (since last close)" value={livePriceData.dp}>{livePriceData.dp !== undefined ? ` (${Math.abs(livePriceData.dp.toFixed(2))}%)` : ""}</PriceChangePercent>
 
         </CompanyInfo>
         <Logo src={logo} alt="company logo" />
         <PerformanceInfo>
-          <StockTotalShares>{totalShares} Shares</StockTotalShares>
-          <StockTotalValue>Total value: ${currentTotalValue.toFixed(2)}</StockTotalValue>
-          <ProfitOrLoss isProfit={isProfit}>${Math.abs(profitLoss).toFixed(2)}</ProfitOrLoss>
+          <StockTotalShares title="quantity of shares owned">{totalShares} Shares</StockTotalShares>
+          <StockTotalValue title="current value of owned shares">Total value: ${currentTotalValue.toFixed(2)}</StockTotalValue>
+          <ProfitOrLoss title="profit/loss %"profitLoss={profitLoss}>${Math.abs(profitLoss).toFixed(2)}</ProfitOrLoss>
         </PerformanceInfo>
 
       </PortfolioDisplayContainer>
@@ -101,7 +101,7 @@ const Logo = styled.img`
 
 
 const PortfolioDisplayContainer = styled.div`
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   display: flex;
@@ -116,7 +116,7 @@ const PortfolioDisplayContainer = styled.div`
   
   
   &:hover {
-    background-color: #DFE1E6;
+    background-color: rgba(255, 255, 255, 0.3);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
   }
 
@@ -124,7 +124,7 @@ const PortfolioDisplayContainer = styled.div`
   `;
 
   const StockListInternalContainer = styled.div`
-  background-color: #DFE1E6;
+  background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   margin: 10px 20px 0px 20px;
@@ -157,9 +157,17 @@ const PortfolioDisplayContainer = styled.div`
   
   const PriceChangePercent = styled.p`
     display: inline;
-    color: ${props => (props.value > 0 ? 'green' : 'red')};
     font-size: 15px;
     font-weight: bold;
+    color: ${props => {
+      if (props.value > 0) {
+        return "lightgreen";
+      } else if (props.value < 0) {
+        return "rgb(176, 67, 63)";
+      } else {
+        return "black";
+      }
+    }};
     `
 
   const StockTotalValue = styled.p``;
@@ -170,9 +178,17 @@ const PortfolioDisplayContainer = styled.div`
   `;
   
   const ProfitOrLoss = styled.p`
-    color: ${(props) => (props.isProfit ? "green" : "red")};
     font-size: 20px;
     font-weight: bold;
+    color: ${(props) => {
+      if (props.profitLoss > 0) {
+        return "lightgreen";
+      } else if (props.profitLoss < 0) {
+        return "rgb(176, 67, 63)";
+      } else {
+        return "black";
+      }
+    }};
   `;
 
   const StyledLink = styled(Link)`

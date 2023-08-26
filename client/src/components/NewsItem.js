@@ -32,7 +32,7 @@ const NewsItem = ( {item} ) => {
 // `;
 
 const NewsItemContainer = styled.div`
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   display: flex;
@@ -48,7 +48,7 @@ const NewsItemContainer = styled.div`
   
   
   &:hover {
-    background-color: #DFE1E6;
+    background-color: rgba(255, 255, 255, 0.6);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
   }
 
@@ -56,7 +56,7 @@ const NewsItemContainer = styled.div`
   `;
 
   const NewsInternalContainer = styled.div`
-  background-color: #DFE1E6;
+  background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   margin: 10px 20px 0px 20px;

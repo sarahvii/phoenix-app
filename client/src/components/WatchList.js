@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+
 
 const WatchList = ({ watchList, setSelectedStock }) => {
   if (watchList === null || watchList.length === 0) {
@@ -15,10 +18,14 @@ const WatchList = ({ watchList, setSelectedStock }) => {
   return (
     <WatchListContainer>
       <List>
+      <Title>
+        Watchlist
+      </Title>
+        <WatchListIcon icon={faStar} />
         {watchList.map((item, index) => (
           <ListItem key={index} onClick={() => onClick(item.ticker)}>
           <StyledLink to="/stocks">
-                <LogoImage src={String(item.logo)} alt="Company Logo" />
+                <LogoImage title={item.ticker} src={String(item.logo)} alt="Company Logo" />
             </StyledLink>
           </ListItem>
         ))}
@@ -27,17 +34,34 @@ const WatchList = ({ watchList, setSelectedStock }) => {
   );
 };
 
+const Title = styled.h2`
+  margin-right: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  `;
+
+const WatchListIcon = styled(FontAwesomeIcon)`
+  color: yellow;
+  margin-right: 100px;
+  font-size: 0.2;
+`;
+
+
 const WatchListContainer = styled.div`
   margin-top: 20px;
   display: flex;
   margin-left: 40px;
-  align-items: center;
-  justify-content: center;
+  align-items: start;
+  justify-content: start;
 `;
 
 const List = styled.ul`
   list-style-type: none;
   padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ListItem = styled.li`

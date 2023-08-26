@@ -1,5 +1,8 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import styled from "styled-components";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
+
 import PieChart from "../components/PieChart";
 import StockList from "../components/StockList";
 import NewsPanel from "../components/NewsPanel";
@@ -24,7 +27,6 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
 
     //this function is used to calculate the total value of the portfolio and the total profit/loss of the portfolio
     calculateTotals(calculatedValsList, setTotalPortfolioValue, setTotalPortfolioProfitLoss, setProfitLossPercentage, setIsProfit);
-
     setPortfolioStocksWithValues(addValueToStock(portfolioStocks, calculatedValsList));
     
   }, [calculatedValsList, portfolioStocks]);
@@ -44,21 +46,24 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
     <OverviewTitle>Portfolio Overview</OverviewTitle>
       <PageContainer>
 
-        
-        
         <ExternalContainerRow>
           <InternalContainerColumn>
             <PortfolioBoxTitle>Performance</PortfolioBoxTitle>
             <DisplayContainer>
 
-                <TotalPortfolioValue>
-                  Total Portfolio Value: ${totalPortfolioValue.toFixed(2)}
+                <TotalValueLabel>Total portfolio value:</TotalValueLabel>  
+                <TotalPortfolioValue title="The total value of your portfolio to date">
+                 ${totalPortfolioValue.toFixed(2)}
                 </TotalPortfolioValue>
-                <TotalPortfolioProfitLoss isProfit={isProfit}>
-                  Total Portfolio Profit/Loss: ${totalPortfolioProfitLoss.toFixed(2)}
+                  {totalPortfolioProfitLoss === 0 ? null : <UpDownIcon icon={faCaretUp} value={totalPortfolioProfitLoss} />}
+                <SummaryLabel>
+                  {totalPortfolioProfitLoss > 0 ? "The value of your portfolio has increased by:" : "The value of your portfolio has decreased by:"}
+                </SummaryLabel>
+                <TotalPortfolioProfitLoss >
+                  <ValueChange value={totalPortfolioProfitLoss}> ${Math.abs(totalPortfolioProfitLoss.toFixed(2))}</ValueChange>
                 </TotalPortfolioProfitLoss>
-                <PercentageProfitLoss isProfit={isProfit}>
-                  Percentage Profit/Loss: {profitLossPercentage.toFixed(2)}%
+                <PercentageProfitLoss value={totalPortfolioProfitLoss}>
+                {Math.abs(profitLossPercentage.toFixed(2))}%
                 </PercentageProfitLoss>
 
             </DisplayContainer>
@@ -66,24 +71,13 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
 
           <InternalContainerColumn>
             <PortfolioBoxTitle>Portfolio Breakdown</PortfolioBoxTitle>
+
             <DisplayContainer ref={chartContainerRef}>
-
-
-
-                <PieChart portfolioStocks={portfolioStocksWithValues} setSelectedStock={setSelectedStock} />
-
-
-
+              <PieChart portfolioStocks={portfolioStocksWithValues} setSelectedStock={setSelectedStock} />
             </DisplayContainer>
-
-
 
           </InternalContainerColumn>
         </ExternalContainerRow>
-
-
-
-
 
           <ExternalContainerColumn>
             {/* <StockListInternalContainer> */}
@@ -95,93 +89,46 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
             {/* </StockListInternalContainer> */}
           </ExternalContainerColumn>
 
-
-
-
-
-
         <NewsPanel containerType="portfolio" portfolioStocks={portfolioStocksWithValues} />
       </PageContainer>
     </StockContext.Provider>
   );
 };
 
+const SummaryLabel = styled.p`
+  font-size: 18px;
+`;
 
-
-// const ExternalContainerRow = styled.div`
-//   background: lightgreen;
-//   border-radius: 12px;
-//   padding: 16px;
-//   display: flex;
-//   flex-direction: row;
-//   height: 50vh;
-//   margin: 10px auto;
-//   width: 86%;
-//   flex: 1;
-
-//   @media screen and (max-width: 768px) {
-//     flex-direction: column;
-//   }
-// `;
-
-// const ExternalContainerColumn = styled.div`
-// background: lightpink;
-// border-radius: 12px;
-// padding: 16px;
-// display: flex;
-// flex-direction: column;
-// height: 50vh;
-// margin: 10px auto;
-// width: 86%;
-// flex: 1;
-// `
-// ;
-
-
-
-// const InternalContainer = styled.div` 
-//   background-color: #DFE1E6;
-//   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-//   border-radius: 12px;
-//   margin: 10px 20px 0px 20px;
-//   padding: 6px 16px 16px 16px;
-//   display: flex;
-//   flex: 1;
-//   flex-direction: column;
-// `;
-
-// const DisplayContainer = styled.div`
-//   background-color: #fff;
-//   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-//   border-radius: 12px;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   align-items: flex-start;
-//   margin: 1px;
-//   padding: 12px;
-//   flex: 1;
-//   `;
-
-
+const TotalValueLabel = styled.p`
+  font-size: 18px
+`;
 
 const TotalPortfolioValue = styled.h4`
   margin: 10px;
   padding: 0px;
   color: black;
-`;
+  font-weight: bold;
+  font-size: 48px;
+  `;
 
 const TotalPortfolioProfitLoss = styled.h4`
-// background-color: pink;
   margin: 10px;
   padding: 0px;
-  color: ${(props) => (props.isProfit ? "green" : "red")};
+  color: black;
 `;
 
 const PercentageProfitLoss = styled.h4`
-// background-color: pink;
   margin: 10px;
   padding: 0px;
+  color: ${props => {
+      if (props.value > 0) {
+        return "lightgreen";
+      } else if (props.value < 0) {
+        return "rgb(176, 67, 63)";
+      } else {
+        return "black";
+      }
+    } };
 `;
 
 const PortfolioBoxTitle = styled.h2`
@@ -192,15 +139,24 @@ const PortfolioBoxTitle = styled.h2`
   border-radius: 12px;
 `;
 
-
-// const OverviewTitle = styled.h2`
-//   background-color: hsl(215,90%,32.7%);
-//   color: white;
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   margin: 10px; 
-// `;
+const ValueChange = styled.span`
+  color: black;
+  font-weight: bold;
+  font-size: 32px;
+  `
+const UpDownIcon = styled(FontAwesomeIcon)`
+  height: 150px;
+  color: ${props => {
+      if (props.value > 0) {
+        return "lightgreen";
+      } else if (props.value < 0) {
+        return "rgb(176, 67, 63)";
+      } else {
+        return "black";
+      }
+    }};
+  transform: ${props => props.value < 0 ? "scaleY(-1)" : "scaleY(1)"};
+  `
 
 
 export default PortfolioBox;

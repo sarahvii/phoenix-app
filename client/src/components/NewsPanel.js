@@ -79,10 +79,24 @@ const NewsPanel = ({ containerType, selectedStock }) => {
 
   return (
     <NewsPanelContainer>
+      <NewsLabel>News</NewsLabel>
       <NewsList news={news} />
     </NewsPanelContainer>
   );
 };
+
+const NewsLabel = styled.div`
+  font-size: 18px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+`;
 
 const NewsPanelContainer = styled.div`
   overflow: auto;
