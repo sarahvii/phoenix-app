@@ -408,17 +408,18 @@ const Logo = styled.img`
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
+  padding: 5px;
   `;
 
   const DetailKey = styled.span`
   padding: 0px; 
-  margin-right: 20px;
+
   `
 
   const DetailValue = styled.span`
   padding: 0px;
-  margin: 0px;
   font-weight: bold;
+  color: white;
   `
 
   const CurrentTime = styled.p`
