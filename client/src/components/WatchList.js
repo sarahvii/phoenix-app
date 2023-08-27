@@ -18,6 +18,9 @@ const WatchList = ({ watchList, setSelectedStock }) => {
   return (
     <WatchListContainer>
       <List>
+      <Title>
+        Watchlist
+      </Title>
         <WatchListIcon icon={faStar} />
         {watchList.map((item, index) => (
           <ListItem key={index} onClick={() => onClick(item.ticker)}>
@@ -31,11 +34,17 @@ const WatchList = ({ watchList, setSelectedStock }) => {
   );
 };
 
+const Title = styled.h2`
+  margin-right: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  `;
+
 const WatchListIcon = styled(FontAwesomeIcon)`
   color: yellow;
   margin-right: 100px;
-  font-size: 3rem;
-
+  font-size: 0.2;
 `;
 
 

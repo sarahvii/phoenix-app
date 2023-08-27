@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
+import phoenix from '../images/phoenix.png';
 
 
 const NavBar = ({searchBar}) => {
@@ -18,7 +19,10 @@ const NavBar = ({searchBar}) => {
           </StyledLink>
         </ListItem>
       </NavItems>
-      <Logo>PhoenixTrader</Logo>
+      <LogoContainer>
+        <Logo>PhoenixTrader</Logo>
+        <StyledLogo src={phoenix} alt="Phoenix Logo" />
+      </LogoContainer>
       <SearchBar>
         {searchBar}
       </SearchBar>
@@ -26,8 +30,22 @@ const NavBar = ({searchBar}) => {
   );
 }
 
+
+const LogoContainer = styled.div`
+  display: flex;`
+
+const StyledLogo = styled.img`
+  height: 60px;
+  width: 60px;
+  margin-right: 10px;
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+  filter: brightness(0) invert(1); //inverts image from black to white
+  `;
+
+
 const Nav = styled.nav`
-  background-color: hsl(215,90%,32.7%);
+  background-color: rgba(0, 0, 0, 0.3);
   color: white;
   display: flex;
   justify-content: space-between;
@@ -78,7 +96,7 @@ const StyledIcon = styled(FontAwesomeIcon)`
 `;
 
 const Logo = styled.h1`
-  font-size: 40px;
+  font-size: 48px;
   font-weight: bold;
   margin: 0;
   padding: 0;

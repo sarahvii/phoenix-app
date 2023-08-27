@@ -124,7 +124,23 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
         );
     };
 
-    const Button = styled.button``;
+    const Button = styled.button`
+      background-color: rgb(255, 255, 255, 0.0);
+      color: white;
+      padding: 5px 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 15px;
+      border-radius: 5px;
+      border: 1px solid white;
+      transition-duration: 0.4s;
+      cursor: pointer;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        color: black;
+      }
+  `;
 
     const OrderHistory = styled.div`
       display: flex;
@@ -204,7 +220,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
                     <StockPriceChange title="stock price change (since last close)" value={livePriceData.d}> ${livePriceData.d.toFixed(2)}</StockPriceChange>
                     <PriceChangePercent value={livePriceData.dp}> ({livePriceData.dp.toFixed(2)}%)  </PriceChangePercent>
                   </StockSummaryContainer>
-                    <CurrentTime>As of {formattedDate}</CurrentTime>
+                  <CurrentTime>As of {formattedDate}</CurrentTime>
                 </DisplayContainer>
           
               {/* </DisplayContainer> */}
@@ -216,7 +232,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 
                 <DisplayContainer>
                 <StyledIcon icon={faStar} onClick={handleToggleWatchList} isWatched={isWatched}/>
-                <WatchListMessage>{isWatched ? "You are watching this stock (click the star to toggle the watchlist)" : "You are not watching this stock click the star to toggle the watchlist)"}</WatchListMessage>
+                <WatchListMessage>{isWatched ? "You are watching this stock (click the star to toggle the watchlist)" : "You are not watching this stock (click the star to toggle the watchlist)"}</WatchListMessage>
                   <BuyPanel currentPrice={livePriceData.c} stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker} logo={liveCompanyData.logo}/>
                 </DisplayContainer>
 
@@ -282,7 +298,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 
   const WatchListMessage = styled.p`
     font-size: 10px;
-    color: grey;
+    color: lightgrey;
     `;
 
   const StockTitleContainer = styled.div`
@@ -301,6 +317,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
     height: 100%;
     width: 100%;
     margin-top: 10px;
+    line-height: 1.5;
   `;
 
 
@@ -323,7 +340,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
   `
   const StockExchange = styled.p`
   padding: 0px;
-  color: grey;
+  color: lightgrey;
   margin-right: 10px;
   margin-bottom: 0px;
   margin-top: 0px;
@@ -333,7 +350,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
   const Currency = styled.p`
   display: inline;
   padding: 0px;
-  color: grey;
+  color: lightgrey;
   margin-right: 10px;
   margin-bottom: 0px;
   margin-top: 0px;
@@ -362,7 +379,7 @@ const Logo = styled.img`
   align-self: center;
   `;
 
-  const StockCurrentPrice = styled.p`
+  const StockCurrentPrice = styled.span`
   padding: 0px;
   color: black;
   margin-right: 10px;
@@ -372,17 +389,17 @@ const Logo = styled.img`
 
   `
   
-  const StockPriceChange = styled.p`
+  const StockPriceChange = styled.span`
   padding: 0px;
   color: black;
   margin-right: 10px;
   margin-top: 0px;
-  color: ${props => props.value > 0 ? "green" : "red"};
+  color: ${props => props.value > 0 ? "lightgreen" : "rgb(176, 67, 63)"};
   `
 
-  const PriceChangePercent = styled.p`
+  const PriceChangePercent = styled.span`
   padding: 0px;
-  color: ${props => props.value > 0 ? "green" : "red"};
+  color: ${props => props.value > 0 ? "lightgreen" : "rgb(176, 67, 63)"};
   margin-top: 0px;
 
   `
@@ -405,9 +422,9 @@ const Logo = styled.img`
   `
 
   const CurrentTime = styled.p`
-  font-size: 18px;
+  font-size: 11px;
   font-style: italic;
-  color: grey;  
+  color: lightgrey;  
   `;
 
   const StyledIcon = styled(FontAwesomeIcon)`

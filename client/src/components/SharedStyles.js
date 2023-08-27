@@ -7,8 +7,8 @@ export const PageContainer = styled.div`
 `;
 
 export const OverviewTitle = styled.h2`
-  background-color: hsl(215,90%,32.7%);
-  color: #DFE1E6;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.9);
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
@@ -45,7 +45,7 @@ export const ExternalContainerRow = styled.div`
 `;
 
 export const InternalContainerColumn = styled.div` 
-  background-color: #DFE1E6;
+  background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   margin: 10px 20px 0px 20px;
@@ -56,7 +56,7 @@ export const InternalContainerColumn = styled.div`
 `;
 
 export const InternalContainerRow = styled.div` 
-  background-color: #DFE1E6;
+  background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   margin: 10px 20px 0px 20px;
@@ -67,7 +67,7 @@ export const InternalContainerRow = styled.div`
 `;
 
 export const DisplayContainer = styled.div`
-  background-color: #DFE1E6;
+  background-color: rgba(0, 0, 0, 0.1);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   display: flex;

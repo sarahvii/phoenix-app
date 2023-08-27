@@ -61,6 +61,9 @@ const CandlestickChart = ({ stockName, stockTicker }) => {
   }));
 
   const options = {
+    chart: {
+      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    },
     title: {
       text: stockName ? ` ${stockName}` : '',
     },

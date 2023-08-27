@@ -71,7 +71,7 @@ const StockItem = ({ stock, handleStockClick}) => {
           <StockTicker>{stock.ticker}</StockTicker>
           <StockName>{liveCompanyData.name}</StockName>
           <StockCurrentPrice title="current stock price">${livePriceData.c}</StockCurrentPrice>
-          <PriceChangePercent title="stock price change (since last close)" value={livePriceData.dp}>{livePriceData.dp !== undefined ? ` (${livePriceData.dp.toFixed(2)}%)` : ""}</PriceChangePercent>
+          <PriceChangePercent title="stock price change (since last close)" value={livePriceData.dp}>{livePriceData.dp !== undefined ? ` (${Math.abs(livePriceData.dp.toFixed(2))}%)` : ""}</PriceChangePercent>
 
         </CompanyInfo>
         <Logo src={logo} alt="company logo" />
@@ -101,7 +101,7 @@ const Logo = styled.img`
 
 
 const PortfolioDisplayContainer = styled.div`
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.1);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   display: flex;
@@ -116,7 +116,7 @@ const PortfolioDisplayContainer = styled.div`
   
   
   &:hover {
-    background-color: #DFE1E6;
+    background-color: rgba(255, 255, 255, 0.3);
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
   }
 
@@ -124,7 +124,7 @@ const PortfolioDisplayContainer = styled.div`
   `;
 
   const StockListInternalContainer = styled.div`
-  background-color: #DFE1E6;
+  background-color: rgba(0, 0, 0, 0.2);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   margin: 10px 20px 0px 20px;
@@ -161,9 +161,9 @@ const PortfolioDisplayContainer = styled.div`
     font-weight: bold;
     color: ${props => {
       if (props.value > 0) {
-        return "green";
+        return "lightgreen";
       } else if (props.value < 0) {
-        return "red";
+        return "rgb(176, 67, 63)";
       } else {
         return "black";
       }
@@ -182,9 +182,9 @@ const PortfolioDisplayContainer = styled.div`
     font-weight: bold;
     color: ${(props) => {
       if (props.profitLoss > 0) {
-        return "green";
+        return "lightgreen";
       } else if (props.profitLoss < 0) {
-        return "red";
+        return "rgb(176, 67, 63)";
       } else {
         return "black";
       }

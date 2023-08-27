@@ -66,25 +66,43 @@ const SearchBar = ({ setSelectedStock }) => {
   };
 
   return (
-    <SearchBarContainer className="SearchBar">
-      <input value={symbol} onChange={(evt) => setSymbol(evt.target.value)} />
-      <Button className="searchButton" onClick={handleClick}>
-        <StyledIcon icon={faMagnifyingGlass} />
-      </Button>
-      <ConfirmationModal 
-      open={openModal} 
-      onClose={handleModalCancel} 
-      details={details} 
-      confirmAction={() => setSelectedStockInternal(details.ticker)} handleConfirm={handleModalConfirm} handleCancel={handleModalCancel}
-      fromBuyPanel={false} />
-    </SearchBarContainer>
+    <>
+      <BigSearchBarContainer>
+        <SearchBarContainer className="SearchBar">
+          <Input value={symbol} onChange={(evt) => setSymbol(evt.target.value)} />
+          <Button className="searchButton" onClick={handleClick}>
+            <StyledIcon icon={faMagnifyingGlass} />
+          </Button>
+          <ConfirmationModal 
+          open={openModal} 
+          onClose={handleModalCancel} 
+          details={details} 
+          confirmAction={() => setSelectedStockInternal(details.ticker)} handleConfirm={handleModalConfirm} handleCancel={handleModalCancel}
+          fromBuyPanel={false} />
+        </SearchBarContainer>
+        <SearchLabel>Search for a stock by ticker symbol (e.g. AAPL)</SearchLabel>
+      </BigSearchBarContainer>
+    </>
   );
 }
+
+const BigSearchBarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const SearchLabel = styled.p`
+  color: white;
+  font-size: 12px;
+  margin-right: 35px;
+`;
 
 const SearchBarContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+
 `;
 
 const Button = styled.button`
@@ -103,6 +121,24 @@ const StyledIcon = styled(FontAwesomeIcon)`
     color: #00b4d8;
   }
 `
+
+const Input = styled.input`
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 1px solid white;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: black;
+  }
+`;
 
 export default SearchBar;
 

@@ -98,7 +98,7 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker, logo }) => {
     <StyledPanel>
       <form id="buy_form">
         <label>
-          <input
+          <Input
             type="number"
             placeholder="0"
             name="shares"
@@ -108,12 +108,12 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker, logo }) => {
 
         </label>
 
-        <button type="submit" onClick={(e) => handleStockTrade(e, 'buy')}>
+        <Button type="submit" onClick={(e) => handleStockTrade(e, 'buy')}>
           Buy Shares {plusIcon}
-        </button>
-        <button type="submit" onClick={(e) => handleStockTrade(e, 'sell')}>
+        </Button>
+        <Button type="submit" onClick={(e) => handleStockTrade(e, 'sell')}>
           Sell Shares {minusIcon}
-        </button>
+        </Button>
       </form>
       </StyledPanel>
       
@@ -138,6 +138,42 @@ const StyledPanel = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
+`;
+
+const Button = styled.button`
+  background-color: rgb(255, 255, 255, 0.0);
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 1px solid white;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: black;
+  }
+`;
+
+const Input = styled.input`
+  background-color: rgb(255, 255, 255, 0.0);
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  border-radius: 5px;
+  border: 1px solid white;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: black;
+  }
 `;
 
 export default BuyPanel;
