@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext, useRef } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
+
 import PieChart from "../components/PieChart";
 import StockList from "../components/StockList";
 import NewsPanel from "../components/NewsPanel";
@@ -50,8 +51,8 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
             <PortfolioBoxTitle>Performance</PortfolioBoxTitle>
             <DisplayContainer>
 
-                <TotalValueLabel>Total Portfolio Value:</TotalValueLabel>  
-                <TotalPortfolioValue>
+                <TotalValueLabel>Total portfolio value:</TotalValueLabel>  
+                <TotalPortfolioValue title="The total value of your portfolio to date">
                  ${totalPortfolioValue.toFixed(2)}
                 </TotalPortfolioValue>
                   {totalPortfolioProfitLoss === 0 ? null : <UpDownIcon icon={faCaretUp} value={totalPortfolioProfitLoss} />}
@@ -95,11 +96,11 @@ const PortfolioBox = ({ portfolioStocks, setSelectedStock }) => {
 };
 
 const SummaryLabel = styled.p`
-  font-size: 12px;
+  font-size: 18px;
 `;
 
 const TotalValueLabel = styled.p`
-  font-size: 12px
+  font-size: 18px
 `;
 
 const TotalPortfolioValue = styled.h4`

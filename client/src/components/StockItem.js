@@ -70,15 +70,15 @@ const StockItem = ({ stock, handleStockClick}) => {
         <CompanyInfo>
           <StockTicker>{stock.ticker}</StockTicker>
           <StockName>{liveCompanyData.name}</StockName>
-          <StockCurrentPrice>${livePriceData.c}</StockCurrentPrice>
-          <PriceChangePercent value={livePriceData.dp}>{livePriceData.dp !== undefined ? ` (${livePriceData.dp.toFixed(2)}%)` : ""}</PriceChangePercent>
+          <StockCurrentPrice title="current stock price">${livePriceData.c}</StockCurrentPrice>
+          <PriceChangePercent title="stock price change (since last close)" value={livePriceData.dp}>{livePriceData.dp !== undefined ? ` (${livePriceData.dp.toFixed(2)}%)` : ""}</PriceChangePercent>
 
         </CompanyInfo>
         <Logo src={logo} alt="company logo" />
         <PerformanceInfo>
-          <StockTotalShares>{totalShares} Shares</StockTotalShares>
-          <StockTotalValue>Total value: ${currentTotalValue.toFixed(2)}</StockTotalValue>
-          <ProfitOrLoss profitLoss={profitLoss}>${Math.abs(profitLoss).toFixed(2)}</ProfitOrLoss>
+          <StockTotalShares title="quantity of shares owned">{totalShares} Shares</StockTotalShares>
+          <StockTotalValue title="current value of owned shares">Total value: ${currentTotalValue.toFixed(2)}</StockTotalValue>
+          <ProfitOrLoss title="profit/loss %"profitLoss={profitLoss}>${Math.abs(profitLoss).toFixed(2)}</ProfitOrLoss>
         </PerformanceInfo>
 
       </PortfolioDisplayContainer>

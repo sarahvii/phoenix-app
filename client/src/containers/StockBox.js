@@ -76,19 +76,13 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
       }
     }, [watchList, selectedStock]);
     
-
-
-
-    //useEffects below are to allow console.logs to print after the data is fetched
-      // useEffect(() => {
-      //   console.log("live price data in StockBox", livePriceData);
-      // }, [livePriceData]);
-      
-      useEffect(() => {
-        console.log("live company data in StockBox", liveCompanyData);
-      }, [liveCompanyData]);
+    useEffect(() => {
+      console.log("live company data in StockBox", liveCompanyData);
+    }, [liveCompanyData]);
 
     
+
+
     if (!liveCompanyData || !livePriceData) {
       return "Loading...";
     }
@@ -115,7 +109,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
           <div>
             <p>You own {stockDetails.totalShares} shares of {' ' + stockDetails.ticker}</p>
             <OrderHistory>
-              <Button type="submit" onClick={(e) => handleShowOrders(e)}>Show Order History</Button>
+              <Button type="submit" onClick={(e) => handleShowOrders(e)}>{ordersShowHide ? "Hide Order History" : "Show Order History"}</Button>
                 {ordersShowHide && <OrderHistoryContainer>
                   {stockDetails.orders.map((order, index) => (
                     <Order key={index}>
@@ -206,8 +200,8 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
                     <StockExchange>{liveCompanyData.exchange}.</StockExchange><Currency> Currency in {liveCompanyData.currency}</Currency>
                   </StockTitleContainer>
                   <StockSummaryContainer>
-                    <StockCurrentPrice>${livePriceData.c}</StockCurrentPrice>
-                    <StockPriceChange value={livePriceData.d}> ${livePriceData.d.toFixed(2)}</StockPriceChange>
+                    <StockCurrentPrice title="current price">${livePriceData.c}</StockCurrentPrice>
+                    <StockPriceChange title="stock price change (since last close)" value={livePriceData.d}> ${livePriceData.d.toFixed(2)}</StockPriceChange>
                     <PriceChangePercent value={livePriceData.dp}> ({livePriceData.dp.toFixed(2)}%)  </PriceChangePercent>
                   </StockSummaryContainer>
                     <CurrentTime>As of {formattedDate}</CurrentTime>
@@ -221,7 +215,8 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 
 
                 <DisplayContainer>
-                <StyledIcon icon={faStar} onClick={handleToggleWatchList} isWatched={isWatched} />
+                <StyledIcon icon={faStar} onClick={handleToggleWatchList} isWatched={isWatched}/>
+                <WatchListMessage>{isWatched ? "You are watching this stock (click the star to toggle the watchlist)" : "You are not watching this stock click the star to toggle the watchlist)"}</WatchListMessage>
                   <BuyPanel currentPrice={livePriceData.c} stockName={liveCompanyData.name} stockTicker={liveCompanyData.ticker} logo={liveCompanyData.logo}/>
                 </DisplayContainer>
 
@@ -285,22 +280,27 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 };
 
 
+  const WatchListMessage = styled.p`
+    font-size: 10px;
+    color: grey;
+    `;
+
   const StockTitleContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  height: 100%;
-  width: 100%;
-  margin: 0px
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+    margin: 0px
   `;
 
   const StockSummaryContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin-top: 10px;
   `;
 
 
@@ -386,18 +386,6 @@ const Logo = styled.img`
   margin-top: 0px;
 
   `
-
-
-  // const StockDetailsContainer = styled.div`
-  // background-color: lightblue;
-  // display: flex;
-  // flex-direction: column;
-  // align-items: flex-start;
-  // height: 100%;
-  // width: 50%;
-  // margin: 10px;
-  // `
-
   const DetailContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -423,10 +411,9 @@ const Logo = styled.img`
   `;
 
   const StyledIcon = styled(FontAwesomeIcon)`
-  width: 30px;
-  height: 30px;
-  margin: 10px;
-  padding: 10px;
+  width: 50px;
+  height: 50px;
+  margin-left: 50%;
   border-radius: 50%;
   color: ${(props) => (props.isWatched ? "rgb(237, 237, 7)" : "rgb(153, 153, 255)")}
   `;
