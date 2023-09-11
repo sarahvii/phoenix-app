@@ -18,7 +18,7 @@ describe('calculateProfitOrLoss', () => {
 
         // Calculate expected profit/loss value
         const expectedProfitLoss = (5 * 70) - (10 * 50); // (5 shares * $70) - (10 shares * $50)
-        // Calculate expected isProfit value
+  
         const expectedIsProfit = expectedProfitLoss > 0;
 
         expect(result.profitLoss).toBe(expectedProfitLoss);

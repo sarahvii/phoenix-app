@@ -7,10 +7,16 @@ import { StockProvider } from './services/StockContext';
 import { PortfolioProvider } from './services/PortfolioContext';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { createGlobalStyle } from 'styled-components';
+import backgroundImage from './images/background3.jpg';
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background: linear-gradient(to top left, #A4A5AE, #1B5299);
+    background-image: url(${backgroundImage});
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    margin: 0;
+    padding: 0;
     margin: 0;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

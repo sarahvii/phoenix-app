@@ -122,9 +122,9 @@ const PercentageProfitLoss = styled.h4`
   padding: 0px;
   color: ${props => {
       if (props.value > 0) {
-        return "lightgreen";
+        return "#39FF14";
       } else if (props.value < 0) {
-        return "rgb(176, 67, 63)";
+        return "red";
       } else {
         return "black";
       }
@@ -148,9 +148,9 @@ const UpDownIcon = styled(FontAwesomeIcon)`
   height: 150px;
   color: ${props => {
       if (props.value > 0) {
-        return "lightgreen";
+        return "#39FF14";
       } else if (props.value < 0) {
-        return "rgb(176, 67, 63)";
+        return "red";
       } else {
         return "black";
       }

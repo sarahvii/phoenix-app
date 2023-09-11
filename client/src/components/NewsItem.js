@@ -5,12 +5,12 @@ const NewsItem = ( {item} ) => {
   return (
     <>
     <NewsInternalContainer>
-    <NewsItemContainer>
-    <h3>{item.headline}</h3>
-      <a href={item.url} target="_blank" rel="noreferrer">
-        <img src={item.image} alt={item.headline} width="250rem" height="auto"/>
-      </a>
-    </NewsItemContainer>
+      <NewsItemContainer>
+        <h3>{item.headline}</h3>
+            <a href={item.url} target="_blank" rel="noreferrer">
+                <NewsItemImage src={item.image} alt={item.headline} />
+            </a>
+      </NewsItemContainer>
     </NewsInternalContainer>
     </>
   )
@@ -32,7 +32,7 @@ const NewsItem = ( {item} ) => {
 // `;
 
 const NewsItemContainer = styled.div`
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   display: flex;
@@ -56,7 +56,7 @@ const NewsItemContainer = styled.div`
   `;
 
   const NewsInternalContainer = styled.div`
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.6);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   margin: 10px 20px 0px 20px;
@@ -67,6 +67,17 @@ const NewsItemContainer = styled.div`
   width: 80%;
   `;
 
+const NewsItemImage = styled.img`
+  max-width: 100%; /* Limit the image's width to the container */
+  height: 200px; /* Set a fixed height for the images */
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.2s ease-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
 
 
 

@@ -126,19 +126,19 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 
     const Button = styled.button`
       background-color: rgb(255, 255, 255, 0.0);
-      color: white;
+      color: black;
       padding: 5px 10px;
       text-align: center;
       text-decoration: none;
       display: inline-block;
       font-size: 15px;
       border-radius: 5px;
-      border: 1px solid white;
+      border: 2px solid black;
       transition-duration: 0.4s;
       cursor: pointer;
       &:hover {
         background-color: rgba(255, 255, 255, 0.2);
-        color: black;
+        color: white;
       }
   `;
 
@@ -166,21 +166,23 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      border: 1px solid #e6e6e6;
+      border: 2px solid black;
       border-radius: 12px;
       padding: 5px;
       margin-bottom: 5px;
       width: 100%;
+      background-color: rgba(255, 255, 255, 0.5);
       `;
 
     const OrderType = styled.div`
-      color: ${props => props.order.type === "buy" ? "#00c805" : "#ff0000"};
+      color: ${props => props.order.type === "buy" ? "#39FF14" : "red"};
       font-weight: bold;
-      font-size: 8px;
+      font-size: 12px;
       `;
 
     const OrderItem = styled.span`
-      font-size: 8px;
+      font-size: 12px;
+      padding: 2px;
       `;
 
       
@@ -298,7 +300,7 @@ const StockBox = ({selectedStock, portfolioStocks, watchList, toggleWatchList}) 
 
   const WatchListMessage = styled.p`
     font-size: 10px;
-    color: lightgrey;
+    color: black;
     `;
 
   const StockTitleContainer = styled.div`
@@ -385,7 +387,7 @@ const Logo = styled.img`
   margin-right: 10px;
   margin-top: 0px;
   font-weight: bold;
-  font-size: 28px;
+  font-size: 36px;
 
   `
   
@@ -394,14 +396,15 @@ const Logo = styled.img`
   color: black;
   margin-right: 10px;
   margin-top: 0px;
-  color: ${props => props.value > 0 ? "lightgreen" : "rgb(176, 67, 63)"};
+  color: ${props => props.value > 0 ? "#39FF14" : "red"};
+  font-weight: bold;
   `
 
   const PriceChangePercent = styled.span`
   padding: 0px;
-  color: ${props => props.value > 0 ? "lightgreen" : "rgb(176, 67, 63)"};
+  color: ${props => props.value > 0 ? "#39FF14" : "red"};
   margin-top: 0px;
-
+  font-weight: bold;
   `
   const DetailContainer = styled.div`
   display: flex;
@@ -413,19 +416,21 @@ const Logo = styled.img`
 
   const DetailKey = styled.span`
   padding: 0px; 
+  margin-left: 20%;
 
   `
 
   const DetailValue = styled.span`
   padding: 0px;
   font-weight: bold;
-  color: white;
+  color: black;
+  margin-right: 20%;
   `
 
   const CurrentTime = styled.p`
   font-size: 11px;
   font-style: italic;
-  color: lightgrey;  
+  color: black;  
   `;
 
   const StyledIcon = styled(FontAwesomeIcon)`

@@ -79,7 +79,7 @@ const NewsPanel = ({ containerType, selectedStock }) => {
 
   return (
     <NewsPanelContainer>
-      <NewsLabel>News</NewsLabel>
+      <NewsLabel>Related News</NewsLabel>
       <NewsList news={news} />
     </NewsPanelContainer>
   );

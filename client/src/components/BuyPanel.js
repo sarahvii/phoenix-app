@@ -129,10 +129,6 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker, logo }) => {
   );
 };
 
-// const styledButton = styled.button`
-//   background-color: rgb(255, 255, 255, 0.0);
-//   `;
-
 const StyledPanel = styled.div`
   display: flex;
   flex-direction: column;
@@ -142,14 +138,14 @@ const StyledPanel = styled.div`
 
 const Button = styled.button`
   background-color: rgb(255, 255, 255, 0.0);
-  color: white;
+  color: black;
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 15px;
   border-radius: 5px;
-  border: 1px solid white;
+  border: 2px solid black;
   transition-duration: 0.4s;
   cursor: pointer;
   &:hover {
@@ -160,14 +156,14 @@ const Button = styled.button`
 
 const Input = styled.input`
   background-color: rgb(255, 255, 255, 0.0);
-  color: white;
+  color: black;
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 15px;
   border-radius: 5px;
-  border: 1px solid white;
+  border: 2px solid black;
   transition-duration: 0.4s;
   cursor: pointer;
   &:hover {

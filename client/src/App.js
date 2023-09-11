@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-route
 import PortfolioContext from './services/PortfolioContext';
 import { set } from 'date-fns';
 import WatchList from './components/WatchList';
+import styled from 'styled-components';
 
 function App() {
   const [portfolioStocks, setPortfolioStocks] = useState(null);
@@ -55,8 +56,11 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar searchBar={<SearchBar setSelectedStock={setSelectedStock} />} />
-      <WatchList watchList={watchList} setSelectedStock={setSelectedStock}/>
+      <Wrapper>
+        <NavBar searchBar={<SearchBar setSelectedStock={setSelectedStock} />} />
+        <WatchList watchList={watchList} setSelectedStock={setSelectedStock}/>
+
+      </Wrapper>
 
       <Routes>
         <Route path="/" element={<HomeBox/>} />
@@ -70,5 +74,12 @@ function App() {
     </div>
   );
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 export default App;

@@ -52,7 +52,7 @@ const Nav = styled.nav`
   align-items: center;
   padding: 15px;
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
+  width: 100%;
 `;
 
 const SearchBar = styled.div`

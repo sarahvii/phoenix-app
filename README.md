@@ -1,4 +1,11 @@
-# phoenix-app
+# PhoenixTrader 💸💸💸
+
+## Description
+
+A stock portfolio application built using React, Express, MongoDB and Node.js.
+An application that allows users to track their stock portfolio. Users can add stocks to their portfolio and view the current value of their portfolio. Users can also view the performance of their portfolio over time. Using live data from an external API, users can view the current price of a stock and the current value of their portfolio. 
+
+## Project Specification
 
 Shares Portfolio Application
 
@@ -11,6 +18,3 @@ A user should be able to:
  - retrieve a list of share prices from an external API and allow the user to add shares to her portfolio.
  - View a chart of the current values in her portfolio.
 
-API, Libraries, Resources
-https://www.finnhub.io/ - Real-Time RESTful APIs and Websocket for Stocks, Currencies, and Crypto
-https://www.highcharts.com/ - HighCharts is an open-source library for rendering responsive charts.

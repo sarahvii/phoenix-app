@@ -36,7 +36,7 @@ const WatchList = ({ watchList, setSelectedStock }) => {
 
 const Title = styled.h2`
   margin-right: 10px;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
   color: white;
   `;
@@ -49,11 +49,14 @@ const WatchListIcon = styled(FontAwesomeIcon)`
 
 
 const WatchListContainer = styled.div`
-  margin-top: 20px;
   display: flex;
-  margin-left: 40px;
   align-items: start;
   justify-content: start;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(255, 255, 255, 0.3));
+  border-radius: 20px;
+  padding-left: 20px;
+  width: 75%;
+  margin: 2cqmax;
 `;
 
 const List = styled.ul`
