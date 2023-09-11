@@ -33,7 +33,6 @@ function App() {
 
   useEffect(() => {
     fetchStocksFromDatabase();
-    navigate('/portfolio');
   }, [shouldRefresh]);
 
   const toggleWatchList = (ticker, logo) => {

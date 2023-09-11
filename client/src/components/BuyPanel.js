@@ -27,6 +27,7 @@ const BuyPanel = ({ currentPrice, stockName, stockTicker, logo }) => {
     // console.log('currentPrice', currentPrice);
     // console.log('stockName', stockName);
     // console.log('stockTicker', stockTicker);
+    console.log(stockName)
     setOpenModal(true);
     setOrderType(type);
 
