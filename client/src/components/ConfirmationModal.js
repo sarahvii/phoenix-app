@@ -56,7 +56,7 @@ const ConfirmationModal = ({ open, onClose, details, confirmAction, handleConfir
     };
 
     const ModalOverlay = styled.div`
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
     position: fixed;
     width: 100%;
     height: 100%;
@@ -69,7 +69,7 @@ const ConfirmationModal = ({ open, onClose, details, confirmAction, handleConfir
     `;
     
     const ModalContainer = styled.div`
-    background-color: rgba(27, 82, 153, 0.9);
+    background-color: rgba(130, 125, 121, 0.9);
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.2);
@@ -107,7 +107,7 @@ const ConfirmationModal = ({ open, onClose, details, confirmAction, handleConfir
     }
     
     button {
-      background-color: #007BFF;
+      background-color: rgb(179, 109, 39);
       color: #fff;
       padding: 8px 16px;
       border: none;
