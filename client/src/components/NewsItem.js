@@ -6,30 +6,17 @@ const NewsItem = ( {item} ) => {
     <>
     <NewsInternalContainer>
       <NewsItemContainer>
-        <h3>{item.headline}</h3>
+
             <a href={item.url} target="_blank" rel="noreferrer">
                 <NewsItemImage src={item.image} alt={item.headline} />
             </a>
+            <h3>{item.headline}</h3>
       </NewsItemContainer>
     </NewsInternalContainer>
     </>
   )
 };
 
-// const NewsItemContainer = styled.div`
-// border: 5px solid black;
-// background-color: #fff;
-// box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-// border-radius: 12px;
-// margin: 10px;
-// padding: 20px;
-// display: flex;
-// min-width: 15rem;
-// flex-direction: column;
-// justify-content: space-between;
-// align-items: center;
-
-// `;
 
 const NewsItemContainer = styled.div`
   background-color: rgba(255, 255, 255, 0.3);
@@ -69,7 +56,7 @@ const NewsItemContainer = styled.div`
 
 const NewsItemImage = styled.img`
   max-width: 100%; /* Limit the image's width to the container */
-  height: 200px; /* Set a fixed height for the images */
+  max-height: 100%;
   object-fit: cover;
   border-radius: 12px;
   transition: transform 0.2s ease-out;
