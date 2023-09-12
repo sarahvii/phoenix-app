@@ -43,7 +43,7 @@ Key features of PhoenixTrader include:
 
 ## Screenshots
 
-<div align="center">
+<div style="text-align: center">
    <span>
     <kbd>
       <img height="200px" alt="Portfolio page" src="./client/src/images/homepic.png">
