@@ -69,8 +69,8 @@ const SearchBar = ({ setSelectedStock }) => {
     <>
       <BigSearchBarContainer>
         <SearchBarContainer className="SearchBar">
-          <Input value={symbol} onChange={(evt) => setSymbol(evt.target.value)} />
-          <Button className="searchButton" onClick={handleClick}>
+          <Input data-testid="search-input" value={symbol} onChange={(evt) => setSymbol(evt.target.value)} />
+          <Button data-testid="search-button" className="searchButton" onClick={handleClick}>
             <StyledIcon icon={faMagnifyingGlass} />
           </Button>
           <ConfirmationModal 
