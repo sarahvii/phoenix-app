@@ -32,9 +32,9 @@ const ConfirmationModal = ({ open, onClose, details, confirmAction, handleConfir
     return (
         <ModalOverlay>
           <ModalContainer>
-            <div className="content">
+            <div  className="content">
             <img src={details.logo} alt={details.name} />
-              <h2>{details.name}</h2>
+              <h2 data-testid="modal-name">{details.name}</h2>
               <p>{details.ticker}</p>
               {fromBuyPanel && details.shares !== null ? (
               <p>You have {details.orderType === 'buy' ? "bought" : "sold"} {details.shares} {details.shares === 1 ? "share" : "shares"} of {details.name} for ${details.currentPrice} per share.</p>
